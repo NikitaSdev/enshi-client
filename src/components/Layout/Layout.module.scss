@@ -1,0 +1,7 @@
+@import "src/assets/styles/adaptive";
+$bar-width: 20%;
+
+.layout {
+	@apply relative flex flex-col;
+
+}

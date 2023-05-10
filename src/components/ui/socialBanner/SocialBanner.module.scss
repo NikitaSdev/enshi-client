@@ -1,0 +1,47 @@
+.banner {
+	margin-top: 72px;
+	background: #6a43b9;
+	display: flex;
+	justify-content: center;
+	.bannerContainer {
+		width: 1170px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 225px;
+	}
+	.heading {
+		color: #ffffff;
+		h1 {
+			font-size: 1.43rem;
+			font-weight: 700;
+		}
+		h3 {
+			margin-top: 10px;
+			font-weight: 500;
+			font-size: 1rem;
+		}
+	}
+	.logos {
+		display: flex;
+		flex-direction: column;
+		img {
+			cursor: pointer;
+		}
+
+		div:first-child {
+			display: flex;
+			justify-content: space-between;
+			gap: 92px;
+			margin-bottom: 25px;
+		}
+		div:last-child {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 10px;
+		}
+	}
+	.girl {
+		margin-top: 2px;
+	}
+}

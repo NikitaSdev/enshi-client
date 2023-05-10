@@ -1,0 +1,34 @@
+@import "src/assets/styles/adaptive";
+.menu {
+	@apply animate-fade;
+	.ul {
+		display: flex;
+		gap: 40px;
+		> li {
+			@apply border-r-4 border-r-transparent transition-colors;
+			font-size: 0.95rem;
+			> a {
+				@apply flex items-center text-gray-600  cursor-pointer;
+
+				> span {
+					@apply hover:text-white;
+				}
+
+				> span,
+				> svg {
+					@apply transition-colors;
+				}
+			}
+
+			&.active {
+				> a > span {
+					@apply text-white;
+				}
+
+				> a > svg {
+					@apply fill-primary;
+				}
+			}
+		}
+	}
+}

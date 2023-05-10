@@ -1,0 +1,94 @@
+.banner {
+	height: 593px;
+	background: url("./dumbArt.jpg") no-repeat;
+	background-size: cover;
+	color: white;
+	padding: 125px 0;
+	display: flex;
+	justify-content: center;
+	.bannerContainer {
+		width: 1160px;
+	}
+}
+.content {
+	flex: 1;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 380px;
+	h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 2.185rem;
+	}
+	.rating {
+		display: flex;
+		font-size: 1.125rem;
+		font-weight: 600;
+		padding-top: 10px;
+		line-height: 30px;
+		.season {
+			padding-right: 12px;
+		}
+		.stars {
+			padding-left: 12px;
+			gap: 6px;
+			border-left: 2px solid white;
+			color: #ffd255;
+			display: flex;
+			align-items: center;
+		}
+	}
+	.description {
+		font-weight: 500;
+		padding-top: 20px;
+		font-size: 1.05rem;
+		line-height: 21px;
+		letter-spacing: 0.5px;
+	}
+	.watch {
+		padding: 13px 27px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+		font-weight: 600;
+		margin-top: 30px;
+		width: 160px;
+		height: 40px;
+		background: linear-gradient(#b621fe 5%, #1fd1f9 98%);
+		span {
+			padding-left: 10px;
+			padding-top: 1px;
+		}
+	}
+}
+
+.swiper {
+	width: 1600px;
+	height: 290px;
+	margin-top: -120px;
+	margin-left: 45vw;
+	position: relative;
+	div {
+		flex: 1;
+		div {
+			cursor: grab;
+		}
+	}
+	img {
+		flex: 1;
+		border-radius: 20px;
+	}
+}
+.swipeLeft {
+	cursor: pointer;
+	position: absolute;
+	top: 110px;
+	left: -80px;
+	padding: 0;
+	margin: 0;
+	height: 70px;
+	width: auto;
+	font-size: 90px;
+}
