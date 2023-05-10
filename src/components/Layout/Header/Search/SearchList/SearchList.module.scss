@@ -7,13 +7,13 @@
 
 		&::after {
 			@apply absolute -right-0.5 h-0 w-0.5 bg-transparent;
-			content: '';
+			content: "";
 			top: 28%;
 			transition: height 0.3s ease-in-out, background-color 0.3s ease-in-out;
 		}
 
 		&:hover::after {
-			@apply bg-primary h-2/5;
+			@apply bg-purple-900 h-2/5;
 		}
 
 		img {
