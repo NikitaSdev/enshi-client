@@ -21,10 +21,10 @@ const DynamicRate = dynamic(
 	}
 )
 const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
-	useUpdateCountOpened(movie.slug)
+	useUpdateCountOpened(movie.id)
 	return (
 		<>
-			<Meta title={movie.title} description={`Watch ${movie.title}`} />
+			<Meta title={movie.name} description={`Watch ${movie.name}`} />
 			<Banner
 				image={movie.bigPoster}
 				Detail={() => <Content movie={movie} />}
@@ -32,7 +32,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 			{/*<VideoPlayer kinopoiskId={movie.kinopoiskId} />*/}
 			<div className={"mt-12"}>
 				<SubHeading title={"Похожие фильмы"} />
-				<Gallery items={similarMovies} />
+				{/*<Gallery items={similarMovies} />*/}
 			</div>
 		</>
 	)

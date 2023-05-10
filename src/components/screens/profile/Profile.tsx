@@ -31,6 +31,7 @@ const Profile = () => {
 						register={register}
 						formState={formState}
 						isPasswordRequired={false}
+						isLogin={"login"}
 					/>
 				)}
 				<Button>Update</Button>

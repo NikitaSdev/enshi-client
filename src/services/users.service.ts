@@ -1,5 +1,3 @@
-import { IMovieEditInput } from "@/screens/admin/movie/movie-edit.interface"
-import { IUserEditInput } from "@/screens/admin/user/user-edit.interface"
 import { IProfileInput } from "@/screens/profile/profile.interface"
 
 import { IMovie } from "@/shared/types/movie.types"
@@ -22,12 +20,12 @@ export const UsersService = {
 	async deleteUser(_id: string) {
 		return axios.delete<string>(getUsersUrl(`/${_id}`))
 	},
-	async getById(_id: string) {
-		return axios.get<IUserEditInput>(getUsersUrl(`/${_id}`))
-	},
-	async updateUser(_id: string, data: IUserEditInput) {
-		return axios.put<string>(getUsersUrl(`/${_id}`), data)
-	},
+	// async getById(_id: string) {
+	// 	return axios.get<IUserEditInput>(getUsersUrl(`/${_id}`))
+	// },
+	// async updateUser(_id: string, data: IUserEditInput) {
+	// 	return axios.put<string>(getUsersUrl(`/${_id}`), data)
+	// },
 	async getFavourites() {
 		return axios.get<IMovie[]>(getUsersUrl("/profile/favourites"))
 	},

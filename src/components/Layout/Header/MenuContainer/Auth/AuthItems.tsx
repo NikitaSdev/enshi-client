@@ -1,12 +1,11 @@
 import React, { FC } from "react"
 
-
+import LogoutButton from "@/components/Layout/Header/MenuContainer/Auth/LogoutButton"
+import MenuItem from "@/components/Layout/Header/MenuContainer/MenuItem"
 
 import { useAuth } from "@/hooks/useAuth"
 
 import { getAdminHomeUrl } from "../../../../../config/url.config"
-import MenuItem from "@/components/Layout/Header/MenuContainer/MenuItem";
-import LogoutButton from "@/components/Layout/Header/MenuContainer/Auth/LogoutButton";
 
 const AuthItems: FC = () => {
 	const { user } = useAuth()
@@ -17,7 +16,6 @@ const AuthItems: FC = () => {
 				<>
 					<MenuItem
 						item={{
-							icon: "MdOutlinePermIdentity",
 							link: "/profile",
 							title: "Профиль"
 						}}
@@ -28,7 +26,6 @@ const AuthItems: FC = () => {
 				<>
 					<MenuItem
 						item={{
-							icon: "MdOutlinePermIdentity",
 							link: "/AuthPage",
 							title: "Войти"
 						}}
@@ -38,7 +35,6 @@ const AuthItems: FC = () => {
 			{user?.isAdmin && (
 				<MenuItem
 					item={{
-						icon: "MdOutlineLock",
 						link: getAdminHomeUrl(),
 						title: "Admin panel"
 					}}

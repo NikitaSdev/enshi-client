@@ -1,5 +1,3 @@
-import { IGenreEditInput } from "@/screens/admin/genre/genre-edit.interface"
-
 import axios from "../api/interceptors"
 
 export const FileService = {

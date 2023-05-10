@@ -3,7 +3,6 @@ import { SubmitHandler, UseFormSetValue } from "react-hook-form"
 import { useMutation, useQuery } from "react-query"
 import { toastr } from "react-redux-toastr"
 
-import { IMovieEditInput } from "@/screens/admin/movie/movie-edit.interface"
 import { IProfileInput } from "@/screens/profile/profile.interface"
 
 import { MovieService } from "@/services/movie.service"

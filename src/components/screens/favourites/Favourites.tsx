@@ -29,13 +29,13 @@ const Favourites: FC = () => {
 				) : (
 					favoritesMovies?.map((movie) => (
 						<FavoriteItem
-							key={movie._id}
+							key={movie.id}
 							item={{
-								name: movie.title,
+								name: movie.name,
 								posterPath: movie.bigPoster,
-								link: getMovieUrl(movie.slug),
-								title: movie.title,
-								_id: movie._id
+								link: getMovieUrl(movie.id),
+								title: movie.name,
+								_id: movie.id
 							}}
 						/>
 					))

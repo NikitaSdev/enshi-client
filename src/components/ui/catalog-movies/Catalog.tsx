@@ -20,20 +20,20 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
 				<Description text={description} className={styles.description} />
 			)}
 			<section className={styles.movies}>
-				{movies.map((movie) => (
-					<GalleryItem
-						key={movie._id}
-						item={{
-							name: movie.title,
-							link: getMovieUrl(movie.slug),
-							posterPath: movie.bigPoster,
-							content: {
-								title: movie.title
-							}
-						}}
-						variant={"horizontal"}
-					/>
-				))}
+				{/*{movies.map((movie) => (*/}
+				{/*	// <GalleryItem*/}
+				{/*	// 	key={movie._id}*/}
+				{/*	// 	item={{*/}
+				{/*	// 		name: movie.title,*/}
+				{/*	// 		link: getMovieUrl(movie.slug),*/}
+				{/*	// 		posterPath: movie.bigPoster,*/}
+				{/*	// 		content: {*/}
+				{/*	// 			title: movie.title*/}
+				{/*	// 		}*/}
+				{/*	// 	}}*/}
+				{/*	// 	variant={"horizontal"}*/}
+				{/*	// />*/}
+				{/*))}*/}
 			</section>
 		</>
 	)

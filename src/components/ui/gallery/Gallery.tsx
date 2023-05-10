@@ -38,6 +38,7 @@ const Gallery: FC<{
 			swiperRef.current.slidePrev()
 		}
 	}
+
 	return (
 		<section
 			className={classNames(styles.wrapper, {
@@ -65,10 +66,11 @@ const Gallery: FC<{
 					onSlideChange={() =>
 						setSwiperNavigationAllowed({
 							prevButtonDisabled: swiperRef?.current?.isBeginning,
-
-							nextButtonDisabled:
-								swiperRef?.current?.activeIndex ===
-								swiperRef?.current?.slides?.length - 5
+							// @ts-ignore
+							nextButtonDisabled: swiperRef?.current
+								? swiperRef?.current?.activeIndex ===
+								  swiperRef?.current?.slides?.length - 5
+								: false
 						})
 					}
 					onReachEnd={() => {

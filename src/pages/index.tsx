@@ -8,7 +8,6 @@ import { ISlide } from "@/ui/slider/slider.types"
 
 import { IMovie, IMovieList } from "@/shared/types/movie.types"
 
-import { ActorService } from "@/services/actor.service"
 import { MovieService } from "@/services/movie.service"
 
 import { getGenresList } from "@/utils/movie/getGenresListEach"
