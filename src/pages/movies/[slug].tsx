@@ -23,21 +23,21 @@ const MoviePage: NextPage<IMoviePage> = ({ movie, similarMovies }) => {
 	)
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	try {
-		const { data: movies } = await MovieService.getAll()
-		const paths = movies.list.map((movie: IMovie) => ({
-			params: { slug: movie.name }
-		}))
-
-		return { paths, fallback: "blocking" }
-	} catch {
-		return {
-			paths: [],
-			fallback: false
-		}
-	}
-}
+// export const getStaticPaths: GetStaticPaths = async () => {
+// 	try {
+// 		const { data: movies } = await MovieService.getAll()
+// 		const paths = movies.list.map((movie: IMovie) => ({
+// 			params: { slug: movie.name }
+// 		}))
+//
+// 		return { paths, fallback: "blocking" }
+// 	} catch {
+// 		return {
+// 			paths: [],
+// 			fallback: false
+// 		}
+// 	}
+// }
 
 // export const getStaticProps: GetStaticProps = async ({ params }) => {
 // 	try {
