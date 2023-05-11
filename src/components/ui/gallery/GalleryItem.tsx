@@ -25,7 +25,7 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
 						<h3>{title(item.content.title)}</h3>
 						<div>
 							<div className={styles.year}>
-								<p className={styles.year}>{item.year}</p>
+								<p>{item.year}</p>
 							</div>
 
 							<p className={styles.genre}>
