@@ -29,6 +29,8 @@ export interface IMovieList {
 }
 
 export interface IMovie {
+	season: any
+	genres: Array<string>
 	list: Array<any>
 	id: string
 	poster: string

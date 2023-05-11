@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-
 @import "react-redux-toastr/src/styles/index.scss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
 html,
 body {
@@ -13,12 +12,9 @@ body {
 	}
 	padding: 0;
 	margin: 0;
-	font-family: "Outfit", sans-serif !important;
 	background: white;
+	font-family: "Monserrat", sans-serif;
 	overflow-x: hidden;
-	display: flex;
-	flex-direction: column;
-	@apply text-text-900;
 }
 
 a {

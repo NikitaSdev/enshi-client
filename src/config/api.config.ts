@@ -6,7 +6,7 @@ export const getAuthUrl = (string: string) => `/auth${string}`
 export const getUsersUrl = (string: string) => `/users${string}`
 export const getActorsUrl = (string: string) => `/actor${string}`
 export const getMoviesUrl = (string: string) =>
-	`/title/search/advanced?query={season.year} == 2022&limit=20`
+	`/title/search/advanced?query={season.year} > 2016&limit=15`
 export const getMoviesUrlBySlug = (string: string) =>
 	`/title/search?search=${string}&limit=7`
 export const getAnnounced = (string: string) =>

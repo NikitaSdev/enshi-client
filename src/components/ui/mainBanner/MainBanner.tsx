@@ -52,7 +52,7 @@ const Slider = () => {
 					}}
 					onSlideChange={(e) => setActiveIndex(e.activeIndex)}
 					spaceBetween={1}
-					slidesPerView={4}
+					slidesPerView={5}
 				>
 					<SwiperSlide>
 						<Image src={poster} alt={""} draggable={false} />

@@ -3,5 +3,8 @@ $bar-width: 20%;
 
 .layout {
 	@apply relative flex flex-col;
-
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
 }

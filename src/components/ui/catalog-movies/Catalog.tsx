@@ -7,11 +7,14 @@ import Heading from "@/ui/heading/Heading"
 
 import Meta from "@/utils/meta/Meta"
 
+import { ANILIBRIA_URL } from "../../../config/api.config"
 import { getMovieUrl } from "../../../config/url.config"
 
 import styles from "./Catalog.module.scss"
+import poster from "./poster.png"
 
 const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
+	console.log(movies)
 	return (
 		<>
 			<Meta title={title} description={description}></Meta>
@@ -20,20 +23,23 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
 				<Description text={description} className={styles.description} />
 			)}
 			<section className={styles.movies}>
-				{/*{movies.map((movie) => (*/}
-				{/*	// <GalleryItem*/}
-				{/*	// 	key={movie._id}*/}
-				{/*	// 	item={{*/}
-				{/*	// 		name: movie.title,*/}
-				{/*	// 		link: getMovieUrl(movie.slug),*/}
-				{/*	// 		posterPath: movie.bigPoster,*/}
-				{/*	// 		content: {*/}
-				{/*	// 			title: movie.title*/}
-				{/*	// 		}*/}
-				{/*	// 	}}*/}
-				{/*	// 	variant={"horizontal"}*/}
-				{/*	// />*/}
-				{/*))}*/}
+				{movies.map((movie) => (
+					<GalleryItem
+						key={movie.id}
+						item={{
+							name: movie.names.ru,
+							link: getMovieUrl(movie.id),
+							posterPath: `${ANILIBRIA_URL}${movie.posters.original.url}`,
+							posters: "",
+							genres: movie.genres,
+							year: movie.season.year,
+							content: {
+								title: movie.names.ru
+							}
+						}}
+						variant={"horizontal"}
+					/>
+				))}
 			</section>
 		</>
 	)

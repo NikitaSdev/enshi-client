@@ -1,30 +1,21 @@
-import { GetStaticProps, NextPage } from "next"
+import { GetStaticProps } from "next"
 import React, { FC } from "react"
 
 import Catalog from "@/ui/catalog-movies/Catalog"
-import Pagination from "@/ui/pagination/Pagination"
-import { usePagination } from "@/ui/pagination/usePagination"
 
 import { MovieService } from "@/services/movie.service"
 
-const TrendingPage: FC<any> = ({ movies }) => {
+const Top: FC<{ movies: any }> = ({ movies }) => {
 	return (
 		<>
 			<Catalog
 				movies={movies || []}
-				title={""}
+				title={"ТОП - 100 аниме"}
 				description={"Трендовые фильмы и сериалы"}
 			/>
-			{/*<Pagination*/}
-			{/*// movies={movies}*/}
-			{/*// page={page}*/}
-			{/*// setPage={setPage}*/}
-			{/*// scrollToTop={scrollToTop}*/}
-			{/*/>*/}
 		</>
 	)
 }
-
 export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const movie = await MovieService.getPopularMovies()
@@ -41,4 +32,4 @@ export const getStaticProps: GetStaticProps = async () => {
 		}
 	}
 }
-export default TrendingPage
+export default Top
