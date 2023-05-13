@@ -1,4 +1,6 @@
 .banner {
-	width: 315px;
-	@apply relative overflow-hidden rounded-layout shadow-lg flex flex-col justify-end;
+	img {
+		width: 315px;
+	}
+	@apply relative  flex  justify-between;
 }
