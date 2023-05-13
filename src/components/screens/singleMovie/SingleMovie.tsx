@@ -1,51 +1,52 @@
+import Hls from "hls.js"
 import dynamic from "next/dynamic"
 import Script from "next/script"
-import React, {FC, useEffect, useRef} from "react"
+import React, { FC, useEffect, useRef } from "react"
 
 import Content from "@/screens/singleMovie/content/Content"
 import { useUpdateCountOpened } from "@/screens/singleMovie/useUpdateCountOpened"
-import Hls from "hls.js";
+
 import Banner from "@/ui/banner/Banner"
 import Gallery from "@/ui/gallery/Gallery"
 import SubHeading from "@/ui/heading/SubHeading"
-import VideoPlayer from "@/ui/video-player/VideoPlayer"
 
 import Meta from "@/utils/meta/Meta"
 
 import { ANILIBRIA_URL } from "../../../config/api.config"
 import { IMoviePage } from "../../../pages/movies/[slug]"
+
 interface VideoPlayerProps {
-	src: string;
+	src: string
 }
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
-	const videoRef = useRef<HTMLVideoElement>(null);
+const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
+	const videoRef = useRef<HTMLVideoElement>(null)
 
 	useEffect(() => {
 		if (Hls.isSupported()) {
-			const hls = new Hls();
+			const hls = new Hls()
 			if (videoRef.current) {
-				hls.loadSource(src);
-				hls.attachMedia(videoRef.current);
+				hls.loadSource(src)
+				hls.attachMedia(videoRef.current)
 				hls.on(Hls.Events.MANIFEST_PARSED, () => {
-					const video = videoRef.current!;
-					video.play();
-				});
+					const video = videoRef.current!
+					video.play()
+				})
 			}
 		} else if (videoRef.current?.canPlayType("application/vnd.apple.mpegurl")) {
-			const video = videoRef.current!;
-			video.src = src;
+			const video = videoRef.current!
+			video.src = src
 			video.addEventListener("loadedmetadata", () => {
-				video.play();
-			});
+				video.play()
+			})
 		}
-	}, [src]);
+	}, [src])
 
 	return (
 		<div>
 			<video ref={videoRef} controls></video>
 		</div>
-	);
-};
+	)
+}
 const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 	console.log(movie)
 
@@ -79,21 +80,16 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 					image={`${ANILIBRIA_URL}` + movie.list[0].posters.original.url}
 					Detail={() => <Content movie={movie.list[0]} />}
 				/>
-				<video>
-					<source
-						src={`https://cache.libria.fun${movie.list[0].player.list[1].hls.sd.replace(
-							'"',
-							""
-						)}`}
-					/>
-				</video>
-				<VideoPlayer src={`https://cache.libria.fun${movie.list[0].player.list[1].hls.sd.replace(
-					'"',
-					""
-				)}`} />
+
+				<VideoPlayer
+					src={`https://cache.libria.fun${movie.list[0].player.list[1].hls.sd.replace(
+						'"',
+						""
+					)}`}
+				/>
 				<div className={"mt-12"}>
 					<SubHeading title={"Похожие фильмы"} />
-					<Gallery items={similar} heading={""} />
+					{/*<Gallery items={similar} heading={""} />*/}
 				</div>
 			</div>
 		</main>
