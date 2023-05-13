@@ -13,9 +13,9 @@ const Banner: FC<IBanner> = ({ image, Detail }) => {
 			<Image
 				src={image}
 				alt={""}
+				width={312}
+				height={445}
 				draggable={false}
-				layout={"fill"}
-				className={"image-like-bg object-top"}
 				unoptimized
 				priority
 			/>

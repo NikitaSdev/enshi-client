@@ -12,7 +12,7 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
 		return title.length > 34 ? title.slice(0, 30) + "..." : title.slice(0, 34)
 	}
 	return (
-		<Link href={item.link}>
+		<Link href={`movies/${item.link}`}>
 			<div className={styles.item}>
 				<div className={styles.favourite}>
 					<MaterialIcon name={"MdBookmark"} />

@@ -40,7 +40,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			description: allData.main.description,
 			link: main.id
 		}
-		console.log(allData)
 		const announcedMovies: any = allData.announced.map((m: any) => ({
 			name: m.title,
 			posterPath: m.img,

@@ -48,9 +48,11 @@ const Gallery: FC<{
 			<h1 className={styles.heading}>
 				{heading}
 
-				<span>
-					<Image src={icon} />
-				</span>
+				{icon && (
+					<span>
+						<Image src={icon} />
+					</span>
+				)}
 			</h1>
 			<div className={styles.swiperContainer}>
 				<button
