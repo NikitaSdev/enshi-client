@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 
 import FavoriteButton from "@/screens/singleMovie/FavoriteButton/FavoriteButton"
 import ContentList from "@/screens/singleMovie/content/ContentList/ContentList"
@@ -12,35 +12,46 @@ import { getActorUrl, getGenreUrl } from "../../../../config/url.config"
 import styles from "./Content.module.scss"
 
 const Content: FC<{ movie: IMovie }> = ({ movie }) => {
+	const [isDescriptionOpened, setIsDescriptionOpened] = useState(false)
+	const title = (title: string) => {
+		return title.length > 34 ? title.slice(0, 200) + "..." : title.slice(0, 34)
+	}
 	return (
 		<div className={styles.content}>
-			{/*<h1>{movie.title}</h1>*/}
-			{/*<div className={styles.details}>*/}
-			{/*	<span>{movie.parameters.year} · </span>*/}
-			{/*	<span>{movie.parameters.country} · </span>*/}
-			{/*	<span>{movie.parameters.duration} min. </span>*/}
-			{/*</div>*/}
+			<h1>{movie.names.ru}</h1>
+			<p>
+				<span>Эпизоды:</span>
+				{movie.type.episodes}
+			</p>
+			<p>
+				<span>Жанры:</span> {movie.genres.join(", ")}
+			</p>
+			<p>
+				<span>Год выпуска:</span> {movie.season.year}
+			</p>
+			<p>
+				<span>Статус:</span> {movie.status.string}
+			</p>
+			<p>
+				<span>Тип:</span> {movie.type.string === "TV" ? "Сериал" : "Фильм"}
+			</p>
+			<p>
+				{isDescriptionOpened ? movie.description : title(movie.description)}
+			</p>
+			<button onClick={() => setIsDescriptionOpened((prev) => !prev)}>
+				{isDescriptionOpened ? "Свернуть" : "Развернуть"}
+			</button>
+
 			{/*<ContentList*/}
 			{/*	name={"Жанры"}*/}
-			{/*	links={movie.genres.slice(0, 3).map((g) => ({*/}
-			{/*		_id: g._id,*/}
-			{/*		link: getGenreUrl(g.slug),*/}
-			{/*		title: g.name*/}
-			{/*	}))}*/}
-			{/*/>*/}
-			{/*<ContentList*/}
-			{/*	name={"Актеры"}*/}
-			{/*	links={movie.actors.slice(0, 3).map((g) => ({*/}
-			{/*		_id: g._id,*/}
-			{/*		link: getActorUrl(g.slug),*/}
-			{/*		title: g.name*/}
+			{/*	links={movie.genres.slice(0, 1).map((g) => ({*/}
+			{/*		title: g*/}
 			{/*	}))}*/}
 			{/*/>*/}
 			{/*<div className={styles.rating}>*/}
 			{/*	<MaterialIcon name={"MdStarRate"} />*/}
-			{/*	<span>{movie.rating?.toFixed(1)}</span>*/}
 			{/*</div>*/}
-			{/*<FavoriteButton movieId={movie._id} />*/}
+			{/*<FavoriteButton movieId={movie.id} />*/}
 		</div>
 	)
 }

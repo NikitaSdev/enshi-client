@@ -29,7 +29,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	try {
 		const { data: movies } = await MovieService.getAll()
 		const paths = movies.list.map((movie: IMovie) => ({
-			params: { slug: movie.names.ru }
+			params: { slug: movie.code }
 		}))
 
 		return { paths, fallback: "blocking" }

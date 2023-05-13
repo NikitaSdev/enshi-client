@@ -8,7 +8,7 @@ export const getActorsUrl = (string: string) => `/actor${string}`
 export const getMoviesUrl = (string: string) =>
 	`/title/search/advanced?query={season.year} > 2016&limit=15`
 export const getMoviesUrlBySlug = (string: string) =>
-	`/title/search?search=${string}&limit=7`
+	`/title/search?search=${string}`
 export const getAnnounced = (string: string) =>
 	`/title/list?code_list=${string}`
 export const getByMovieId = (string: string) => `/title?code=${string}`

@@ -29,6 +29,8 @@ export interface IMovieList {
 }
 
 export interface IMovie {
+	type: any
+	code: string
 	season: any
 	genres: Array<string>
 	list: Array<any>

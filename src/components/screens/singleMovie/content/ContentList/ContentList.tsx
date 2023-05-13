@@ -12,9 +12,7 @@ const ContentList: FC<IContentList> = ({ links, name }) => {
 			<div className={styles.links}>
 				{links.map((link, index) => (
 					<Fragment key={index}>
-						<Link href={link.link}>
-							<a>{link.title}</a>
-						</Link>
+						<a>{link.title}</a>
 						{index + 1 !== links.length ? ", " : ""}
 					</Fragment>
 				))}

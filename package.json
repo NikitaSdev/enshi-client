@@ -21,6 +21,7 @@
 		"classnames": "^2.3.1",
 		"draft-js": "^0.11.7",
 		"draftjs-to-html": "^0.9.1",
+		"hls.js": "^1.4.3-0.canary.9155",
 		"html-react-parser": "^1.4.8",
 		"html-to-draftjs": "^1.5.0",
 		"js-cookie": "^3.0.1",

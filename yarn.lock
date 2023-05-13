@@ -1953,6 +1953,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hls.js@^1.4.3-0.canary.9155:
+  version "1.4.3-0.canary.9155"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.4.3-0.canary.9155.tgz#284691255ac893d92761cd4622720ff0e7e98fd5"
+  integrity sha512-Da0fzCBn04qTCfVgco11In+UWFo7/jL13ru7ghoKmJ195yTXdgNe/Ou5DveBxeD8o6Br0qDO6NYEzBd9HlPGwQ==
+
 hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
