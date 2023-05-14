@@ -1,5 +1,7 @@
 import Link from "next/link"
-import { FC } from "react"
+import { FC, useState } from "react"
+
+import { useOutsideClick } from "@/components/Layout/Header/useClickOutside"
 
 import { IMovie } from "@/shared/types/movie.types"
 

@@ -28,7 +28,7 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
 						key={movie.id}
 						item={{
 							name: movie.names.ru,
-							link: movie.names.en,
+							link: movie.code,
 							posterPath: `${ANILIBRIA_URL}${movie.posters.original.url}`,
 							posters: "",
 							genres: movie.genres,

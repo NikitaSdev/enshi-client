@@ -7,6 +7,7 @@ import {
 	getAnnounced,
 	getByMovieId,
 	getMoviesUrl,
+	getMoviesUrlByName,
 	getMoviesUrlBySlug
 } from "../config/api.config"
 import { getMovieUrl } from "../config/url.config"
@@ -47,7 +48,10 @@ export const MovieService = {
 		return movies
 	},
 	async getBySlug(slug: string) {
-		return axiosClassic.get<IMovieList>(getMoviesUrlBySlug(`${slug}`))
+		return axiosClassic.get<IMovieList>(getMoviesUrlBySlug(slug))
+	},
+	async getByName(name: string) {
+		return axiosClassic.get<IMovieList>(getMoviesUrlByName(name))
 	},
 	async getByGenres(genreIds: string[]) {
 		return axiosClassic.post<IMovie[]>(getMoviesUrl(`/by-genres`), {

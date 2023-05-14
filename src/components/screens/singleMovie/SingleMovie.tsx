@@ -47,9 +47,7 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 	)
 }
 const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
-	console.log(movie)
-	const [episode, setEpisode] = useState(1)
-	console.log(episode)
+	const [episode, setEpisode] = useState<any>(movie.player.episodes.first)
 	const similar = [
 		{
 			season: "1 сезон",
@@ -72,25 +70,20 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 		}
 	]
 	const options: any = []
-
-	for (let i = 1; i <= Object.keys(movie.list[0].player.list).length; i++) {
+	console.log(movie)
+	for (let i = episode; i <= movie.player.episodes.last; i++) {
 		options.push({
-			value: movie.list[0].player.list[i].uuid,
-			label: movie.list[0].player.list[i].episode
+			value: movie.player.list[i].uuid,
+			label: movie.player.list[i].episode
 		})
 	}
-	console.log(options)
 	return (
 		<main className={"flex w-full justify-center  align-middle"}>
-			<Meta
-				title={movie.list[0].names.ru}
-				description={`Смотрите ${movie.list[0].names.ru}`}
-			/>
-
+			<Meta title={movie.names.ru} description={`Смотрите ${movie.names.ru}`} />
 			<div className={"w-11/12"}>
 				<Banner
-					image={`${ANILIBRIA_URL}` + movie.list[0].posters.original.url}
-					Detail={() => <Content movie={movie.list[0]} />}
+					image={`${ANILIBRIA_URL}` + movie.posters.original.url}
+					Detail={() => <Content movie={movie} />}
 				/>
 				<div>
 					<p>Серия {episode}</p>
@@ -100,7 +93,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 					/>
 				</div>
 				<VideoPlayer
-					src={`https://${movie.list[0].player.host}${movie.list[0].player.list[episode].hls.sd}`}
+					src={`https://${movie.player.host}${movie.player.list[episode].hls.hd}`}
 				/>
 				<div className={"mt-12"}>
 					<SubHeading title={"Похожие фильмы"} />
