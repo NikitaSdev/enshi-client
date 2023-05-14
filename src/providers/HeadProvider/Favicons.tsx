@@ -3,14 +3,13 @@ const Favicons = () => {
 		<>
 			<link
 				rel="shortcut icon"
-				href={"/favicons/favicon.ico"}
+				href={"/favicons/apple-touch-icon-100x100.png"}
 				type="image/x-icon"
 			/>
-			<link rel="apple-touch-icon" href="/favicons/favicon.png" />
 			<link
 				rel="apple-touch-icon"
 				sizes="100x100"
-				href="/favicons/favicon.png"
+				href="/favicons/apple-touch-icon-100x100.png"
 			/>
 		</>
 	)

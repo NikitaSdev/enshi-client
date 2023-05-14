@@ -9,7 +9,7 @@
   "description": "Смотрите аниме бесплатно",
   "icons": [
     {
-      "src": "/favicons/favicon.png",
+      "src": "/favicons/apple-touch-icon-100x100.png",
       "sizes": "100x100",
       "type": "image/png"
     },
