@@ -48,33 +48,16 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 }
 const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 	const [episode, setEpisode] = useState<any>(movie.player.episodes.first)
-	const similar = [
-		{
-			season: "1 сезон",
-			genres: ["Романтика", "Экшен"],
-			list: [],
-			id: "dfdsf",
-			poster:
-				"https://images0.persgroep.net/rcs/RvzOii3OIhTUhdDIY8qdyKnINFg/diocontent/115579801/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8",
-			bigPoster:
-				"https://images0.persgroep.net/rcs/RvzOii3OIhTUhdDIY8qdyKnINFg/diocontent/115579801/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8",
-			posters:
-				"https://images0.persgroep.net/rcs/RvzOii3OIhTUhdDIY8qdyKnINFg/diocontent/115579801/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8",
-			description:
-				"Знакомьтесь! Сатору Миками, 37-летний рядовой служащий крупной финансовой компании, ныне мечтающий лишь об одном — о девушке. Однако встреча с приятелем на улице обернулась для Сатору трагедией, перечеркнув все планы: грабитель с ножом бросился на товарища, а  принял на себя удар...\n" +
-				"Но жизнь для   на этом не закончилась. Мужчина переродился в другом мире. Перед смертью он подумал о том, как плохо человеку от потери крови, а после перерождения получил... тело слизня, в котором эта жидкая красная субстанция попросту отсутствует. Но что может сделать в огромном незнакомом мире, пускай и разумная, но слизь?",
-			names: { ru: "Твоё имя" },
-			name: "string",
-			videoUrl: "string",
-			link: "string"
-		}
-	]
 	const options: any = []
 	console.log(movie)
-	for (let i = episode; i <= movie.player.episodes.last; i++) {
+	for (
+		let i = movie.player.episodes.first;
+		i <= movie.player.episodes.last;
+		i++
+	) {
 		options.push({
-			value: movie.player.list[i].uuid,
-			label: movie.player.list[i].episode
+			value: movie.player.list[i].episode,
+			label: `Серия ${movie.player.list[i].episode}`
 		})
 	}
 	return (
@@ -89,7 +72,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 					<p>Серия {episode}</p>
 					<Select
 						options={options}
-						onChange={(value: any) => setEpisode(value?.label)}
+						onChange={(value: any) => setEpisode(value?.value)}
 					/>
 				</div>
 				<VideoPlayer
