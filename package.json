@@ -37,7 +37,7 @@
 		"react-query": "^3.34.14",
 		"react-redux": "^7.2.6",
 		"react-redux-toastr": "^7.6.8",
-		"react-select": "^5.2.2",
+		"react-select": "^5.7.3",
 		"react-star-rating-component": "^1.4.1",
 		"react-transition-group": "^4.4.2",
 		"sass": "^1.49.0",

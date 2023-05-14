@@ -1,7 +1,6 @@
 import Hls from "hls.js"
-import dynamic from "next/dynamic"
-import Script from "next/script"
-import React, { FC, useEffect, useRef } from "react"
+import { FC, useEffect, useRef, useState } from "react"
+import Select from "react-select"
 
 import Content from "@/screens/singleMovie/content/Content"
 import { useUpdateCountOpened } from "@/screens/singleMovie/useUpdateCountOpened"
@@ -49,7 +48,8 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 }
 const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 	console.log(movie)
-
+	const [episode, setEpisode] = useState(1)
+	console.log(episode)
 	const similar = [
 		{
 			season: "1 сезон",
@@ -71,6 +71,15 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 			link: "string"
 		}
 	]
+	const options: any = []
+
+	for (let i = 1; i <= Object.keys(movie.list[0].player.list).length; i++) {
+		options.push({
+			value: movie.list[0].player.list[i].uuid,
+			label: movie.list[0].player.list[i].episode
+		})
+	}
+	console.log(options)
 	return (
 		<main className={"flex w-full justify-center  align-middle"}>
 			<Meta
@@ -83,12 +92,15 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 					image={`${ANILIBRIA_URL}` + movie.list[0].posters.original.url}
 					Detail={() => <Content movie={movie.list[0]} />}
 				/>
-
+				<div>
+					<p>Серия {episode}</p>
+					<Select
+						options={options}
+						onChange={(value: any) => setEpisode(value?.label)}
+					/>
+				</div>
 				<VideoPlayer
-					src={`https://cache.libria.fun${movie.list[0].player.list[1].hls.sd.replace(
-						'"',
-						""
-					)}`}
+					src={`https://${movie.list[0].player.host}${movie.list[0].player.list[episode].hls.sd}`}
 				/>
 				<div className={"mt-12"}>
 					<SubHeading title={"Похожие фильмы"} />
