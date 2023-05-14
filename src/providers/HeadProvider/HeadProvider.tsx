@@ -20,7 +20,6 @@ const HeadProvider: FC = ({ children }) => {
 					name={"viewport"}
 					content={"width=device-width, initial-scale=1,maximum-scale=1.0"}
 				/>
-				<favicon></favicon>
 				<Favicons />
 				<meta name={"theme-color"} content={"#8b54fd"} />
 				<meta name={"msapplication-navbutton-color"} content={"#18b54fd"} />
