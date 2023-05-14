@@ -1,9 +1,6 @@
 import Head from "next/head"
-import Script from "next/script"
 import NextProgressBar from "nextjs-progressbar"
 import React, { FC } from "react"
-
-import { accentColor } from "../../config/constants"
 
 import Favicons from "./Favicons"
 
@@ -11,23 +8,25 @@ const HeadProvider: FC = ({ children }) => {
 	return (
 		<>
 			<NextProgressBar
-				color={accentColor}
+				color={"#8b54fd"}
 				startPosition={0.3}
 				stopDelayMs={300}
 				height={3}
 			/>
 			<Head>
+				<link rel="manifest" href="/manifest.json" />
 				<meta charSet={"UTF-8"} />
 				<meta
 					name={"viewport"}
 					content={"width=device-width, initial-scale=1,maximum-scale=1.0"}
 				/>
+				<favicon></favicon>
 				<Favicons />
-				<meta name={"theme-color"} content={"#181B1e"} />
-				<meta name={"msapplication-navbutton-color"} content={"#181B1e"} />
+				<meta name={"theme-color"} content={"#8b54fd"} />
+				<meta name={"msapplication-navbutton-color"} content={"#18b54fd"} />
 				<meta
 					name={"apple-mobile-web-app-status-bar-style"}
-					content={"#181B1e"}
+					content={"#8b54fd"}
 				/>
 			</Head>
 			{children}
