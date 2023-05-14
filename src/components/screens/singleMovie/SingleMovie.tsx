@@ -73,8 +73,11 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 	]
 	return (
 		<main className={"flex w-full justify-center  align-middle"}>
-			{/*<Meta title={movie.names} description={`Watch ${movie.names}`} />*/}
-			<Meta title={"О моём перерождении в слизь: Алые узы "} description={``} />
+			<Meta
+				title={movie.list[0].names.ru}
+				description={`Смотрите ${movie.list[0].names.ru}`}
+			/>
+
 			<div className={"w-11/12"}>
 				<Banner
 					image={`${ANILIBRIA_URL}` + movie.list[0].posters.original.url}
