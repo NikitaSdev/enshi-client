@@ -1,0 +1,47 @@
+{
+    "name": "Enshi.",
+    "short_name": "Enshi.",
+    "description":"Онлайн сервис для просмотра аниме и фильмов.",
+    "icons": [
+      {
+        "src": "/android-chrome-96x96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      },
+      {
+         "src": "/favicon-16x16.png",
+         "sizes": "16x16",
+         "type": "image/png"
+      },
+     {
+         "src": "/apple-touch-icon-72x72.png",
+         "sizes": "72x72",
+         "type": "image/png"
+      },
+      {
+         "src": "/apple-touch-icon-76x76.png",
+         "sizes": "76x76",
+         "type": "image/png"
+      },
+      {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32",
+          "type": "image/png"
+       },
+       {
+       "src": "/favicon.ico",
+       "sizes": "48x48",
+       "type": "image/x-icon"
+       },
+      {
+        "src": "/apple-touch-icon.png",
+        "sizes": "76x76",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "theme_color": "#8b54fd",
+    "background_color": "#ffffff",
+    "display": "standalone"
+  }
+  

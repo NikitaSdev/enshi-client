@@ -47,7 +47,18 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 	)
 }
 const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
-	const [episode, setEpisode] = useState<any>(movie.player.episodes.first)
+	const [episode, setEpisode] = useState<number>(movie.player.episodes.first)
+	const [quality, setQuality] = useState<"hd" | "sd">("hd")
+	const qualityOptions: any = [
+		{
+			value: "hd",
+			label: `Качество: HD`
+		},
+		{
+			value: "sd",
+			label: `Качество: SD`
+		}
+	]
 	const options: any = []
 	console.log(movie)
 	for (
@@ -74,9 +85,13 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 						options={options}
 						onChange={(value: any) => setEpisode(value?.value)}
 					/>
+					<Select
+						options={qualityOptions}
+						onChange={(value: any) => setQuality(value?.value)}
+					/>
 				</div>
 				<VideoPlayer
-					src={`https://${movie.player.host}${movie.player.list[episode].hls.hd}`}
+					src={`https://${movie.player.host}${movie.player.list[episode].hls[quality]}`}
 				/>
 				<div className={"mt-12"}>
 					<SubHeading title={"Похожие фильмы"} />
