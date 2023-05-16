@@ -8,7 +8,8 @@ import {
 	getByMovieId,
 	getMoviesUrl,
 	getMoviesUrlByName,
-	getMoviesUrlBySlug
+	getMoviesUrlBySlug,
+	getSimilar
 } from "../config/api.config"
 import { getMovieUrl } from "../config/url.config"
 
@@ -48,10 +49,13 @@ export const MovieService = {
 		return movies
 	},
 	async getBySlug(slug: string) {
-		return axiosClassic.get<IMovieList>(getMoviesUrlBySlug(slug))
+		return axiosClassic.get<IMovie>(getMoviesUrlBySlug(slug))
 	},
 	async getByName(name: string) {
 		return axiosClassic.get<IMovieList>(getMoviesUrlByName(name))
+	},
+	async getSimilar(genres: Array<string>) {
+		return axiosClassic.get<IMovie>(getSimilar(genres))
 	},
 	async getByGenres(genreIds: string[]) {
 		return axiosClassic.post<IMovie[]>(getMoviesUrl(`/by-genres`), {

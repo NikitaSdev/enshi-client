@@ -10,6 +10,9 @@ export const getMoviesUrl = (string: string) =>
 export const getMoviesUrlBySlug = (string: string) => `/title?code=${string}`
 export const getMoviesUrlByName = (string: string) =>
 	`/title/search?search=${string}`
+export const getSimilar = (genres: Array<string>) =>
+	`/title/search/advanced?query= {season.year} == 2020 and {genres[0]} == "${genres[0]}"  or {genres[1]} == "${genres[1]}"&limit=25`
+
 export const getAnnounced = (string: string) =>
 	`/title/list?code_list=${string}`
 export const getByMovieId = (string: string) => `/title?code=${string}`

@@ -1,3 +1,4 @@
+import axios from "axios"
 import Hls from "hls.js"
 import { FC, useEffect, useRef, useState } from "react"
 import Select from "react-select"
@@ -8,6 +9,10 @@ import { useUpdateCountOpened } from "@/screens/singleMovie/useUpdateCountOpened
 import Banner from "@/ui/banner/Banner"
 import Gallery from "@/ui/gallery/Gallery"
 import SubHeading from "@/ui/heading/SubHeading"
+
+import { IMovie, IMovieList } from "@/shared/types/movie.types"
+
+import { MovieService } from "@/services/movie.service"
 
 import Meta from "@/utils/meta/Meta"
 
@@ -46,7 +51,18 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 		</div>
 	)
 }
-const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
+const SingleMovie: FC<IMoviePage> = ({ movie }) => {
+	const [similar, setSimilar] = useState<IMovieList>({ list: [movie] })
+	useEffect(() => {
+		const fetch = async () => {
+			const { data: similarMovies } = await MovieService.getSimilar(
+				movie.genres
+			)
+			setSimilar(similarMovies)
+		}
+		fetch()
+	}, [])
+	console.log(similar)
 	const [episode, setEpisode] = useState<number>(movie.player.episodes.first)
 	const [quality, setQuality] = useState<"hd" | "sd">("hd")
 	const qualityOptions: any = [
@@ -60,7 +76,6 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 		}
 	]
 	const options: any = []
-	console.log(movie)
 	for (
 		let i = movie.player.episodes.first;
 		i <= movie.player.episodes.last;
@@ -80,11 +95,12 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 					Detail={() => <Content movie={movie} />}
 				/>
 				<div>
-					<p>Серия {episode}</p>
+					<p>Серия: {episode}</p>
 					<Select
 						options={options}
 						onChange={(value: any) => setEpisode(value?.value)}
 					/>
+					<p>Качесвтво: {quality}</p>
 					<Select
 						options={qualityOptions}
 						onChange={(value: any) => setQuality(value?.value)}
@@ -95,7 +111,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie, similarMovies }) => {
 				/>
 				<div className={"mt-12"}>
 					<SubHeading title={"Похожие фильмы"} />
-					{/*<Gallery items={similar} heading={""} />*/}
+					<Gallery items={similar} heading={""} />
 				</div>
 			</div>
 		</main>

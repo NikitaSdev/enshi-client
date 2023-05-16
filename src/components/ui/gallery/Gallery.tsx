@@ -8,15 +8,14 @@ import { v4 as uuidv4 } from "uuid"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 
-import { IMovie } from "@/shared/types/movie.types"
+import { IMovie, IMovieList } from "@/shared/types/movie.types"
 
 import { ANILIBRIA_URL } from "../../../config/api.config"
 
 import styles from "./Gallery.module.scss"
-import poster from "./poster.png"
 
 const Gallery: FC<{
-	items: IMovie[]
+	items: IMovieList
 	heading: string
 	icon?: any
 	announced?: boolean
@@ -27,7 +26,7 @@ const Gallery: FC<{
 		prevButtonDisabled: true,
 		nextButtonDisabled: false
 	})
-	console.log(swiperNavigationAllowed.nextButtonDisabled)
+
 	const nextSlide = () => {
 		if (swiperRef.current) {
 			swiperRef.current.slideNext()
@@ -38,7 +37,6 @@ const Gallery: FC<{
 			swiperRef.current.slidePrev()
 		}
 	}
-
 	return (
 		<section
 			className={classNames(styles.wrapper, {
@@ -75,7 +73,6 @@ const Gallery: FC<{
 						})
 					}
 					onReachEnd={() => {
-						console.log("end")
 						setSwiperNavigationAllowed({
 							...swiperNavigationAllowed,
 							nextButtonDisabled: true
@@ -95,389 +92,15 @@ const Gallery: FC<{
 					width={190}
 					className={styles.swiper}
 				>
-					{/*{items.map((item: any) => (*/}
-					{/*	<SwiperSlide key={uuidv4()}>*/}
-					{/*		<img src={`${anilibria}${item.posterPath}`} alt={item.name} />*/}
-					{/*		{item.name}*/}
-					{/*	</SwiperSlide>*/}
-					{/*))}*/}
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.swiperItem}>
-						{announced ? (
-							<div className={styles.announce}>
-								<p>Анонс</p>
-							</div>
-						) : (
-							<div className={styles.favourite}>
-								<MaterialIcon name={"MdBookmark"} />
-							</div>
-						)}
-						<Image src={poster} />
-						<div className={styles.description}>
-							<h3>О моём перерождении в слизь: Алые узы </h3>
-							<div>
-								{announced ? (
-									<>
-										<p className={styles.announceData}>на 12 апреля, 2023 г.</p>
-									</>
-								) : (
-									<>
-										<div className={styles.year}>
-											<p>2023</p>
-										</div>
-										<p className={styles.genre}>Комедия/Экшен</p>
-									</>
-								)}
-							</div>
-						</div>
-					</SwiperSlide>
+					{items.list.map((item: IMovie) => (
+						<SwiperSlide key={uuidv4()}>
+							<img
+								src={`${anilibria}${item.posters.original.url}`}
+								alt={item.names.ru}
+							/>
+							{item.names.ru}
+						</SwiperSlide>
+					))}
 				</Swiper>
 
 				<button

@@ -4,7 +4,7 @@ import SingleMovie from "@/screens/singleMovie/SingleMovie"
 
 import { IGalleryItem } from "@/ui/gallery/gallery.interface"
 
-import { IMovie } from "@/shared/types/movie.types"
+import { IMovie, IMovieList } from "@/shared/types/movie.types"
 
 import { MovieService } from "@/services/movie.service"
 
@@ -12,14 +12,12 @@ import Error404 from "../404"
 import { getMovieUrl } from "../../config/url.config"
 
 export interface IMoviePage {
-	similarMovies: IGalleryItem[]
 	movie: IMovie
 }
-const MoviePage: NextPage<IMoviePage> = ({ movie, similarMovies }) => {
-	console.log(movie)
+const MoviePage: NextPage<IMoviePage> = ({ movie }) => {
 	return movie ? (
 		<>
-			<SingleMovie movie={movie} similarMovies={similarMovies || []} />
+			<SingleMovie movie={movie} />
 		</>
 	) : (
 		<Error404 />
@@ -51,6 +49,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			revalidate: 60
 		}
 	} catch (e) {
+		console.log(e)
 		return {
 			notFound: true
 		}
