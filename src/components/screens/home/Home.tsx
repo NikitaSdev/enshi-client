@@ -11,33 +11,34 @@ import fire from "./fire.svg"
 import { IHome } from "./home.interface"
 
 const Home: FC<IHome> = ({ trendingMovies, announcedMovies, mainMovie }) => {
+	console.log(trendingMovies)
 	return (
 		<>
 			<Meta title={"Главная"} description={"Главная"} />
 			<main>
-				<MainBanner />
+				{/*<MainBanner />*/}
 				{/*{trendingMovies.length && (*/}
-				<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
+				{/*	<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />*/}
 				{/*)}*/}
-				<Gallery
-					items={trendingMovies}
-					heading={"Анонсировано"}
-					icon={chevron}
-					announced
-				/>
-				<Gallery
-					items={trendingMovies}
-					heading={"Рейтинговые"}
-					icon={chevron}
-				/>
-				{/*<Gallery items={announcedMovies} heading={"Анонсировано "} />*/}
+				{/*<Gallery*/}
+				{/*	items={trendingMovies}*/}
+				{/*	heading={"Анонсировано"}*/}
+				{/*	icon={chevron}*/}
+				{/*	announced*/}
+				{/*/>*/}
+				{/*<Gallery*/}
+				{/*	items={trendingMovies}*/}
+				{/*	heading={"Рейтинговые"}*/}
+				{/*	icon={chevron}*/}
+				{/*/>*/}
+				{/*/!*<Gallery items={announcedMovies} heading={"Анонсировано "} />*!/*/}
 				{/*/!*{announcedMovies.length && <Gallery items={announcedMovies} />}*!/*/}
-				<SocialBanner />
-				<Gallery
-					items={trendingMovies}
-					heading={"Рекомендуемые"}
-					icon={chevron}
-				/>
+				{/*<SocialBanner />*/}
+				{/*<Gallery*/}
+				{/*	items={trendingMovies}*/}
+				{/*	heading={"Рекомендуемые"}*/}
+				{/*	icon={chevron}*/}
+				{/*/>*/}
 				{/*{announcedMovies.length && <Gallery items={announcedMovies} />}*/}
 			</main>
 		</>

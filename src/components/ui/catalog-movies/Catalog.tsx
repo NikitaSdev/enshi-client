@@ -14,7 +14,6 @@ import styles from "./Catalog.module.scss"
 import poster from "./poster.png"
 
 const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
-	console.log(movies)
 	return (
 		<>
 			<Meta title={title} description={description}></Meta>

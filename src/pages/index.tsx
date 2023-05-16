@@ -20,6 +20,7 @@ const HomePage: NextPage<IHome> = ({
 	announcedMovies,
 	mainMovie
 }) => {
+	console.log(trendingMovies)
 	return (
 		<Home
 			trendingMovies={trendingMovies}
