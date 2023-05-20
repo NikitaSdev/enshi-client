@@ -9,14 +9,15 @@ interface ISearchField {
 	searchTerm: string
 	handleSearch: (event: ChangeEvent<HTMLInputElement>) => void
 }
-const SearchField: FC<ISearchField> = ({ searchTerm, handleSearch }) => {
-	const [expandedInput, setExpandedInput] = useState(false)
+const SearchField: FC<
+	ISearchField & { expandedInput?: boolean; onClick?: () => void }
+> = ({ searchTerm, handleSearch, onClick, expandedInput }) => {
 	return (
 		<div className={styles.search}>
 			<MaterialIcon
 				name={"MdSearch"}
 				className={styles.icon}
-				onClick={() => setExpandedInput((prev) => !prev)}
+				onClick={onClick}
 			/>
 
 			<input

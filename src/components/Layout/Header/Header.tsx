@@ -6,6 +6,8 @@ import MobileMenu from "@/components/Layout/Header/MobileMenu/MobileMenu"
 import Search from "@/components/Layout/Header/Search/Search"
 import Logo from "@/components/ui/Logo/Logo"
 
+import SearchField from "@/ui/search-filed/SearchField"
+
 import styles from "./Header.module.scss"
 import Menu from "./MenuContainer/Menu"
 import Profile from "./Profile/Profile"
