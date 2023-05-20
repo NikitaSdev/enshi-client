@@ -1,6 +1,9 @@
 @import "src/assets/styles/adaptive";
 .menu {
 	@apply animate-fade;
+	@include _780 {
+		display: none;
+	}
 	.ul {
 		display: flex;
 		gap: 40px;

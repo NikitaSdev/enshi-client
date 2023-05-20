@@ -82,7 +82,11 @@ const ProfileButton = () => {
 }
 const Profile = () => {
 	const { user } = useAuth()
-	return <div>{user ? <ProfileButton /> : <AuthButton />}</div>
+	return (
+		<div className={styles.button}>
+			{user ? <ProfileButton /> : <AuthButton />}
+		</div>
+	)
 }
 
 export default Profile

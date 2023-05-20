@@ -32,7 +32,8 @@ const Footer = () => {
 					</a>
 				</div>
 				<div className={styles.copyright}>
-					<p>© 2023 Enshi.com. Все права защищены.</p>
+					<p>© 2023 Enshi.com.</p>
+					<p> Все права защищены.</p>
 				</div>
 			</div>
 		</footer>

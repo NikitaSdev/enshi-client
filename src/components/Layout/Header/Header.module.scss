@@ -4,15 +4,20 @@
 	height: 96px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	padding: 14px 33px;
 	> div {
 		max-width: 1172px;
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
+		justify-content: space-between;
 		flex: 1;
+		font-size: 0.95rem;
 		> div:first-child {
 			padding-left: 150px;
 		}
+	}
+	.container {
+		display: flex;
+		gap: 10px;
 	}
 }
