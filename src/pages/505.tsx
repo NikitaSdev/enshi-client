@@ -9,7 +9,7 @@ export default function Error500() {
 				<Heading title={"505 - Ошибка на сервере"} />
 			</Meta>
 			<div className={"text-3xl text-white text-center "}>
-				505 - Ошибка на сервере 123
+				505 - Ошибка на сервере
 			</div>
 		</>
 	)
