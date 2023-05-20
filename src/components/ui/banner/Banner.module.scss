@@ -1,6 +1,26 @@
 .banner {
-	img {
+	margin-top:75px;
+	.poster {
 		width: 315px;
+		border-radius: 16.5px;
 	}
 	@apply relative  flex  justify-between;
+}
+.addToFavourite{
+	margin-top:36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #8B54FD;
+	width: 312px;
+	height: 50px;
+	padding: 0;
+
+	>p{
+		color:#FFFFFF;
+		font-size: 0.8rem;
+		letter-spacing: 0.02rem;
+		font-weight: 600;
+		font-style: normal;
+	}
 }

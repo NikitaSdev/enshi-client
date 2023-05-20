@@ -19,26 +19,32 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	return (
 		<div className={styles.content}>
 			<h1>{movie.names.ru}</h1>
-			<p>
-				<span>Эпизоды:</span>
-				{movie.type.episodes}
-			</p>
-			<p>
-				<span>Жанры:</span> {movie.genres.join(", ")}
-			</p>
-			<p>
-				<span>Год выпуска:</span> {movie.season.year}
-			</p>
-			<p>
-				<span>Статус:</span> {movie.status.string}
-			</p>
-			<p>
-				<span>Тип:</span> {movie.type.string === "TV" ? "Сериал" : "Фильм"}
-			</p>
-			<p>
-				{isDescriptionOpened ? movie.description : title(movie.description)}
-			</p>
-			<button onClick={() => setIsDescriptionOpened((prev) => !prev)}>
+			<div className={styles.info}>
+				<p>
+					<span>Эпизоды:</span>
+					{movie.type.episodes}
+				</p>
+				<p>
+					<span>Жанры:</span> {movie.genres.join(", ")}
+				</p>
+				<p>
+					<span>Год выпуска:</span> {movie.season.year}
+				</p>
+				<p>
+					<span>Статус:</span> {movie.status.string}
+				</p>
+				<p>
+					<span>Тип:</span> {movie.type.string === "TV" ? "Сериал" : "Фильм"}
+				</p>
+			</div>
+
+			<div className={styles.description}>
+				<p>
+					{isDescriptionOpened ? movie.description : title(movie.description)}
+				</p>
+			</div>
+
+			<button className={styles.extra} onClick={() => setIsDescriptionOpened((prev) => !prev)}>
 				{isDescriptionOpened ? "Свернуть" : "Развернуть"}
 			</button>
 

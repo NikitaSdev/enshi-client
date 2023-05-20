@@ -14,6 +14,7 @@ const Banner: FC<IBanner> = ({ image, Detail }) => {
 		<div className={styles.banner}>
 			<div>
 				<Image
+					className={styles.poster}
 					src={image}
 					alt={""}
 					width={312}
@@ -22,7 +23,7 @@ const Banner: FC<IBanner> = ({ image, Detail }) => {
 					unoptimized
 					priority
 				/>
-				<Button>Добавить в избранное</Button>
+				<Button className={styles.addToFavourite}><p>Добавить в избранное</p></Button>
 			</div>
 			{Detail && <Detail />}
 		</div>
