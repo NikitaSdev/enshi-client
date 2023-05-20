@@ -21,11 +21,11 @@ const Header = () => {
 				<div className={styles.container}>
 					<Search />
 					<Profile />
+					<Burger
+						onClick={() => setIsMenuOpened((prev) => !prev)}
+						active={isMenuOpened}
+					/>
 				</div>
-				<Burger
-					onClick={() => setIsMenuOpened((prev) => !prev)}
-					active={isMenuOpened}
-				/>
 			</div>
 			<MobileMenu active={isMenuOpened} />
 		</header>
