@@ -1,31 +1,29 @@
 @import "src/assets/styles/adaptive";
 
 .menu {
-  position: absolute;
-  top: 0;
-  padding: 40px 0;
-  @apply bg-gray-800;
-  z-index: 999999;
-  width: 35vw;
-  height: 100vh;
-  transition: 0.8s;
-  transform: translateX(-100vw);
-  @include _480 {
-    width: 60vw;
-  }
-}
-
-.search {
-  width: 90%;
-
+	display: none !important;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 40px 0;
+	@apply bg-gray-800;
+	z-index: 4;
+	width: 221px;
+	height: 321px;
+	transition: 0.8s;
 }
 
 .active {
-  transform: translateX(0);
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  transition: 0.8s;
+	padding-top: 80px;
+	transition: 0.8s;
+	display: flex !important;
+	flex-direction: column;
+	align-items: center;
+	div {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 50px;
+	}
 }

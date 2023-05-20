@@ -8,7 +8,8 @@ import { TypeMaterialIconName } from "@/shared/types/icons.types"
 export const MaterialIcon: FC<{
 	name: TypeMaterialIconName
 	className?: string
-}> = ({ name, className }) => {
+	onClick?: () => void
+}> = ({ name, className, onClick }) => {
 	const { isRenderClient } = useRenderClient()
 	const IconComponent = MaterialIcons[name]
 
@@ -16,7 +17,7 @@ export const MaterialIcon: FC<{
 		if (IconComponent === undefined) {
 			return <MaterialIcons.MdDragIndicator className={className} />
 		}
-		return <IconComponent className={className} />
+		return <IconComponent className={className} onClick={onClick} />
 	} else {
 		return null
 	}

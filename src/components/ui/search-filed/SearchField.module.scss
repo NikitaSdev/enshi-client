@@ -6,16 +6,39 @@
 	width: 270px;
 	font-size: 0.8rem;
 	display: flex;
-	@include _780 {
+	@include _900 {
 		width: 240px;
+	}
+	@include _480 {
+		width: 42px;
+		height: 42px;
 	}
 	.icon {
 		height: 24px;
 		width: 48px;
 		@apply fill-gray-600  transition-colors;
+		@include _480 {
+			@apply fill-white  transition-colors;
+		}
 	}
 	> input {
 		@apply w-5/6 text-white placeholder:text-gray-600  bg-transparent outline-none border-0;
+		@include _480 {
+			display: none;
+		}
+	}
+	.activeInput {
+		@include _480 {
+			display: flex;
+			justify-content: center;
+			background: #333238;
+			position: absolute;
+			width: 150vw;
+			height: 50px;
+			z-index: 10;
+			top: 50px;
+			left: -80vw;
+		}
 	}
 	&:focus-within {
 		@apply border-gray-600;

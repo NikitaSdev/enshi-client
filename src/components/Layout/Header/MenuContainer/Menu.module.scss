@@ -1,12 +1,19 @@
 @import "src/assets/styles/adaptive";
 .menu {
 	@apply animate-fade;
-	@include _780 {
+	@include _900 {
 		display: none;
 	}
 	.ul {
 		display: flex;
 		gap: 40px;
+		@include _780 {
+			width: 320px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 		> li {
 			@apply border-r-4 border-r-transparent transition-colors;
 			font-size: 0.95rem;

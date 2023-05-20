@@ -1,14 +1,19 @@
 @import "src/assets/styles/adaptive";
 .burger {
-	width: 50px;
-	height: 50px;
+	width: 42px;
+	height: 42px;
 	position: relative;
-	z-index: 2;
+	z-index: 7;
 	overflow: hidden;
 	cursor: pointer;
+	background: #333238;
+	display: none;
+	border-radius: 8px;
+	@include _900 {
+		display: block;
+	}
 	span {
-		display: none;
-		width: 50px;
+		width: 30px;
 		height: 2.5px;
 		border-radius: 2px;
 		position: absolute;
@@ -17,19 +22,17 @@
 		transform: translate(-50%, -50%);
 		background: white;
 		transition: all 0.3s linear;
-		@include _780 {
-			display: block;
-		}
 		&:nth-of-type(2) {
-			top: calc(50% - 15px);
+			top: calc(50% - 8px);
 		}
 
 		&:nth-of-type(3) {
-			top: calc(50% + 15px);
+			top: calc(50% + 8px);
 		}
 	}
 
 	&.active {
+		background: #1d1c22;
 		span {
 			background-color: var(--primary-color);
 

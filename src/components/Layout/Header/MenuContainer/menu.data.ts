@@ -1,8 +1,6 @@
-import {IMenu} from "@/components/Layout/Header/MenuContainer/menu.interface";
-
+import { IMenu } from "@/components/Layout/Header/MenuContainer/menu.interface"
 
 export const firstMenu: IMenu = {
-	title: "Меню",
 	items: [
 		{
 			link: "/",
@@ -18,4 +16,23 @@ export const firstMenu: IMenu = {
 		}
 	]
 }
-
+export const mobileMenu: IMenu = {
+	items: [
+		{
+			link: "/",
+			title: "Главная"
+		},
+		{
+			link: "/catalog",
+			title: "Каталог"
+		},
+		{
+			link: "/top",
+			title: "Топ - 100"
+		},
+		{
+			link: "/profile",
+			title: "Профиль" + ""
+		}
+	]
+}

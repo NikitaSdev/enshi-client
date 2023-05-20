@@ -1,4 +1,5 @@
-import { ChangeEvent, FC } from "react"
+import classNames from "classnames"
+import { ChangeEvent, FC, useState } from "react"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 
@@ -9,10 +10,17 @@ interface ISearchField {
 	handleSearch: (event: ChangeEvent<HTMLInputElement>) => void
 }
 const SearchField: FC<ISearchField> = ({ searchTerm, handleSearch }) => {
+	const [expandedInput, setExpandedInput] = useState(false)
 	return (
 		<div className={styles.search}>
-			<MaterialIcon name={"MdSearch"} className={styles.icon} />
+			<MaterialIcon
+				name={"MdSearch"}
+				className={styles.icon}
+				onClick={() => setExpandedInput((prev) => !prev)}
+			/>
+
 			<input
+				className={classNames({ [styles.activeInput]: expandedInput })}
 				type="text"
 				placeholder={"Поиск аниме"}
 				value={searchTerm}
