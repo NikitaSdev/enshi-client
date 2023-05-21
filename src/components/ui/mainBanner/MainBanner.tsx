@@ -80,7 +80,7 @@ const Rating: FC<IBanner & { currentIndex: number }> = ({
 	stars.fill(0, 0, -1)
 	return (
 		<>
-			{stars.map((star) => (
+			{stars.map(() => (
 				<MaterialIcon name={"MdStar"} key={v4()} />
 			))}
 		</>

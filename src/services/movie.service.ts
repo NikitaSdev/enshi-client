@@ -6,6 +6,7 @@ import axios, { axiosClassic } from "../api/interceptors"
 import {
 	getAnnounced,
 	getByMovieId,
+	getMoviesList,
 	getMoviesUrl,
 	getMoviesUrlByName,
 	getMoviesUrlBySlug,
@@ -14,14 +15,11 @@ import {
 import { getMovieUrl } from "../config/url.config"
 
 export const MovieService = {
-	async getAll(searchTerm?: string) {
-		return axiosClassic.get<IMovieList>(getMoviesUrl(``), {
-			params: searchTerm
-				? {
-						searchTerm
-				  }
-				: {}
-		})
+	async getAll(page: number) {
+		return axiosClassic.get<IMovieList>(getMoviesUrl(page))
+	},
+	async getMovieList(searchTerm?: string) {
+		return axiosClassic.get<IMovieList>(getMoviesList())
 	},
 	async getMain(mainId: string) {
 		const { data: movies } = await axiosClassic.get<IMovie>(
@@ -36,19 +34,19 @@ export const MovieService = {
 		return movies
 	},
 	async getTrending(movieList: Array<string>) {
-		const { data: movies } = await axios.get<IMovie[]>(
+		const { data: movies } = await axios.get<IMovieList>(
 			getAnnounced(movieList.join(","))
 		)
 		return movies
 	},
-	async getPopularMovies() {
+	async getPopularMovies(page: number) {
 		const { data: movies } = await axiosClassic.get<IMovieList>(
-			getMoviesUrl("")
+			getMoviesUrl(page)
 		)
 		return movies
 	},
 	async getBySlug(slug: string) {
-		return axiosClassic.get<IMovie>(getMoviesUrlBySlug(slug))
+		return axios.get<IMovie>(getMoviesUrlBySlug(slug))
 	},
 	async getByName(name: string) {
 		return axiosClassic.get<IMovieList>(getMoviesUrlByName(name))

@@ -1,4 +1,6 @@
+import axios from "axios"
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+import { useQuery } from "react-query"
 
 import SingleMovie from "@/screens/singleMovie/SingleMovie"
 
@@ -9,6 +11,7 @@ import { IMovie, IMovieList } from "@/shared/types/movie.types"
 import { MovieService } from "@/services/movie.service"
 
 import Error404 from "../404"
+import { axiosClassic } from "../../api/interceptors"
 import { getMovieUrl } from "../../config/url.config"
 
 export interface IMoviePage {
@@ -26,7 +29,7 @@ const MoviePage: NextPage<IMoviePage> = ({ movie }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	try {
-		const { data: movies } = await MovieService.getAll()
+		const { data: movies } = await MovieService.getMovieList()
 		const paths = movies.list.map((movie: IMovie) => ({
 			params: { slug: movie.code }
 		}))

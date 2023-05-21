@@ -5,7 +5,9 @@ export const getGenresUrl = (string: string) => `/genres${string}`
 export const getAuthUrl = (string: string) => `/auth${string}`
 export const getUsersUrl = (string: string) => `/users${string}`
 export const getActorsUrl = (string: string) => `/actor${string}`
-export const getMoviesUrl = (string: string) =>
+export const getMoviesUrl = (page: number) =>
+	`/title/search/advanced?query={season.year} > 2016&limit=15&page=${page}`
+export const getMoviesList = () =>
 	`/title/search/advanced?query={season.year} > 2016&limit=15`
 export const getMoviesUrlBySlug = (string: string) => `/title?code=${string}`
 export const getMoviesUrlByName = (string: string) =>

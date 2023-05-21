@@ -7,7 +7,7 @@
 	.ul {
 		display: flex;
 		gap: 40px;
-		@include _780 {
+		@include _900 {
 			width: 320px;
 			display: flex;
 			flex-direction: column;
