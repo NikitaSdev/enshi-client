@@ -11,17 +11,12 @@
 	margin-right: auto;
 	gap: 54px;
 	justify-content: center;
-	width: 1300px;
+	max-width: 1300px;
 	align-self: center;
 	> a {
 		@apply animate-fade;
 	}
 	> a:nth-child(3n) {
 		@apply mr-0;
-	}
-}
-@media (max-width: 830px) {
-	.movies {
-		@apply flex-col;
 	}
 }

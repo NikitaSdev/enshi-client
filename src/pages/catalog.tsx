@@ -15,12 +15,7 @@ const TrendingPage: FC<any> = ({ movies }) => {
 				title={""}
 				description={"Трендовые фильмы и сериалы"}
 			/>
-			{/*<Pagination*/}
-			{/*// movies={movies}*/}
-			{/*// page={page}*/}
-			{/*// setPage={setPage}*/}
-			{/*// scrollToTop={scrollToTop}*/}
-			{/*/>*/}
+			<Pagination count={10} />
 		</>
 	)
 }

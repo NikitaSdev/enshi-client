@@ -13,12 +13,8 @@ const SearchField: FC<
 	ISearchField & { expandedInput?: boolean; onClick?: () => void }
 > = ({ searchTerm, handleSearch, onClick, expandedInput }) => {
 	return (
-		<div className={styles.search}>
-			<MaterialIcon
-				name={"MdSearch"}
-				className={styles.icon}
-				onClick={onClick}
-			/>
+		<div className={styles.search} onClick={onClick}>
+			<MaterialIcon name={"MdSearch"} className={styles.icon} />
 
 			<input
 				className={classNames({ [styles.activeInput]: expandedInput })}

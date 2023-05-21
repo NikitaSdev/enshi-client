@@ -1,5 +1,6 @@
 import classNames from "classnames"
 import Image from "next/image"
+import Link from "next/link"
 import { FC, useEffect, useRef, useState } from "react"
 import SwiperCore, { Navigation } from "swiper"
 import "swiper/css"
@@ -62,6 +63,7 @@ const Gallery: FC<{
 				</button>
 				<Swiper
 					slidesPerView={1}
+					allowTouchMove={false}
 					scrollbar={{ draggable: true }}
 					onSlideChange={() =>
 						setSwiperNavigationAllowed({
@@ -94,28 +96,46 @@ const Gallery: FC<{
 				>
 					{items.list.map((item: IMovie) => (
 						<SwiperSlide key={uuidv4()}>
-							<img
-								src={`${announced ? "" : anilibria}${
-									item.posters.original.url
-								}`}
-								alt={item.names.ru}
-							/>
-							{item.names.ru}
-							{announced ? (
-								<div className={styles.release}>{item.release}</div>
-							) : (
-								<div>
-									<div className={styles.year}>
-										<p>{item.year}</p>
+							<Link href={`movies/${item.code}`}>
+								<div className={styles.item}>
+									<div className={styles.favourite}>
+										<MaterialIcon name={"MdBookmark"} />
 									</div>
+									{announced && (
+										<div className={styles.announce}>Анонсировано</div>
+									)}
+									<img
+										alt={item.names.ru}
+										src={`${announced ? "" : anilibria}${
+											item.posters.original.url
+										}`}
+										className={styles.slide}
+										draggable={false}
+									/>
+									{announced ? (
+										<div className={styles.release}>{item.release}</div>
+									) : (
+										<div className={styles.description}>
+											<h3>{item.names.ru}</h3>
+											<div>
+												<div className={styles.year}>
+													<p>{item.season.year}</p>
+												</div>
 
-									<p className={styles.genre}>
-										{item.genres[1]
-											? item.genres[0] + "/" + item.genres[1]
-											: item.genres[0]}
-									</p>
+												<div className={styles.genre}>
+													{item.genres[1] ? (
+														<>
+															<p>{item.genres[0]}/</p> <p>{item.genres[1]}</p>
+														</>
+													) : (
+														<p>{item.genres[0]}</p>
+													)}
+												</div>
+											</div>
+										</div>
+									)}
 								</div>
-							)}
+							</Link>
 						</SwiperSlide>
 					))}
 				</Swiper>

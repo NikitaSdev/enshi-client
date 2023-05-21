@@ -33,7 +33,7 @@ const Search: FC<{
 				searchTerm={searchTerm}
 				handleSearch={handleSearch}
 			/>
-			{isSuccess && isSearchListOpened && (
+			{expandedInput && isSuccess && isSearchListOpened && (
 				<SearchList movies={data?.list || []} />
 			)}
 		</div>

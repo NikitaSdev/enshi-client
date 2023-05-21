@@ -28,11 +28,15 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
 								<p>{item.year}</p>
 							</div>
 
-							<p className={styles.genre}>
-								{item.genres[1]
-									? item.genres[0] + "/" + item.genres[1]
-									: item.genres[0]}
-							</p>
+							<div className={styles.genre}>
+								{item.genres[1] ? (
+									<>
+										<p>{item.genres[0]}/</p> <p>{item.genres[1]}</p>
+									</>
+								) : (
+									<p>{item.genres[0]}</p>
+								)}
+							</div>
 						</div>
 					</div>
 				)}

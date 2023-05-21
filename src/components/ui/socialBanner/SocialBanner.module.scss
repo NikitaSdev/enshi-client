@@ -1,32 +1,68 @@
+@import "src/assets/styles/adaptive";
 .banner {
 	margin-top: 72px;
 	background: #6a43b9;
 	display: flex;
 	justify-content: center;
 	.bannerContainer {
-		width: 1170px;
+		max-width: 1170px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		height: 225px;
+		@include _1250 {
+			width: 95%;
+			justify-content: space-between;
+		}
+	}
+	.contentWrapper {
+		display: flex;
+		gap: 100px;
+		@include _1250 {
+			flex-direction: column;
+			gap: 15px;
+		}
 	}
 	.heading {
 		color: #ffffff;
 		h1 {
 			font-size: 1.43rem;
 			font-weight: 700;
+			@include _1250 {
+				font-size: 1.2rem;
+			}
+			@include _780 {
+				font-size: 1.1rem;
+			}
+			@include _420 {
+				font-size: 0.9rem;
+			}
 		}
 		h3 {
 			margin-top: 10px;
 			font-weight: 500;
 			font-size: 1rem;
+			@include _1250 {
+				font-size: 0.9rem;
+			}
+			@include _780 {
+				font-size: 0.75rem;
+			}
 		}
 	}
 	.logos {
 		display: flex;
 		flex-direction: column;
+		@include _1250 {
+			flex-direction: row;
+			gap: 20px;
+		}
 		img {
 			cursor: pointer;
+			@include _480 {
+				min-width: 42px;
+				height: auto;
+			}
 		}
 
 		div:first-child {
@@ -34,14 +70,35 @@
 			justify-content: space-between;
 			gap: 92px;
 			margin-bottom: 25px;
+			@include _1250 {
+				gap: 15px;
+				margin: 0;
+			}
 		}
 		div:last-child {
 			display: flex;
 			justify-content: center;
 			margin-bottom: 10px;
+			@include _1250 {
+				margin: 0;
+			}
 		}
 	}
 	.girl {
+		height: 100%;
 		margin-top: 2px;
+		@include _780 {
+			margin-right: -100px;
+		}
+		@include _480 {
+			margin-right: -150px;
+		}
+		@include _420 {
+			margin-right: -180px;
+		}
+		img {
+			min-width: 350px !important;
+			min-height: 225px !important;
+		}
 	}
 }
