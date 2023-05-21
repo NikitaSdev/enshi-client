@@ -1,0 +1,12 @@
+@import "src/assets/styles/adaptive";
+
+.container {
+	margin: auto;
+	max-width: 1170px;
+}
+.video {
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+	flex: 1;
+}

@@ -1,14 +1,11 @@
 import axios from "axios"
 import { GetStaticProps, NextPage } from "next"
-import { useEffect, useState } from "react"
 
 import { IHome } from "@/screens/home/home.interface"
 
-import { IGalleryItem } from "@/ui/gallery/gallery.interface"
-import { ISlide } from "@/ui/slider/slider.types"
-
-import { IMovie, IMovieList } from "@/shared/types/movie.types"
-
+//TODO: swiper
+//TODO: videoadaptive
+//TODO: profile
 import { MovieService } from "@/services/movie.service"
 
 import Home from "../components/screens/home/Home"
@@ -31,7 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			genres: m.genres
 		}))
 		const dataTrendingMovies = await MovieService.getTrending(allData.popular)
-		const trendingMovies: any = dataTrendingMovies.map((m) => ({
+		const trendingMovies: any = dataTrendingMovies.map((m: any) => ({
 			name: m.names.ru,
 			posterPath: m.posters.original.url,
 			link: m.id

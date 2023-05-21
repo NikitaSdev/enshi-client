@@ -20,7 +20,6 @@ const Top = () => {
 		async () => await MovieService.getTrending(topList.list)
 	)
 	const moviesToRender = { list: top }
-	console.log(moviesToRender)
 	return (
 		<>
 			<Catalog

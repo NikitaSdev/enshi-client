@@ -43,8 +43,6 @@
 		padding-top: 35px;
 		max-width: 1150px;
 		align-self: center;
-		flex: 1;
-
 		@include _1200 {
 			max-width: 960px;
 		}
@@ -137,12 +135,12 @@
 	color: #a9a9a9;
 }
 .description {
-	padding-top: 15px;
+	padding-top: 1px;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
 	h3 {
-		height: 50px;
+		height: 42px;
 		font-size: 0.95rem;
 		line-height: 1.1rem;
 		font-weight: 700;

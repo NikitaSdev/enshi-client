@@ -10,7 +10,7 @@ const SkeletonLoader: FC<SkeletonProps> = ({ className, ...rest }) => {
 			{...rest}
 			baseColor={"#1F2125"}
 			highlightColor={"#292a2e"}
-			width={190}
+			width={200}
 			height={365}
 			className={cn("rounded-br-xl", className)}
 		/>

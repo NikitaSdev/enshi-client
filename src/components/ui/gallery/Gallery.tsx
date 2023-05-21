@@ -16,11 +16,12 @@ import { ANILIBRIA_URL } from "../../../config/api.config"
 import styles from "./Gallery.module.scss"
 
 const Gallery: FC<{
-	items: IMovieList
+	items: any
 	heading: string
 	icon?: any
+	singleMovie?: boolean
 	announced?: boolean
-}> = ({ items, heading, icon, announced }) => {
+}> = ({ items, heading, singleMovie, icon, announced }) => {
 	const anilibria = ANILIBRIA_URL
 	const swiperRef = useRef<SwiperCore>()
 	const [swiperNavigationAllowed, setSwiperNavigationAllowed] = useState<any>({
@@ -62,15 +63,25 @@ const Gallery: FC<{
 					<MaterialIcon name={"MdChevronLeft"} />
 				</button>
 				<Swiper
-					slidesPerView={1}
-					allowTouchMove={false}
+					breakpoints={{
+						320: {
+							slidesPerView: 1
+						},
+						580: {
+							slidesPerView: 2
+						},
+						1280: {
+							slidesPerView: 5
+						}
+					}}
+					slidesPerView={5}
 					scrollbar={{ draggable: true }}
 					onSlideChange={() =>
 						setSwiperNavigationAllowed({
 							prevButtonDisabled: swiperRef?.current?.isBeginning,
 							nextButtonDisabled: swiperRef?.current
 								? swiperRef?.current?.activeIndex ===
-								  swiperRef?.current?.slides?.length - 5
+								  swiperRef?.current?.slides?.length - 4
 								: false
 						})
 					}
@@ -90,13 +101,12 @@ const Gallery: FC<{
 					onBeforeInit={(swiper: SwiperCore | undefined) => {
 						swiperRef.current = swiper
 					}}
-					spaceBetween={50}
-					width={190}
+					spaceBetween={20}
 					className={styles.swiper}
 				>
 					{items.list.map((item: IMovie) => (
-						<SwiperSlide key={uuidv4()}>
-							<Link href={`movies/${item.code}`}>
+						<SwiperSlide key={uuidv4()} className={styles.swiperItem}>
+							<Link href={singleMovie ? item.code : `movies/${item.code}`}>
 								<div className={styles.item}>
 									<div className={styles.favourite}>
 										<MaterialIcon name={"MdBookmark"} />

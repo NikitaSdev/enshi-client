@@ -1,23 +1,23 @@
 .banner {
-	margin-top:75px;
+	margin-top: 75px;
 	.poster {
 		width: 315px;
 		border-radius: 16.5px;
 	}
 	@apply relative  flex  justify-between;
 }
-.addToFavourite{
-	margin-top:36px;
+.addToFavourite {
+	margin-top: 15px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #8B54FD;
+	background: #8b54fd;
 	width: 312px;
 	height: 50px;
 	padding: 0;
 
-	>p{
-		color:#FFFFFF;
+	> p {
+		color: #ffffff;
 		font-size: 0.8rem;
 		letter-spacing: 0.02rem;
 		font-weight: 600;

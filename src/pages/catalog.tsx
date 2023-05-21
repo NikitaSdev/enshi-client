@@ -59,7 +59,6 @@ const TrendingPage: FC<any> = () => {
 				<div className={"flex mt-8 justify-center w-full "}>
 					<Pagination
 						className={classes.root}
-						style={{ marginTop: "48px" }}
 						count={totalPages}
 						onChange={(e, currentPage) => setPage(currentPage)}
 					/>

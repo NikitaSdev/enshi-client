@@ -34,7 +34,7 @@ export const MovieService = {
 		return movies
 	},
 	async getTrending(movieList: Array<string>) {
-		const { data: movies } = await axios.get<IMovieList>(
+		const { data: movies } = await axios.get<IMovie>(
 			getAnnounced(movieList.join(","))
 		)
 		return movies
@@ -54,22 +54,11 @@ export const MovieService = {
 	async getSimilar(genres: Array<string>) {
 		return axiosClassic.get<IMovie>(getSimilar(genres))
 	},
-	async getByGenres(genreIds: string[]) {
-		return axiosClassic.post<IMovie[]>(getMoviesUrl(`/by-genres`), {
-			genreIds
-		})
-	},
-	async getByActor(actorIds: string) {
-		return axiosClassic.get<IMovie>(getMoviesUrl(`/by-actor/${actorIds}`))
-	},
-	async getById(_id: string) {
-		return axios.get(getMovieUrl(`${_id}`))
-	},
-	async updateCountOpened(slug: string) {
-		return axiosClassic.put<string>(getMoviesUrl(`/update-count-opened`), {
-			slug
-		})
-	},
+	// async updateCountOpened(slug: string) {
+	// 	return axiosClassic.put<string>(getMoviesUrl(`/update-count-opened`), {
+	// 		slug
+	// 	})
+	// },
 	async Get20() {
 		useEffect(() => {
 			alert("")

@@ -1,7 +1,7 @@
-import axios from "axios"
 import Hls from "hls.js"
 import { FC, useEffect, useRef, useState } from "react"
 import Select from "react-select"
+import videojs from "video.js"
 
 import Content from "@/screens/singleMovie/content/Content"
 import { useUpdateCountOpened } from "@/screens/singleMovie/useUpdateCountOpened"
@@ -19,9 +19,12 @@ import Meta from "@/utils/meta/Meta"
 import { ANILIBRIA_URL } from "../../../config/api.config"
 import { IMoviePage } from "../../../pages/movies/[slug]"
 
+import styles from "./SingleMovie.module.scss"
+
 interface VideoPlayerProps {
 	src: string
 }
+
 const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 	const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -47,10 +50,11 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 
 	return (
 		<div>
-			<video ref={videoRef} controls></video>
+			<video ref={videoRef} controls className={styles.video}></video>
 		</div>
 	)
 }
+
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 	const [similar, setSimilar] = useState<IMovieList>({ list: [movie] })
 	useEffect(() => {
@@ -87,33 +91,34 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		})
 	}
 	return (
-		<main className={"flex w-full justify-center  align-middle"}>
+		<main>
 			<Meta title={movie.names.ru} description={`Смотрите ${movie.names.ru}`} />
-			<div className={"w-11/12"}>
-				<Banner
-					image={`${ANILIBRIA_URL}` + movie.posters.original.url}
-					Detail={() => <Content movie={movie} />}
-				/>
-				<div>
-					<p>Серия: {episode}</p>
-					<Select
-						options={options}
-						onChange={(value: any) => setEpisode(value?.value)}
+			<section>
+				<div className={styles.container}>
+					<Banner
+						image={`${ANILIBRIA_URL}` + movie.posters.original.url}
+						Detail={() => <Content movie={movie} />}
 					/>
-					<p>Качесвтво: {quality}</p>
-					<Select
-						options={qualityOptions}
-						onChange={(value: any) => setQuality(value?.value)}
+					<div>
+						<p>Серия: {episode}</p>
+						<Select
+							options={options}
+							onChange={(value: any) => setEpisode(value?.value)}
+						/>
+						<p>Качесвтво: {quality}</p>
+						<Select
+							options={qualityOptions}
+							onChange={(value: any) => setQuality(value?.value)}
+						/>
+					</div>
+					<VideoPlayer
+						src={`https://${movie.player.host}${movie.player.list[episode].hls[quality]}`}
 					/>
+					<div className={"mt-12"}>
+						<Gallery items={similar} heading={"Похожие фильмы"} singleMovie />
+					</div>
 				</div>
-				<VideoPlayer
-					src={`https://${movie.player.host}${movie.player.list[episode].hls[quality]}`}
-				/>
-				<div className={"mt-12"}>
-					<SubHeading title={"Похожие фильмы"} />
-					<Gallery items={similar} heading={""} />
-				</div>
-			</div>
+			</section>
 		</main>
 	)
 }

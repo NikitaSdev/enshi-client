@@ -48,7 +48,8 @@
 		"sharp": "^0.31.3",
 		"string-strip-html": "^9.1.6",
 		"swiper": "^9.3.1",
-		"uuid": "^9.0.0"
+		"uuid": "^9.0.0",
+		"video.js": "^8.3.0"
 	},
 	"devDependencies": {
 		"@trivago/prettier-plugin-sort-imports": "^3.1.1",

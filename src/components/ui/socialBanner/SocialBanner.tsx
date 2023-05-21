@@ -22,7 +22,13 @@ const SocialBanner = () => {
 					<div className={styles.logos}>
 						<div>
 							<Link href={"https://vk.com/enshii"}>
-								<Image draggable={false} src={vk} />
+								<a
+									href="https://vk.com/enshii"
+									target={"_blank"}
+									rel={"noreferrer"}
+								>
+									<Image draggable={false} src={vk} />
+								</a>
 							</Link>
 							<Link href={""}>
 								<Image draggable={false} src={youtube} />

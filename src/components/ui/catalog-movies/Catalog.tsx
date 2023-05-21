@@ -36,7 +36,7 @@ const Catalog: FC<ICatalog> = ({ movies, isLoading, title, description }) => {
 						<SkeletonLoader count={15} />
 					</div>
 				) : (
-					movies.list.map((movie) => (
+					movies.list.map((movie: any) => (
 						<GalleryItem
 							key={movie.id}
 							item={{
