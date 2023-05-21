@@ -1,5 +1,6 @@
 import axios from "axios"
 import { GetStaticProps, NextPage } from "next"
+import { useEffect, useState } from "react"
 
 import { IHome } from "@/screens/home/home.interface"
 
@@ -10,23 +11,11 @@ import { IMovie, IMovieList } from "@/shared/types/movie.types"
 
 import { MovieService } from "@/services/movie.service"
 
-import { getGenresList } from "@/utils/movie/getGenresListEach"
-
 import Home from "../components/screens/home/Home"
-import { getActorUrl, getMovieUrl } from "../config/url.config"
 
-const HomePage: NextPage<IHome> = ({
-	trendingMovies,
-	announcedMovies,
-	mainMovie
-}) => {
-	console.log(trendingMovies)
+const HomePage: NextPage<IHome> = ({ trendingMovies, announcedMovies }) => {
 	return (
-		<Home
-			trendingMovies={trendingMovies}
-			announcedMovies={announcedMovies}
-			mainMovie={mainMovie}
-		/>
+		<Home trendingMovies={trendingMovies} announcedMovies={announcedMovies} />
 	)
 }
 export const getStaticProps: GetStaticProps = async () => {
@@ -34,13 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		const { data: allData } = await axios.get(
 			`http://localhost:5000/api/homePage`
 		)
-		const main = await MovieService.getMain(allData.main.id)
-		const mainMovie: any = {
-			poster: allData.main.photo,
-			name: main.names.ru,
-			description: allData.main.description,
-			link: main.id
-		}
+		const list = allData.main
 		const announcedMovies: any = allData.announced.map((m: any) => ({
 			name: m.title,
 			posterPath: m.img,
@@ -55,14 +38,13 @@ export const getStaticProps: GetStaticProps = async () => {
 		}))
 		return {
 			props: {
-				mainMovie,
+				list,
 				announcedMovies,
 				trendingMovies
 			} as any,
 			revalidate: 60
 		}
 	} catch (e) {
-		console.log(e)
 		return {
 			props: {
 				slides: [],

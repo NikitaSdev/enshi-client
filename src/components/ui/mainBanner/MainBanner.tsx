@@ -1,9 +1,10 @@
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 import { MdStar } from "react-icons/all"
 import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper"
 import "swiper/css"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { v4 } from "uuid"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 import Button from "@/ui/form-elements/Button"
@@ -11,25 +12,26 @@ import Button from "@/ui/form-elements/Button"
 import styles from "./MainBanner.module.scss"
 import poster from "./dumbPoster.jpg"
 
-interface IBanner {
+export interface IBannerItem {
+	bigPoster: string
 	name: string
 	poster: string
 	description: string
 	link: string
+	rating: number
+	season: number
 }
-const Slider = () => {
+export interface IBanner {
+	list: IBannerItem[]
+}
+const Slider: FC<{
+	onClick: (arg: number) => void
+	currentIndex: number
+	list: Array<IBannerItem>
+}> = ({ currentIndex, list, onClick }) => {
 	const swiperRef = useRef<SwiperCore>()
-	const [activeIndex, setActiveIndex] = useState(0)
-	const [allSlides, setAllSlides] = useState<number | undefined>(1)
-	useEffect(() => {
-		const slides = getSlides()
-		setAllSlides(slides)
-	}, [])
-	const getSlides = () => {
-		if (swiperRef.current) {
-			return swiperRef.current?.slides.length
-		}
-	}
+
+	console.log(currentIndex)
 	const prevSlide = () => {
 		if (swiperRef.current) {
 			swiperRef.current.slidePrev()
@@ -50,91 +52,90 @@ const Slider = () => {
 					onBeforeInit={(swiper: SwiperCore | undefined) => {
 						swiperRef.current = swiper
 					}}
-					onSlideChange={(e) => setActiveIndex(e.activeIndex)}
+					onSlideChange={(e) => onClick(e.activeIndex)}
 					spaceBetween={1}
-					slidesPerView={5}
+					slidesPerView={4}
 				>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Image src={poster} alt={""} draggable={false} />
-					</SwiperSlide>
+					{list.map((item: IBannerItem, index: number) => (
+						<SwiperSlide key={index}>
+							<img
+								className={styles.swiperSlide}
+								src={item.poster}
+								alt={item.name}
+								draggable={false}
+								onClick={() => onClick(index)}
+							/>
+						</SwiperSlide>
+					))}
 				</Swiper>
 			</div>
 		</>
 	)
 }
-const Rating = () => {
+const Rating: FC<IBanner & { currentIndex: number }> = ({
+	list,
+	currentIndex
+}) => {
+	const stars = new Array(list[currentIndex].rating + 1)
+	stars.fill(0, 0, -1)
 	return (
 		<>
-			<MaterialIcon name={"MdStar"} />
-			<MaterialIcon name={"MdStar"} />
-			<MaterialIcon name={"MdStar"} />
-			<MaterialIcon name={"MdStar"} />
-			<MaterialIcon name={"MdStar"} />
+			{stars.map((star) => (
+				<MaterialIcon name={"MdStar"} key={v4()} />
+			))}
 		</>
 	)
 }
-const MainBanner = () => {
+const MainBanner: FC<IBanner> = ({ list }) => {
+	const [currentIndex, setCurrentIndex] = useState<number>(0)
+
 	return (
-		// <div
-		// 	style={{
-		// 		background: `url(${poster})`
-		// 	}}
-		// 	className={styles.banner}
-		// >
-		// 	{name}
-		// 	{description}
-		// 	<button>
-		// 		<Link href={`/movies/${link}`}>Смотреть</Link>
-		// 	</button>
-		// </div>
 		<>
-			<section className={styles.banner}>
-				<div className={styles.bannerContainer}>
-					<div className={styles.content}>
-						<div>
-							<h1>Семь смертных грехов!</h1>
-							<p className={styles.rating}>
-								<span className={styles.season}>1 сезон </span>
-								<span className={styles.stars}>
-									<Rating />
-								</span>
-							</p>
+			{list && (
+				<section
+					className={styles.banner}
+					style={{
+						background: `url(${list[currentIndex].bigPoster})`,
+						backgroundRepeat: "no-repeat",
+						backgroundSize: "cover"
+					}}
+				>
+					<div className={styles.bannerContainer}>
+						<div className={styles.content}>
+							<div>
+								{<h1>{list[currentIndex].name}</h1>}
+								<p className={styles.rating}>
+									<span className={styles.season}>
+										{list[currentIndex].season} сезон
+									</span>
+									<span className={styles.stars}>
+										<Rating currentIndex={currentIndex} list={list} />
+									</span>
+								</p>
+
+								<div>
+									<p className={styles.description}>
+										{list[currentIndex].description}
+									</p>
+								</div>
+								<Button className={styles.watch}>
+									<a href={`movies/${list[currentIndex].link}`}>
+										Cмотреть
+										<span>
+											<MaterialIcon name={"MdPlayArrow"} />
+										</span>
+									</a>
+								</Button>
+							</div>
 						</div>
-						<div>
-							<p className={styles.description}>
-								Один случайный матч зажёг в Сёё Хинате безумную любовь к
-								волейболу. Хоть в его волейбольном клубе изначально не было даже
-								участников, упорством и стараниями
-							</p>
-						</div>
-						<Button className={styles.watch}>
-							Cмотреть
-							<span>
-								<MaterialIcon name={"MdPlayArrow"} />
-							</span>
-						</Button>
+						<Slider
+							list={list}
+							currentIndex={currentIndex}
+							onClick={(num) => setCurrentIndex(num)}
+						/>
 					</div>
-					<Slider />
-				</div>
-			</section>
+				</section>
+			)}
 		</>
 	)
 }
