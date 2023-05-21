@@ -25,8 +25,8 @@ export const getStaticProps: GetStaticProps = async () => {
 		)
 		const list = allData.main
 		const announcedMovies: any = allData.announced.map((m: any) => ({
-			name: m.title,
-			posterPath: m.img,
+			name: m.name,
+			posterPath: m.poster,
 			type: m.type,
 			genres: m.genres
 		}))

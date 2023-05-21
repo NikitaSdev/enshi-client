@@ -95,10 +95,27 @@ const Gallery: FC<{
 					{items.list.map((item: IMovie) => (
 						<SwiperSlide key={uuidv4()}>
 							<img
-								src={`${anilibria}${item.posters.original.url}`}
+								src={`${announced ? "" : anilibria}${
+									item.posters.original.url
+								}`}
 								alt={item.names.ru}
 							/>
 							{item.names.ru}
+							{announced ? (
+								<div className={styles.release}>{item.release}</div>
+							) : (
+								<div>
+									<div className={styles.year}>
+										<p>{item.year}</p>
+									</div>
+
+									<p className={styles.genre}>
+										{item.genres[1]
+											? item.genres[0] + "/" + item.genres[1]
+											: item.genres[0]}
+									</p>
+								</div>
+							)}
 						</SwiperSlide>
 					))}
 				</Swiper>

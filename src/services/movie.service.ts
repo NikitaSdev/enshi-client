@@ -36,8 +36,7 @@ export const MovieService = {
 		return movies
 	},
 	async getTrending(movieList: Array<string>) {
-		console.log(movieList)
-		const { data: movies } = await axiosClassic.get<IMovie[]>(
+		const { data: movies } = await axios.get<IMovie[]>(
 			getAnnounced(movieList.join(","))
 		)
 		return movies

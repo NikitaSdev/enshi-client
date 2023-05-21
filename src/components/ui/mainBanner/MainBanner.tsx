@@ -86,56 +86,54 @@ const Rating: FC<IBanner & { currentIndex: number }> = ({
 		</>
 	)
 }
-const MainBanner: FC<IBanner> = ({ list }) => {
+const MainBanner: FC<any> = ({ list }) => {
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
 
 	return (
 		<>
-			{list && (
-				<section
-					className={styles.banner}
-					style={{
-						background: `url(${list[currentIndex].bigPoster})`,
-						backgroundRepeat: "no-repeat",
-						backgroundSize: "cover"
-					}}
-				>
-					<div className={styles.bannerContainer}>
-						<div className={styles.content}>
-							<div>
-								{<h1>{list[currentIndex].name}</h1>}
-								<p className={styles.rating}>
-									<span className={styles.season}>
-										{list[currentIndex].season} сезон
-									</span>
-									<span className={styles.stars}>
-										<Rating currentIndex={currentIndex} list={list} />
-									</span>
-								</p>
+			<section
+				className={styles.banner}
+				style={{
+					background: `url(${list[currentIndex].bigPoster})`,
+					backgroundRepeat: "no-repeat",
+					backgroundSize: "cover"
+				}}
+			>
+				<div className={styles.bannerContainer}>
+					<div className={styles.content}>
+						<div>
+							{<h1>{list[currentIndex].name}</h1>}
+							<p className={styles.rating}>
+								<span className={styles.season}>
+									{list[currentIndex].season} сезон
+								</span>
+								<span className={styles.stars}>
+									<Rating currentIndex={currentIndex} list={list} />
+								</span>
+							</p>
 
-								<div>
-									<p className={styles.description}>
-										{list[currentIndex].description}
-									</p>
-								</div>
-								<Button className={styles.watch}>
-									<a href={`movies/${list[currentIndex].link}`}>
-										Cмотреть
-										<span>
-											<MaterialIcon name={"MdPlayArrow"} />
-										</span>
-									</a>
-								</Button>
+							<div>
+								<p className={styles.description}>
+									{list[currentIndex].description}
+								</p>
 							</div>
+							<Button className={styles.watch}>
+								<a href={`movies/${list[currentIndex].link}`}>
+									Cмотреть
+									<span>
+										<MaterialIcon name={"MdPlayArrow"} />
+									</span>
+								</a>
+							</Button>
 						</div>
-						<Slider
-							list={list}
-							currentIndex={currentIndex}
-							onClick={(num) => setCurrentIndex(num)}
-						/>
 					</div>
-				</section>
-			)}
+					<Slider
+						list={list}
+						currentIndex={currentIndex}
+						onClick={(num) => setCurrentIndex(num)}
+					/>
+				</div>
+			</section>
 		</>
 	)
 }
