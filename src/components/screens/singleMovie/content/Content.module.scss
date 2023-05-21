@@ -1,8 +1,15 @@
 .content {
-	@apply relative z-2 p-8;
+	@apply relative z-2 px-8;
 
 	> h1 {
-		@apply text-white uppercase text-5xl font-semibold mb-1 text-shadow;
+
+		display: flex;
+		color: #29282E;
+		font-weight: 600;
+		font-size: 1.75rem;
+		line-height: 1.75rem;
+		height: 56px;
+		width: 450px;
 	}
 
 	.rating {
@@ -20,4 +27,34 @@
 	.details {
 		@apply text-white text-opacity-80 my-3;
 	}
+}
+.info{
+	margin-top:35px;
+	display:flex;
+	flex-direction: column;
+	gap:11px;
+	p{
+		font-weight: 500;
+		font-size: 0.95rem;
+		color: #29282E;
+		span{
+			color:#828282;
+
+		}
+	}
+}
+.extra{
+	width:100%;
+	display:flex;
+	justify-content: center;
+	color: #8956FD;
+	font-weight: 600;
+	font-size: 0.8125rem;
+	height: 1.125rem;
+}
+.description{
+	margin-top:32px;
+	display: flex;
+	color: #424242;
+	font-weight: 500;
 }
