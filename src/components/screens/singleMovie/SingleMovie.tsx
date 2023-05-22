@@ -4,6 +4,8 @@ import Select, { Props, StylesConfig, components } from "react-select"
 
 import Content from "@/screens/singleMovie/content/Content"
 
+import Button from "@/components/ui/form-elements/Button"
+
 import Banner from "@/ui/banner/Banner"
 import Gallery from "@/ui/gallery/Gallery"
 
@@ -123,9 +125,10 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		}
 		fetch()
 	}, [])
-	console.log(similar)
+	console.log(movie)
 	const [episode, setEpisode] = useState<number>(movie.player.episodes.first)
 	const [quality, setQuality] = useState<"hd" | "sd">("hd")
+
 	const qualityOptions: any = [
 		{
 			value: "hd",
@@ -164,7 +167,6 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							options={options}
 							onChange={(value: any) => setEpisode(value?.value)}
 						/>
-
 						<Select
 							isSearchable={false}
 							styles={customStyles}
@@ -172,6 +174,12 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							options={qualityOptions}
 							onChange={(value: any) => setQuality(value?.value)}
 						/>
+						<Button
+							onClick={() => setEpisode((prev) => prev + 1)}
+							disabled={episode == movie.player.episodes.last}
+						>
+							Дальше
+						</Button>
 					</div>
 					<div
 						className={

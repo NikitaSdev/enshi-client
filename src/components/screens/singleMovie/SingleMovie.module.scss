@@ -5,6 +5,7 @@
 	max-width: 1170px;
 }
 .video {
+	position: relative;
 	margin-top: 75px;
 	width: 100%;
 	height: auto;
@@ -14,9 +15,10 @@
 
 .buttons {
 	display: flex;
+	z-index: 5;
 	position: absolute;
 	gap: 15px;
-	margin-top: 100px;
+	margin-top: 455px;
 	margin-left: 40px;
 	color: white;
 }
