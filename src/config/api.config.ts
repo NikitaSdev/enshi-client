@@ -1,5 +1,5 @@
 export const APP_URL = `https://kodikapi.com`
-export const API_SERVER_URL = `https://api.anilibria.tv/v3`
+export const API_SERVER_URL = `https://kodikapi.com/`
 export const ANILIBRIA_URL = "https://ww.anilibria.org.ru"
 export const getGenresUrl = (string: string) => `/genres${string}`
 export const getAuthUrl = (string: string) => `/auth${string}`
@@ -8,7 +8,7 @@ export const getActorsUrl = (string: string) => `/actor${string}`
 export const getMoviesUrl = (page: number) =>
 	`/title/search/advanced?query={season.year} > 2016&limit=15&page=${page}`
 export const getMoviesList = () =>
-	`/title/search/advanced?query={season.year} > 2016&limit=15`
+	`/list?token=d046caa991d8b228f8d0a1a2f990cce5`
 export const getMoviesUrlBySlug = (string: string) => `/title?code=${string}`
 export const getMoviesUrlByName = (string: string) =>
 	`/title/search?search=${string}`
