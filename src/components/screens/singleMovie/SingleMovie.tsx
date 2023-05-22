@@ -178,7 +178,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							onClick={() => setEpisode((prev) => prev + 1)}
 							disabled={episode == movie.player.episodes.last}
 						>
-							Дальше1
+							Дальше
 						</Button>
 					</div>
 					<div
