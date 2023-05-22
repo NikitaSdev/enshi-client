@@ -14,18 +14,20 @@ const SearchField: FC<
 > = ({ searchTerm, handleSearch, onClick, expandedInput }) => {
 	return (
 		<>
-			<div className={styles.search} onClick={onClick}>
-				<MaterialIcon name={"MdSearch"} className={styles.icon} />
+			<div className={styles.search}>
+				<div onClick={onClick}>
+					<MaterialIcon name={"MdSearch"} className={styles.icon} />
+				</div>
+				<input
+					className={classNames(styles.input, {
+						[styles.activeInput]: expandedInput
+					})}
+					type="text"
+					placeholder={"Поиск аниме"}
+					value={searchTerm}
+					onChange={handleSearch}
+				/>
 			</div>
-			<input
-				className={classNames(styles.input, {
-					[styles.activeInput]: expandedInput
-				})}
-				type="text"
-				placeholder={"Поиск аниме"}
-				value={searchTerm}
-				onChange={handleSearch}
-			/>
 		</>
 	)
 }
