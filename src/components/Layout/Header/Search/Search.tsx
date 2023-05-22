@@ -22,11 +22,7 @@ const Search: FC<{
 		setWidth(document.body.clientWidth)
 	}, [expandedInput])
 	return (
-		<div
-			className={cn(styles.wrapper, className)}
-			onClick={() => setIsSearchListOpened(true)}
-			ref={ref}
-		>
+		<div className={cn(styles.wrapper, className)} ref={ref}>
 			<SearchField
 				onClick={() => setExpandedInput((prev) => !prev)}
 				expandedInput={expandedInput}

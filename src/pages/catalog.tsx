@@ -1,4 +1,4 @@
-import { Pagination } from "@mui/material"
+import { Pagination, useMediaQuery } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import axios from "axios"
 import { FC, useEffect, useState } from "react"
@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
 		},
 		"& .MuiPaginationItem-root": {
 			borderRadius: 5,
-			width: 50,
-			height: 50,
+			width: 42,
+			height: 42,
 			fontSize: "1rem",
 			display: "flex",
 			justifyContent: "center",
@@ -49,6 +49,7 @@ const TrendingPage: FC<any> = () => {
 		movies && setTotalPages(movies.pagination.pages)
 	}, [movies])
 	const classes = useStyles()
+	const matches = useMediaQuery("(max-width: 600px)")
 	return (
 		<main className={"flex flex-col items-center "}>
 			<Catalog
@@ -59,6 +60,8 @@ const TrendingPage: FC<any> = () => {
 			/>
 
 			<Pagination
+				boundaryCount={1}
+				siblingCount={matches ? 0 : 1}
 				className={classes.root}
 				count={totalPages}
 				onChange={(e, currentPage) => setPage(currentPage)}

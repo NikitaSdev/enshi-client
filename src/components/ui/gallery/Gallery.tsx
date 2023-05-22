@@ -70,11 +70,10 @@ const Gallery: FC<{
 						0: {
 							slidesPerView: 1
 						},
-
-						480: {
+						360: {
 							slidesPerView: 2
 						},
-						780: {
+						700: {
 							slidesPerView: 3
 						},
 						1050: {

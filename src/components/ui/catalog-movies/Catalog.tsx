@@ -32,6 +32,7 @@ const Catalog: FC<ICatalog> = ({ movies, isLoading, title, description }) => {
 				) : (
 					movies.list.map((movie: any) => (
 						<GalleryItem
+							catalog
 							key={movie.id}
 							item={{
 								name: movie.names.ru,

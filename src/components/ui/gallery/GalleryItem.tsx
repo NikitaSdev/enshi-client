@@ -1,4 +1,5 @@
 import cn from "classnames"
+import classNames from "classnames"
 import Link from "next/link"
 import { FC } from "react"
 
@@ -7,13 +8,17 @@ import { IGalleryItemProps } from "@/ui/gallery/gallery.interface"
 
 import styles from "./Gallery.module.scss"
 
-const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
+const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog, variant }) => {
 	const title = (title: string) => {
 		return title.length > 34 ? title.slice(0, 30) + "..." : title.slice(0, 34)
 	}
 	return (
 		<Link href={`movies/${item.link}`}>
-			<div className={styles.item}>
+			<div
+				className={classNames(styles.item, {
+					[styles.catalogItem]: catalog
+				})}
+			>
 				<div className={styles.favourite}>
 					<MaterialIcon name={"MdBookmark"} />
 				</div>

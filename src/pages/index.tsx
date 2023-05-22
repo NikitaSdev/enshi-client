@@ -1,5 +1,6 @@
 import axios from "axios"
 import { GetStaticProps, NextPage } from "next"
+import { useQuery } from "react-query"
 
 import { IHome } from "@/screens/home/home.interface"
 
@@ -10,32 +11,48 @@ import { MovieService } from "@/services/movie.service"
 
 import Home from "../components/screens/home/Home"
 
-const HomePage: NextPage<IHome> = ({ trendingMovies, announcedMovies }) => {
+const HomePage: NextPage<IHome> = ({
+	list,
+	ratingsMovies,
+	recommendedMovies,
+	trendingMovies,
+	announcedMovies
+}) => {
 	return (
-		<Home trendingMovies={trendingMovies} announcedMovies={announcedMovies} />
+		<Home
+			trendingMovies={trendingMovies}
+			announcedMovies={announcedMovies}
+			list={list}
+			recommendedMovies={recommendedMovies}
+			ratingsMovies={ratingsMovies}
+		/>
 	)
 }
 export const getStaticProps: GetStaticProps = async () => {
 	try {
-		const { data: allData } = await axios.get(
+		const { data: allData } = await axios.get<any>(
 			`http://localhost:5000/api/homePage`
 		)
+
 		const list = allData.main
-		const announcedMovies: any = allData.announced.map((m: any) => ({
-			name: m.name,
-			posterPath: m.poster,
-			type: m.type,
-			genres: m.genres
-		}))
-		const dataTrendingMovies = await MovieService.getTrending(allData.popular)
-		const trendingMovies: any = dataTrendingMovies.map((m: any) => ({
-			name: m.names.ru,
-			posterPath: m.posters.original.url,
-			link: m.id
-		}))
+		const announcedMovies = allData.announced
+		const trendingMoviesList = allData.trending
+		const ratingsMoviesList = allData.ratings
+		const recommendedMoviesList = allData.recommended
+		const trendingMovies = {
+			list: await MovieService.getTrending(trendingMoviesList)
+		}
+		const ratingsMovies = {
+			list: await MovieService.getTrending(ratingsMoviesList)
+		}
+		const recommendedMovies = {
+			list: await MovieService.getTrending(recommendedMoviesList)
+		}
 		return {
 			props: {
 				list,
+				ratingsMovies,
+				recommendedMovies,
 				announcedMovies,
 				trendingMovies
 			} as any,

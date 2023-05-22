@@ -14,7 +14,7 @@ import styles from "./Content.module.scss"
 const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	const [isDescriptionOpened, setIsDescriptionOpened] = useState(false)
 	const title = (title: string) => {
-		return title.length > 34 ? title.slice(0, 200) + "..." : title.slice(0, 34)
+		return title.length > 34 ? title.slice(0, 350) + "..." : title.slice(0, 34)
 	}
 	return (
 		<div className={styles.content}>
@@ -44,7 +44,10 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 				</p>
 			</div>
 
-			<button className={styles.extra} onClick={() => setIsDescriptionOpened((prev) => !prev)}>
+			<button
+				className={styles.extra}
+				onClick={() => setIsDescriptionOpened((prev) => !prev)}
+			>
 				{isDescriptionOpened ? "Свернуть" : "Развернуть"}
 			</button>
 
