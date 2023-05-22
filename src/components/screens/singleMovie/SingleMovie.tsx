@@ -173,6 +173,13 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							onChange={(value: any) => setQuality(value?.value)}
 						/>
 					</div>
+					<div
+						className={
+							"w-dull content-center items-center text-center bg-purple-900 mt-36 py-24"
+						}
+					>
+						<h1>Здесь могла быть ваша реклама</h1>
+					</div>
 					<VideoPlayer
 						src={`https://${movie.player.host}${movie.player.list[episode].hls[quality]}`}
 					/>

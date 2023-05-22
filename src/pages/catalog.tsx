@@ -32,7 +32,11 @@ const TrendingPage: FC<any> = () => {
 	const [page, setPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(1)
 
-	const { data: movies, isLoading } = useQuery(
+	const {
+		data: movies,
+		isLoading,
+		error
+	} = useQuery(
 		[`getCatalog`, page],
 		() =>
 			axios.get(
@@ -40,6 +44,7 @@ const TrendingPage: FC<any> = () => {
 			),
 		{ select: ({ data }) => data }
 	)
+	console.log(error)
 	useEffect(() => {
 		movies && setTotalPages(movies.pagination.pages)
 	}, [movies])

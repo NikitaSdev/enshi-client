@@ -22,20 +22,7 @@ const Profile = () => {
 	return (
 		<>
 			<Meta title={"Профиль"}></Meta>
-			<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-				<Heading title={"Профиль"} className={"mb-6"} />
-				{isLoading ? (
-					<SkeletonLoader count={2} />
-				) : (
-					<AuthField
-						register={register}
-						formState={formState}
-						isPasswordRequired={false}
-						isLogin={"login"}
-					/>
-				)}
-				<Button>Update</Button>
-			</form>
+			<main></main>
 		</>
 	)
 }
