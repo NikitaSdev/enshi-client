@@ -55,6 +55,21 @@ const Slider: FC<{
 					onSlideChange={(e) => onClick(e.activeIndex)}
 					spaceBetween={1}
 					slidesPerView={4}
+					breakpoints={{
+						320: {
+							slidesPerView: 1
+						},
+						380: {
+							slidesPerView: 2
+						},
+						900: {
+							slidesPerView: 3
+						},
+						1050: {
+							spaceBetween: 20,
+							slidesPerView: 4
+						}
+					}}
 				>
 					{list.map((item: IBannerItem, index: number) => (
 						<SwiperSlide key={index}>
@@ -96,7 +111,8 @@ const MainBanner: FC<any> = ({ list }) => {
 				style={{
 					background: `url(${list[currentIndex].bigPoster})`,
 					backgroundRepeat: "no-repeat",
-					backgroundSize: "cover"
+					backgroundSize: "cover",
+					backgroundPosition: "center"
 				}}
 			>
 				<div className={styles.bannerContainer}>

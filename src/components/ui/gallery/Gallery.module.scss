@@ -22,6 +22,11 @@
 		font-weight: 700;
 		line-height: 1.75rem;
 		padding-left: 60px;
+		@include _480 {
+			padding-left: 0;
+			width: 100%;
+			text-align: center;
+		}
 		@include _1300 {
 			width: 100%;
 			align-self: start;
@@ -59,9 +64,11 @@
 			max-width: 450px;
 		}
 		@include _580 {
-			max-width: 380px;
+			max-width: 420px;
 		}
 		@include _480 {
+			display: flex;
+			justify-content: center;
 			max-width: 300px;
 		}
 		@include _420 {
@@ -70,8 +77,14 @@
 		@include _360 {
 			max-width: 200px;
 		}
+
 		.swiperItem {
 			position: relative;
+			@include _480 {
+				display: flex;
+				justify-content: center;
+				max-width: 300px;
+			}
 		}
 	}
 	.button {
@@ -119,6 +132,9 @@
 	align-items: center;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
+	@include _580 {
+		width: 190px;
+	}
 }
 .favourite {
 	position: absolute;
@@ -174,7 +190,7 @@
 			font-size: 0.75rem;
 			line-height: 0.8rem;
 			color: #828282;
-			margin-bottom: 5px;
+
 			p {
 				text-align: right;
 			}
@@ -185,6 +201,9 @@
 	border-radius: 21px;
 	width: 200px;
 	height: 285px;
+	@include _580 {
+		width: 190px;
+	}
 }
 .item {
 	cursor: pointer;
@@ -193,6 +212,9 @@
 	flex-direction: column;
 	justify-content: start;
 	position: relative;
+	@include _580 {
+		width: 190px;
+	}
 	img {
 		border-radius: 21px;
 	}

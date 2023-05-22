@@ -1,16 +1,13 @@
 import Hls from "hls.js"
 import { FC, useEffect, useRef, useState } from "react"
-import Select from "react-select"
-import videojs from "video.js"
+import Select, { Props, StylesConfig, components } from "react-select"
 
 import Content from "@/screens/singleMovie/content/Content"
-import { useUpdateCountOpened } from "@/screens/singleMovie/useUpdateCountOpened"
 
 import Banner from "@/ui/banner/Banner"
 import Gallery from "@/ui/gallery/Gallery"
-import SubHeading from "@/ui/heading/SubHeading"
 
-import { IMovie, IMovieList } from "@/shared/types/movie.types"
+import { IMovieList } from "@/shared/types/movie.types"
 
 import { MovieService } from "@/services/movie.service"
 
@@ -53,6 +50,66 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
 			<video ref={videoRef} controls className={styles.video}></video>
 		</div>
 	)
+}
+interface OptionType {
+	value: string
+	label: string
+}
+
+const customStyles: StylesConfig<OptionType, false> = {
+	control: (provided) => ({
+		...provided,
+		height: 40,
+		width: 169,
+		borderRadius: 10,
+		backgroundColor: "#8b54fd",
+		border: "none",
+		boxShadow: "none"
+	}),
+	valueContainer: (provided) => ({
+		...provided,
+		padding: 0,
+		color: "#fff",
+		display: "flex",
+		alignItems: "center"
+	}),
+	singleValue: (provided) => ({
+		...provided,
+		color: "#fff",
+		paddingLeft: 8,
+		whiteSpace: "nowrap",
+		overflow: "hidden",
+		textOverflow: "ellipsis"
+	}),
+	option: (provided, state) => ({
+		...provided,
+		backgroundColor: state.isSelected ? "#fff" : "transparent",
+		color: state.isSelected ? "#8b54fd" : "#666",
+		padding: "10px 15px",
+		cursor: "pointer"
+	}),
+	menu: (provided) => ({
+		...provided,
+		marginTop: 0,
+		borderRadius: 10,
+		boxShadow: "none"
+	}),
+	placeholder: (provided) => ({
+		...provided,
+		color: "#fff",
+		paddingLeft: 8
+	}),
+	dropdownIndicator: (provided) => ({
+		...provided,
+		color: "white",
+		"&:hover": {
+			color: "white"
+		}
+	}),
+	indicatorSeparator: (provided) => ({
+		...provided,
+		display: "none"
+	})
 }
 
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
@@ -99,14 +156,19 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 						image={`${ANILIBRIA_URL}` + movie.posters.original.url}
 						Detail={() => <Content movie={movie} />}
 					/>
-					<div>
-						<p>Серия: {episode}</p>
+					<div className={styles.buttons}>
 						<Select
+							isSearchable={false}
+							styles={customStyles}
+							placeholder={`Серия ${episode}`}
 							options={options}
 							onChange={(value: any) => setEpisode(value?.value)}
 						/>
-						<p>Качесвтво: {quality}</p>
+
 						<Select
+							isSearchable={false}
+							styles={customStyles}
+							placeholder={`Качество: ${String(quality).toUpperCase()}`}
 							options={qualityOptions}
 							onChange={(value: any) => setQuality(value?.value)}
 						/>

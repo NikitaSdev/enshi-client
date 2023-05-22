@@ -39,6 +39,9 @@ const Gallery: FC<{
 			swiperRef.current.slidePrev()
 		}
 	}
+	const title = (title: string) => {
+		return title.length > 34 ? title.slice(0, 30) + "..." : title.slice(0, 34)
+	}
 	return (
 		<section
 			className={classNames(styles.wrapper, {
@@ -64,13 +67,20 @@ const Gallery: FC<{
 				</button>
 				<Swiper
 					breakpoints={{
-						320: {
+						0: {
 							slidesPerView: 1
 						},
-						580: {
+
+						480: {
 							slidesPerView: 2
 						},
-						1280: {
+						780: {
+							slidesPerView: 3
+						},
+						1050: {
+							slidesPerView: 4
+						},
+						1250: {
 							slidesPerView: 5
 						}
 					}}
@@ -81,7 +91,7 @@ const Gallery: FC<{
 							prevButtonDisabled: swiperRef?.current?.isBeginning,
 							nextButtonDisabled: swiperRef?.current
 								? swiperRef?.current?.activeIndex ===
-								  swiperRef?.current?.slides?.length - 4
+								  swiperRef?.current?.slides?.length
 								: false
 						})
 					}
@@ -126,7 +136,7 @@ const Gallery: FC<{
 										<div className={styles.release}>{item.release}</div>
 									) : (
 										<div className={styles.description}>
-											<h3>{item.names.ru}</h3>
+											<h3>{title(item.names.ru)}</h3>
 											<div>
 												<div className={styles.year}>
 													<p>{item.season.year}</p>

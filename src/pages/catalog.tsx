@@ -1,13 +1,10 @@
 import { Pagination } from "@mui/material"
-import { purple } from "@mui/material/colors"
 import { makeStyles } from "@mui/styles"
 import axios from "axios"
-import { FC, useEffect, useMemo, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { useQuery } from "react-query"
 
 import Catalog from "@/ui/catalog-movies/Catalog"
-
-import { MovieService } from "@/services/movie.service"
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -48,23 +45,20 @@ const TrendingPage: FC<any> = () => {
 	}, [movies])
 	const classes = useStyles()
 	return (
-		<>
-			<>
-				<Catalog
-					movies={movies || []}
-					title={""}
-					description={"Трендовые фильмы и сериалы"}
-					isLoading={isLoading}
-				/>
-				<div className={"flex mt-8 justify-center w-full "}>
-					<Pagination
-						className={classes.root}
-						count={totalPages}
-						onChange={(e, currentPage) => setPage(currentPage)}
-					/>
-				</div>
-			</>
-		</>
+		<main className={"flex flex-col items-center "}>
+			<Catalog
+				movies={movies || []}
+				title={"Каталог"}
+				description={"Трендовые фильмы и сериалы"}
+				isLoading={isLoading}
+			/>
+
+			<Pagination
+				className={classes.root}
+				count={totalPages}
+				onChange={(e, currentPage) => setPage(currentPage)}
+			/>
+		</main>
 	)
 }
 
