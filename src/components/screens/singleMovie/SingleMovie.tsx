@@ -125,31 +125,6 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		}
 		fetch()
 	}, [])
-	console.log(movie)
-	const [episode, setEpisode] = useState<number>(movie.player.episodes.first)
-	const [quality, setQuality] = useState<"hd" | "sd">("hd")
-
-	const qualityOptions: any = [
-		{
-			value: "hd",
-			label: `Качество: HD`
-		},
-		{
-			value: "sd",
-			label: `Качество: SD`
-		}
-	]
-	const options: any = []
-	for (
-		let i = movie.player.episodes.first;
-		i <= movie.player.episodes.last;
-		i++
-	) {
-		options.push({
-			value: movie.player.list[i].episode,
-			label: `Серия ${movie.player.list[i].episode}`
-		})
-	}
 	return (
 		<main>
 			<Meta title={movie.names.ru} description={`Смотрите ${movie.names.ru}`} />
@@ -159,28 +134,6 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 						image={`${ANILIBRIA_URL}` + movie.posters.original.url}
 						Detail={() => <Content movie={movie} />}
 					/>
-					<div className={styles.buttons}>
-						<Select
-							isSearchable={false}
-							styles={customStyles}
-							placeholder={`Серия ${episode}`}
-							options={options}
-							onChange={(value: any) => setEpisode(value?.value)}
-						/>
-						<Select
-							isSearchable={false}
-							styles={customStyles}
-							placeholder={`Качество: ${String(quality).toUpperCase()}`}
-							options={qualityOptions}
-							onChange={(value: any) => setQuality(value?.value)}
-						/>
-						<Button
-							onClick={() => setEpisode((prev) => prev + 1)}
-							disabled={episode == movie.player.episodes.last}
-						>
-							Дальше
-						</Button>
-					</div>
 					<VideoPlayer
 						src={`https://${movie.player.host}${movie.player.list[episode].hls[quality]}`}
 					/>

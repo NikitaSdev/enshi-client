@@ -16,6 +16,7 @@ export const firstMenu: IMenu = {
 		}
 	]
 }
+
 export const mobileMenu: IMenu = {
 	items: [
 		{
@@ -29,10 +30,6 @@ export const mobileMenu: IMenu = {
 		{
 			link: "/top",
 			title: "Топ - 100"
-		},
-		{
-			link: "/profile",
-			title: "Профиль" + ""
 		}
 	]
 }

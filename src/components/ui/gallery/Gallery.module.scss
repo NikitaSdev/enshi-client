@@ -196,15 +196,15 @@
 	width: 200px;
 	height: 285px;
 	@include _480 {
-		height: 360px;
+		height: 340px;
 		width: 200px;
 	}
 	@include _420 {
-		height: 380px;
+		height: 330px;
 		width: 180px;
 	}
 	@include _360 {
-		height: 380px;
+		height: 360px;
 		width: 250px;
 	}
 }

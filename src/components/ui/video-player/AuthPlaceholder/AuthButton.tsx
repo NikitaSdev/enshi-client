@@ -1,13 +1,10 @@
 import Link from "next/link"
-import { FC } from "react"
-
-import { getMovieUrl } from "../../../../config/url.config"
 
 import styles from "./AuthPlaceholder.module.scss"
 
-const AuthButton: FC<{ slug: string }> = ({ slug }) => {
+const AuthButton = () => {
 	return (
-		<Link href={`/auth?redirect=${getMovieUrl(slug)}`}>
+		<Link href={"/"}>
 			<a className={styles.btn}>Sign in</a>
 		</Link>
 	)
