@@ -28,7 +28,7 @@ const Gallery: FC<{
 		prevButtonDisabled: true,
 		nextButtonDisabled: false
 	})
-
+	console.log(items)
 	const nextSlide = () => {
 		if (swiperRef.current) {
 			swiperRef.current.slideNext()
@@ -65,99 +65,100 @@ const Gallery: FC<{
 				>
 					<MaterialIcon name={"MdChevronLeft"} />
 				</button>
-				<Swiper
-					breakpoints={{
-						0: {
-							slidesPerView: 1
-						},
-						360: {
-							slidesPerView: 2
-						},
-						700: {
-							slidesPerView: 3
-						},
-						1050: {
-							slidesPerView: 4
-						},
-						1250: {
-							slidesPerView: 5
+				{items.results && (
+					<Swiper
+						breakpoints={{
+							0: {
+								slidesPerView: 1
+							},
+							360: {
+								slidesPerView: 2
+							},
+							700: {
+								slidesPerView: 3
+							},
+							1050: {
+								slidesPerView: 4
+							},
+							1250: {
+								slidesPerView: 5
+							}
+						}}
+						slidesPerView={5}
+						scrollbar={{ draggable: true }}
+						onSlideChange={() =>
+							setSwiperNavigationAllowed({
+								prevButtonDisabled: swiperRef?.current?.isBeginning,
+								nextButtonDisabled: swiperRef?.current
+									? swiperRef?.current?.activeIndex ===
+									  swiperRef?.current?.slides?.length
+									: false
+							})
 						}
-					}}
-					slidesPerView={5}
-					scrollbar={{ draggable: true }}
-					onSlideChange={() =>
-						setSwiperNavigationAllowed({
-							prevButtonDisabled: swiperRef?.current?.isBeginning,
-							nextButtonDisabled: swiperRef?.current
-								? swiperRef?.current?.activeIndex ===
-								  swiperRef?.current?.slides?.length
-								: false
-						})
-					}
-					onReachEnd={() => {
-						setSwiperNavigationAllowed({
-							...swiperNavigationAllowed,
-							nextButtonDisabled: true
-						})
-					}}
-					onReachBeginning={() =>
-						setSwiperNavigationAllowed({
-							...swiperNavigationAllowed,
-							prevButtonDisabled: true
-						})
-					}
-					modules={[Navigation]}
-					onBeforeInit={(swiper: SwiperCore | undefined) => {
-						swiperRef.current = swiper
-					}}
-					spaceBetween={20}
-					className={styles.swiper}
-				>
-					{items.list.map((item: IMovie) => (
-						<SwiperSlide key={uuidv4()} className={styles.swiperItem}>
-							<Link href={singleMovie ? item.code : `movies/${item.code}`}>
-								<div className={styles.item}>
-									<div className={styles.favourite}>
-										<MaterialIcon name={"MdBookmark"} />
-									</div>
-									{announced && (
-										<div className={styles.announce}>Анонсировано</div>
-									)}
-									<img
-										alt={item.names.ru}
-										src={`${announced ? "" : anilibria}${
-											item.posters.original.url
-										}`}
-										className={styles.slide}
-										draggable={false}
-									/>
-									{announced ? (
-										<div className={styles.release}>{item.release}</div>
-									) : (
-										<div className={styles.description}>
-											<h3>{title(item.names.ru)}</h3>
-											<div>
-												<div className={styles.year}>
-													<p>{item.season.year}</p>
-												</div>
+						onReachEnd={() => {
+							setSwiperNavigationAllowed({
+								...swiperNavigationAllowed,
+								nextButtonDisabled: true
+							})
+						}}
+						onReachBeginning={() =>
+							setSwiperNavigationAllowed({
+								...swiperNavigationAllowed,
+								prevButtonDisabled: true
+							})
+						}
+						modules={[Navigation]}
+						onBeforeInit={(swiper: SwiperCore | undefined) => {
+							swiperRef.current = swiper
+						}}
+						spaceBetween={20}
+						className={styles.swiper}
+					>
+						{items.results.map((item: IMovie) => (
+							<SwiperSlide key={uuidv4()} className={styles.swiperItem}>
+								<Link href={singleMovie ? item.id : `movies/${item.id}`}>
+									<div className={styles.item}>
+										<div className={styles.favourite}>
+											<MaterialIcon name={"MdBookmark"} />
+										</div>
+										{announced && (
+											<div className={styles.announce}>Анонсировано</div>
+										)}
+										<img
+											alt={item.title}
+											src={item.material_data.poster_url}
+											className={styles.slide}
+											draggable={false}
+										/>
+										{announced ? (
+											<div className={styles.release}>{item.release}</div>
+										) : (
+											<div className={styles.description}>
+												<h3>{title(item.title)}</h3>
+												<div>
+													<div className={styles.year}>
+														<p>{item.year}</p>
+													</div>
 
-												<div className={styles.genre}>
-													{item.genres[1] ? (
-														<>
-															<p>{item.genres[0]}/</p> <p>{item.genres[1]}</p>
-														</>
-													) : (
-														<p>{item.genres[0]}</p>
-													)}
+													<div className={styles.genre}>
+														{item.material_data.anime_genres[1] ? (
+															<>
+																<p>{item.material_data.anime_genres[0]}/</p>{" "}
+																<p>{item.material_data.anime_genres[1]}</p>
+															</>
+														) : (
+															<p>{item.material_data.anime_genres[0]}</p>
+														)}
+													</div>
 												</div>
 											</div>
-										</div>
-									)}
-								</div>
-							</Link>
-						</SwiperSlide>
-					))}
-				</Swiper>
+										)}
+									</div>
+								</Link>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				)}
 
 				<button
 					onClick={nextSlide}

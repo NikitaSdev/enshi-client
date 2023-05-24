@@ -20,7 +20,7 @@ export interface IMoviePage {
 const MoviePage: NextPage<IMoviePage> = ({ movie }) => {
 	return movie ? (
 		<>
-			<SingleMovie movie={movie} />
+			<SingleMovie movie={movie.results[0]} />
 		</>
 	) : (
 		<Error404 />
@@ -30,12 +30,11 @@ const MoviePage: NextPage<IMoviePage> = ({ movie }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
 	try {
 		const { data: movies } = await MovieService.getMovieList()
-		const paths = movies.list.map((movie: IMovie) => ({
-			params: { slug: movie.code }
+		const paths = movies.results.map((movie: IMovie) => ({
+			params: { slug: movie.id }
 		}))
-
 		return { paths, fallback: "blocking" }
-	} catch {
+	} catch (e) {
 		return {
 			paths: [],
 			fallback: false
@@ -52,9 +51,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			revalidate: 60
 		}
 	} catch (e) {
-		console.log(e)
 		return {
-			notFound: true
+			notFound: false
 		}
 	}
 }

@@ -18,29 +18,35 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	}
 	return (
 		<div className={styles.content}>
-			<h1>{movie.names.ru}</h1>
+			<h1>{movie.title}</h1>
 			<div className={styles.info}>
 				<p>
 					<span>Эпизоды:</span>
-					{movie.type.episodes}
+					{movie.last_episode}
 				</p>
 				<p>
-					<span>Жанры:</span> {movie.genres.join(", ")}
+					<span>Жанры:</span> {movie.material_data.anime_genres.join(", ")}
 				</p>
 				<p>
-					<span>Год выпуска:</span> {movie.season.year}
+					<span>Год выпуска:</span> {movie.year}
 				</p>
 				<p>
-					<span>Статус:</span> {movie.status.string}
+					<span>Статус:</span>{" "}
+					{movie.material_data.anime_status === "ongoing"
+						? "Онгоинг"
+						: "Завершенный"}
 				</p>
 				<p>
-					<span>Тип:</span> {movie.type.string === "TV" ? "Сериал" : "Фильм"}
+					<span>Тип:</span>{" "}
+					{movie.material_data.anime_kins === "tv" ? "Сериал" : "Фильм"}
 				</p>
 			</div>
 
 			<div className={styles.description}>
 				<p>
-					{isDescriptionOpened ? movie.description : title(movie.description)}
+					{isDescriptionOpened
+						? movie.material_data.anime_description
+						: title(movie.material_data.anime_description)}
 				</p>
 			</div>
 
@@ -51,16 +57,13 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 				{isDescriptionOpened ? "Свернуть" : "Развернуть"}
 			</button>
 
-			{/*<ContentList*/}
-			{/*	name={"Жанры"}*/}
-			{/*	links={movie.genres.slice(0, 1).map((g) => ({*/}
-			{/*		title: g*/}
-			{/*	}))}*/}
-			{/*/>*/}
-			{/*<div className={styles.rating}>*/}
-			{/*	<MaterialIcon name={"MdStarRate"} />*/}
-			{/*</div>*/}
-			{/*<FavoriteButton movieId={movie.id} />*/}
+			<ContentList
+				name={"Жанры"}
+				links={movie.material_data.anime_genres.slice(0, 1).map((g) => ({
+					title: g
+				}))}
+			/>
+			<FavoriteButton movieId={movie.id} />
 		</div>
 	)
 }

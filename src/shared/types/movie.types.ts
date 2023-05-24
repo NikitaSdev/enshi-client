@@ -25,7 +25,7 @@ export interface IParameters {
 	country: string
 }
 export interface IMovieList {
-	list: Array<IMovie>
+	results: Array<IMovie>
 }
 
 export interface IMovie {

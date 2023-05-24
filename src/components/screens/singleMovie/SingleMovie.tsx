@@ -115,34 +115,50 @@ const customStyles: StylesConfig<OptionType, false> = {
 }
 
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
-	const [similar, setSimilar] = useState<IMovieList>({ list: [movie] })
+	console.log(movie)
+	const [similar, setSimilar] = useState<IMovieList>()
 	useEffect(() => {
 		const fetch = async () => {
 			const { data: similarMovies } = await MovieService.getSimilar(
-				movie.genres
+				movie.material_data.anime_genres,
+				movie.year
 			)
 			setSimilar(similarMovies)
 		}
 		fetch()
 	}, [])
+	console.log(similar)
 	return (
-		<main>
-			<Meta title={movie.names.ru} description={`Смотрите ${movie.names.ru}`} />
-			<section>
-				<div className={styles.container}>
-					<Banner
-						image={`${ANILIBRIA_URL}` + movie.posters.original.url}
-						Detail={() => <Content movie={movie} />}
-					/>
-					<VideoPlayer
-						src={`https://${movie.player.host}${movie.player.list[episode].hls[quality]}`}
-					/>
-					<div className={"mt-12"}>
-						<Gallery items={similar} heading={"Похожие фильмы"} singleMovie />
+		movie &&
+		movie.material_data && (
+			<main>
+				<Meta
+					title={movie.material_data.title}
+					description={`Смотрите ${movie.material_data.title}`}
+				/>
+				<section>
+					<div className={styles.container}>
+						<Banner
+							image={movie.material_data.poster_url}
+							Detail={() => <Content movie={movie} />}
+						/>
+						<iframe
+							src={`http:${movie.link}`}
+							className={styles.video}
+						></iframe>
+						{similar && similar.results && (
+							<div className={"mt-12"}>
+								<Gallery
+									items={similar}
+									heading={"Похожие фильмы"}
+									singleMovie
+								/>
+							</div>
+						)}
 					</div>
-				</div>
-			</section>
-		</main>
+				</section>
+			</main>
+		)
 	)
 }
 

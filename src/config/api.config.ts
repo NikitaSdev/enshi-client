@@ -8,14 +8,19 @@ export const getActorsUrl = (string: string) => `/actor${string}`
 export const getMoviesUrl = (page: number) =>
 	`/title/search/advanced?query={season.year} > 2016&limit=15&page=${page}`
 export const getMoviesList = () =>
-	`/list?token=d046caa991d8b228f8d0a1a2f990cce5`
-export const getMoviesUrlBySlug = (string: string) => `/title?code=${string}`
+	`/list?token=d046caa991d8b228f8d0a1a2f990cce5&with_material_data=true&types=anime-serial&limit=15`
+export const getMoviesUrlBySlug = (string: string) =>
+	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&id=${string}&with_material_data=true`
 export const getMoviesUrlByName = (string: string) =>
 	`/title/search?search=${string}`
-export const getSimilar = (genres: Array<string>) =>
-	`/title/search/advanced?query= {season.year} == 2020 and {genres[0]} == "${genres[0]}"  or {genres[1]} == "${genres[1]}"&limit=25`
+export const getSimilar = (genres: Array<string>, year: string) =>
+	`/list?token=d046caa991d8b228f8d0a1a2f990cce5&types=anime-serial&anime_genres=${genres.join(
+		","
+	)}&year=${year}&with_material_data=true`
 
 export const getAnnounced = (string: string) =>
 	`/title/list?code_list=${string}`
 export const getByMovieId = (string: string) => `/title?code=${string}`
+export const getTopList = (string: string) =>
+	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&id=${string}&with_material_data=true`
 export const getRatingsUrl = (string: string) => `/ratings${string}`

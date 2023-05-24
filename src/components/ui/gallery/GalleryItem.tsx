@@ -6,6 +6,8 @@ import { FC } from "react"
 import MaterialIcon from "@/ui/MaterialIcon"
 import { IGalleryItemProps } from "@/ui/gallery/gallery.interface"
 
+import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter"
+
 import styles from "./Gallery.module.scss"
 
 const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog, variant }) => {
@@ -34,12 +36,13 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog, variant }) => {
 							</div>
 
 							<div className={styles.genre}>
-								{item.genres[1] ? (
+								{item.genres[0] && item.genres[1] ? (
 									<>
-										<p>{item.genres[0]}/</p> <p>{item.genres[1]}</p>
+										<p>{capitalizeFirstLetter(item.genres[0])}/</p>{" "}
+										<p>{capitalizeFirstLetter(item.genres[1])}</p>
 									</>
 								) : (
-									<p>{item.genres[0]}</p>
+									<p>{capitalizeFirstLetter(item.genres[0])}</p>
 								)}
 							</div>
 						</div>

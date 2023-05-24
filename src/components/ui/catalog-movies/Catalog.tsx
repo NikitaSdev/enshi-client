@@ -11,7 +11,8 @@ import { ANILIBRIA_URL } from "../../../config/api.config"
 
 import styles from "./Catalog.module.scss"
 
-const Catalog: FC<ICatalog> = ({ movies, isLoading, title, description }) => {
+const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
+	movies && console.log(movies.results)
 	return (
 		<section className={styles.main}>
 			<Meta title={title} description={description}></Meta>
@@ -24,32 +25,33 @@ const Catalog: FC<ICatalog> = ({ movies, isLoading, title, description }) => {
 				</h1>
 			)}
 
-			<div className={styles.movies}>
-				{isLoading ? (
-					<div className={styles.loader}>
-						<SkeletonLoader count={15} />
-					</div>
-				) : (
-					movies.list.map((movie: any) => (
-						<GalleryItem
-							catalog
-							key={movie.id}
-							item={{
-								name: movie.names.ru,
-								link: movie.code,
-								posterPath: `${ANILIBRIA_URL}${movie.posters.original.url}`,
-								posters: "",
-								genres: movie.genres,
-								year: movie.season.year,
-								content: {
-									title: movie.names.ru
-								}
-							}}
-							variant={"horizontal"}
-						/>
-					))
-				)}
-			</div>
+			{movies && (
+				<div className={styles.movies}>
+					{movies.results.map(
+						(movie: any) =>
+							movie.material_data && (
+								<GalleryItem
+									catalog
+									key={movie.id}
+									item={{
+										name: movie.title,
+										link: movie.id,
+										posterPath: movie.material_data.poster_url,
+										posters: "",
+										genres: movie.material_data.anime_genres
+											? movie.material_data.anime_genres
+											: [""],
+										year: movie.year,
+										content: {
+											title: movie.title
+										}
+									}}
+									variant={"horizontal"}
+								/>
+							)
+					)}
+				</div>
+			)}
 		</section>
 	)
 }

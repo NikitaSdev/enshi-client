@@ -10,7 +10,8 @@ import {
 	getMoviesUrl,
 	getMoviesUrlByName,
 	getMoviesUrlBySlug,
-	getSimilar
+	getSimilar,
+	getTopList
 } from "../config/api.config"
 import { getMovieUrl } from "../config/url.config"
 
@@ -19,7 +20,7 @@ export const MovieService = {
 		return axiosClassic.get<IMovieList>(getMoviesUrl(page))
 	},
 	async getMovieList(searchTerm?: string) {
-		return axiosClassic.get<IMovieList>(getMoviesList())
+		return axios.get<IMovieList>(getMoviesList())
 	},
 	async getMain(mainId: string) {
 		const { data: movies } = await axiosClassic.get<IMovie>(
@@ -31,6 +32,10 @@ export const MovieService = {
 		const { data: movies } = await axiosClassic.get<IMovieList>(
 			getAnnounced(movieList.join(","))
 		)
+		return movies
+	},
+	async getTop(id: string) {
+		const movies = await axios.get<IMovieList>(getTopList(id))
 		return movies
 	},
 	async getTrending(movieList: Array<string>) {
@@ -51,8 +56,8 @@ export const MovieService = {
 	async getByName(name: string) {
 		return axiosClassic.get<IMovieList>(getMoviesUrlByName(name))
 	},
-	async getSimilar(genres: Array<string>) {
-		return axiosClassic.get<IMovie>(getSimilar(genres))
+	async getSimilar(genres: Array<string>, year: string) {
+		return axios.get<IMovieList>(getSimilar(genres, year))
 	},
 	// async updateCountOpened(slug: string) {
 	// 	return axiosClassic.put<string>(getMoviesUrl(`/update-count-opened`), {
