@@ -20,7 +20,6 @@ const Home: FC<IHome> = ({
 	ratingsMovies,
 	recommendedMovies
 }) => {
-	console.log(ratingsMovies)
 	return (
 		<>
 			<Meta title={"Главная"} description={"Главная"} />

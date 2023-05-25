@@ -22,7 +22,6 @@ const Gallery: FC<{
 	singleMovie?: boolean
 	announced?: boolean
 }> = ({ items, heading, singleMovie, icon, announced }) => {
-	const anilibria = ANILIBRIA_URL
 	const swiperRef = useRef<SwiperCore>()
 	const [swiperNavigationAllowed, setSwiperNavigationAllowed] = useState<any>({
 		prevButtonDisabled: true,

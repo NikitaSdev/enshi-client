@@ -8,35 +8,33 @@ import TopCatalog from "@/ui/top-catalog/Catalog"
 
 import { MovieService } from "@/services/movie.service"
 
+import MoviePage from "./movies/[slug]"
+
 const Top = () => {
-	const [isCatalogLoading, setIsCatalogLoading] = useState(true)
-	const { data: topList, isLoading } = useQuery(
-		[`getTopList`],
-		async () => await axios.get(`http://localhost:5000/api/topPage`),
-		{
-			select: ({ data }) => data
-		}
-	)
+	const [movies, setMovies] = useState({ results: [] })
+	const getData = async () => {
+		try {
+			const { data: topList } = await axios.get(
+				"http://localhost:5000/api/topPage"
+			)
+			const moviesList = []
 
-	const top = { results: [] }
+			for (let i = 0; i < topList.list.length; i++) {
+				const { data: movies } = await MovieService.getTop(topList.list[i])
+				moviesList.push(...movies.results)
+			}
 
-	const getTop = async () => {
-		for (let i = 0; i < topList.list.length; i++) {
-			const { data: movies } = await MovieService.getTop(topList.list[i])
-			top.results.push(movies)
-			if (i === top.results.length - 1) setIsCatalogLoading(false)
+			setMovies((prevMovies) => ({ ...prevMovies, results: moviesList }))
+		} catch (error) {
+			console.log(error)
 		}
 	}
-
-	!isLoading && getTop()
-	console.log(top)
-	console.log(isCatalogLoading)
+	useEffect(() => {
+		getData()
+	}, [])
+	console.log(movies)
 	return (
-		<>
-			{!isLoading && !isCatalogLoading && (
-				<TopCatalog movies={top || []} title={"ТОП - 100 аниме"} />
-			)}
-		</>
+		movies && <TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
 	)
 }
 

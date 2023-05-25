@@ -235,6 +235,10 @@
 		height: 270px;
 		width: 200px;
 		border-radius: 21px;
+		@include _360 {
+			height: 320px;
+			width: 250px;
+		}
 	}
 }
 .catalogItem {

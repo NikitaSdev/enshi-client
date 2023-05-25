@@ -29,12 +29,15 @@ export interface IMovieList {
 }
 
 export interface IMovie {
-	[x: string]: any
+	title: any
+	last_episode: any
+	year: string
+	material_data: any
 	type: any
 	code: string
 	season: any
 	genres: Array<string>
-	list: Array<any>
+	list: { list: any }
 	id: string
 	poster: string
 	bigPoster: string

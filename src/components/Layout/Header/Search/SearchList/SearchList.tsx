@@ -13,18 +13,18 @@ const SearchList: FC<{ movies: IMovie[] }> = ({ movies }) => {
 	console.log(movies)
 	return (
 		<div className={styles.list}>
-			{movies.length ? (
-				movies.map((movie) => (
-					<Link key={movie.id} href={`/movies/${movie.code}`}>
+			{movies.results.length ? (
+				movies.results.map((movie) => (
+					<Link key={movie.id} href={`/movies/${movie.id}`}>
 						<a>
 							<img
-								src={`${ANILIBRIA_URL}${movie.posters.original.url}`}
+								src={movie.material_data ? movie.material_data.poster_url : ""}
 								width={50}
 								height={50}
-								alt={movie.names.ru}
+								alt={movie.title}
 								draggable={false}
 							/>
-							<span>{movie.names.ru}</span>
+							<span>{movie.title}</span>
 						</a>
 					</Link>
 				))

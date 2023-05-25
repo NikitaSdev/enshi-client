@@ -115,7 +115,6 @@ const customStyles: StylesConfig<OptionType, false> = {
 }
 
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
-	console.log(movie)
 	const [similar, setSimilar] = useState<IMovieList>()
 	useEffect(() => {
 		const fetch = async () => {
@@ -127,7 +126,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		}
 		fetch()
 	}, [])
-	console.log(similar)
+
 	return (
 		movie &&
 		movie.material_data && (

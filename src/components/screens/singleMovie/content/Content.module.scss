@@ -1,10 +1,16 @@
+@import "src/assets/styles/adaptive";
 .content {
 	@apply relative z-2 px-8;
-
+	max-width: 900px;
+	@include _780 {
+		max-width: 350px;
+	}
+	@include _650 {
+		max-width: 100%;
+	}
 	> h1 {
-
 		display: flex;
-		color: #29282E;
+		color: #29282e;
 		font-weight: 600;
 		font-size: 1.75rem;
 		line-height: 1.75rem;
@@ -28,32 +34,31 @@
 		@apply text-white text-opacity-80 my-3;
 	}
 }
-.info{
-	margin-top:35px;
-	display:flex;
+.info {
+	margin-top: 35px;
+	display: flex;
 	flex-direction: column;
-	gap:11px;
-	p{
+	gap: 11px;
+	p {
 		font-weight: 500;
 		font-size: 0.95rem;
-		color: #29282E;
-		span{
-			color:#828282;
-
+		color: #29282e;
+		span {
+			color: #828282;
 		}
 	}
 }
-.extra{
-	width:100%;
-	display:flex;
+.extra {
+	width: 100%;
+	display: flex;
 	justify-content: center;
-	color: #8956FD;
+	color: #8956fd;
 	font-weight: 600;
 	font-size: 0.8125rem;
 	height: 1.125rem;
 }
-.description{
-	margin-top:32px;
+.description {
+	margin-top: 32px;
 	display: flex;
 	color: #424242;
 	font-weight: 500;

@@ -10,9 +10,9 @@ export const getMoviesUrl = (page: number) =>
 export const getMoviesList = () =>
 	`/list?token=d046caa991d8b228f8d0a1a2f990cce5&with_material_data=true&types=anime-serial&limit=15`
 export const getMoviesUrlBySlug = (string: string) =>
-	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&id=${string}&with_material_data=true`
+	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&id=${string}&with_material_data=true&strict=true&limit=8`
 export const getMoviesUrlByName = (string: string) =>
-	`/title/search?search=${string}`
+	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&title=${string}&with_material_data=true&type=anime-serial,anime&limit=100&with_episodes=true`
 export const getSimilar = (genres: Array<string>, year: string) =>
 	`/list?token=d046caa991d8b228f8d0a1a2f990cce5&types=anime-serial&anime_genres=${genres.join(
 		","

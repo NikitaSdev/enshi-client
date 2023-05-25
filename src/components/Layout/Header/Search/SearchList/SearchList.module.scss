@@ -2,6 +2,8 @@
 .list {
 	@apply absolute border border-gray-700 rounded-layout bg-gray-800 w-full animate-fade z-10;
 	top: calc(100% + 15px);
+	max-height: 500px;
+	overflow-y: scroll;
 	@include _480 {
 		width: 240px;
 		margin-top: 100px;

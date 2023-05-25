@@ -59,9 +59,11 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 
 			<ContentList
 				name={"Жанры"}
-				links={movie.material_data.anime_genres.slice(0, 1).map((g) => ({
-					title: g
-				}))}
+				links={movie.material_data.anime_genres
+					.slice(0, 1)
+					.map((g: string) => ({
+						title: g
+					}))}
 			/>
 			<FavoriteButton movieId={movie.id} />
 		</div>

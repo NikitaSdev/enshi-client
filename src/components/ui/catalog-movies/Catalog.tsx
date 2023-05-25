@@ -12,7 +12,6 @@ import { ANILIBRIA_URL } from "../../../config/api.config"
 import styles from "./Catalog.module.scss"
 
 const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
-	movies && console.log(movies.results)
 	return (
 		<section className={styles.main}>
 			<Meta title={title} description={description}></Meta>

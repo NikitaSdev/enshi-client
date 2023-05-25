@@ -1,10 +1,19 @@
+@import "src/assets/styles/adaptive";
 .banner {
+	padding: 14px;
 	margin-top: 75px;
 	.poster {
 		width: 315px;
 		border-radius: 16.5px;
 	}
-	@apply relative  flex  justify-between;
+
+	@apply relative  flex;
+	@include _650 {
+		align-items: center;
+		flex-direction: column;
+		gap: 40px;
+		width: 100%;
+	}
 }
 .addToFavourite {
 	margin-top: 15px;
