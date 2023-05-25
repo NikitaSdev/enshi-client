@@ -12,12 +12,15 @@ const Pagination: FC<{
 	return (
 		<div className={styles.pagination}>
 			{movies && (
-				<Button onClick={handlePrev} disabled={movies.prev_page == null}>
-					Предыдущая страница
-				</Button>
+				<>
+					<Button onClick={handlePrev} disabled={movies.prev_page == null}>
+						Предыдущая страница
+					</Button>
+					<Button onClick={handleNext} disabled={movies.next_page == null}>
+						Следующая страница
+					</Button>
+				</>
 			)}
-
-			<Button onClick={handleNext}>Следующая страница</Button>
 		</div>
 	)
 }

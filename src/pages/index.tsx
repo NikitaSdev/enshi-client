@@ -1,5 +1,6 @@
 import axios from "axios"
 import { GetStaticProps, NextPage } from "next"
+import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
 
 import { IHome } from "@/screens/home/home.interface"
@@ -11,13 +12,58 @@ import { MovieService } from "@/services/movie.service"
 
 import Home from "../components/screens/home/Home"
 
-const HomePage: NextPage<IHome> = ({
-	list,
-	ratingsMovies,
-	recommendedMovies,
-	trendingMovies,
-	announcedMovies
-}) => {
+const HomePage: NextPage<IHome> = () => {
+	const [list, setList] = useState()
+	const [announcedMovies, setAnnounced] = useState()
+	const [trendingMovies, setTrendingMovies] = useState({ results: [] })
+	const [ratingsMovies, setRatingMovies] = useState({ results: [] })
+	const [recommendedMovies, setRecommendedMovies] = useState({ results: [] })
+	const getData = async () => {
+		try {
+			const { data: homeData } = await axios.get(
+				"http://localhost:5000/api/HomePage"
+			)
+			setAnnounced(homeData.announced)
+			setList(homeData.main)
+			const trendingList: any = []
+			const ratingsList: any = []
+			const recommendedList: any = []
+
+			for (let i = 0; i < homeData.trending.length; i++) {
+				const { data: movies } = await MovieService.getTop(homeData.trending[i])
+				trendingList.push(...movies.results)
+			}
+			for (let i = 0; i < homeData.ratings.length; i++) {
+				const { data: movies } = await MovieService.getTop(homeData.ratings[i])
+				ratingsList.push(...movies.results)
+			}
+			for (let i = 0; i < homeData.recommended.length; i++) {
+				const { data: movies } = await MovieService.getTop(
+					homeData.recommended[i]
+				)
+				recommendedList.push(...movies.results)
+			}
+			setTrendingMovies((prevMovies) => ({
+				...prevMovies,
+				results: trendingList
+			}))
+			setRatingMovies((prevMovies) => ({
+				...prevMovies,
+				results: ratingsList
+			}))
+			setRecommendedMovies((prevMovies) => ({
+				...prevMovies,
+				results: recommendedList
+			}))
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	useEffect(() => {
+		getData()
+	}, [])
+	console.log(recommendedMovies)
+
 	return (
 		<Home
 			trendingMovies={trendingMovies}
@@ -27,46 +73,6 @@ const HomePage: NextPage<IHome> = ({
 			ratingsMovies={ratingsMovies}
 		/>
 	)
-}
-export const getStaticProps: GetStaticProps = async () => {
-	try {
-		const { data: allData } = await axios.get<any>(
-			`http://localhost:5000/api/homePage`
-		)
-
-		const list = allData.main
-		const announcedMovies = allData.announced
-		const trendingMoviesList = allData.trending
-		const ratingsMoviesList = allData.ratings
-		const recommendedMoviesList = allData.recommended
-		const trendingMovies = {
-			list: await MovieService.getTrending(trendingMoviesList)
-		}
-		const ratingsMovies = {
-			list: await MovieService.getTrending(ratingsMoviesList)
-		}
-		const recommendedMovies = {
-			list: await MovieService.getTrending(recommendedMoviesList)
-		}
-		return {
-			props: {
-				list,
-				ratingsMovies,
-				recommendedMovies,
-				announcedMovies,
-				trendingMovies
-			} as any,
-			revalidate: 60
-		}
-	} catch (e) {
-		return {
-			props: {
-				slides: [],
-				actors: [],
-				trendingMovies: []
-			}
-		}
-	}
 }
 
 export default HomePage

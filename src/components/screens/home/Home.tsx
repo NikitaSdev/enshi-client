@@ -2,6 +2,7 @@ import axios from "axios"
 import { FC, useEffect, useState } from "react"
 
 import Gallery from "@/ui/gallery/Gallery"
+import HomeGallery from "@/ui/homeGallery/HomeGallery"
 import MainBanner, { IBanner } from "@/ui/mainBanner/MainBanner"
 import SocialBanner from "@/ui/socialBanner/SocialBanner"
 
@@ -20,6 +21,7 @@ const Home: FC<IHome> = ({
 	ratingsMovies,
 	recommendedMovies
 }) => {
+	console.log(ratingsMovies)
 	return (
 		<>
 			<Meta title={"Главная"} description={"Главная"} />
@@ -29,7 +31,7 @@ const Home: FC<IHome> = ({
 					<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
 				)}
 				{announcedMovies && (
-					<Gallery
+					<HomeGallery
 						items={announcedMovies}
 						heading={"Анонсировано "}
 						announced

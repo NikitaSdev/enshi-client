@@ -13,21 +13,28 @@ const SearchList: FC<{ movies: IMovie[] }> = ({ movies }) => {
 	console.log(movies)
 	return (
 		<div className={styles.list}>
-			{movies.results.length ? (
-				movies.results.map((movie) => (
-					<Link key={movie.id} href={`/movies/${movie.id}`}>
-						<a>
-							<img
-								src={movie.material_data ? movie.material_data.poster_url : ""}
-								width={50}
-								height={50}
-								alt={movie.title}
-								draggable={false}
-							/>
-							<span>{movie.title}</span>
-						</a>
-					</Link>
-				))
+			{movies ? (
+				movies.results.map(
+					(movie) =>
+						movie.material_data && (
+							<Link key={movie.id} href={`/movies/${movie.id}`}>
+								<a>
+									<img
+										src={
+											movie.material_data.poster_url
+												? movie.material_data.poster_url
+												: ""
+										}
+										width={50}
+										height={50}
+										alt={movie.title}
+										draggable={false}
+									/>
+									<span>{movie.title}</span>
+								</a>
+							</Link>
+						)
+				)
 			) : (
 				<div className={"text-white text-center my-4"}>Аниме не найдено</div>
 			)}

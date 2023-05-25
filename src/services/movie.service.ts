@@ -6,6 +6,7 @@ import axios, { axiosClassic } from "../api/interceptors"
 import {
 	getAnnounced,
 	getByMovieId,
+	getMovie,
 	getMoviesList,
 	getMoviesUrl,
 	getMoviesUrlByName,
@@ -19,9 +20,17 @@ export const MovieService = {
 	async getAll(page: number) {
 		return axiosClassic.get<IMovieList>(getMoviesUrl(page))
 	},
-	async getMovieList(searchTerm?: string) {
-		return axios.get<IMovieList>(getMoviesList())
+	async getMovieList(
+		genres: Array<{ value: string; label: string }>,
+		statuses: Array<{ value: string; label: string }>,
+		years: Array<{ value: number; label: number }>
+	) {
+		return axios.get<IMovieList>(getMoviesList(genres, statuses, years))
 	},
+	async getMovie() {
+		return axios.get<IMovieList>(getMovie())
+	},
+
 	async getMain(mainId: string) {
 		const { data: movies } = await axiosClassic.get<IMovie>(
 			getByMovieId(mainId)

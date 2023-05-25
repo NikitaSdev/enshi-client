@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { ChangeEvent, FC, useState } from "react"
+import { ChangeEvent, FC, SetStateAction, useState } from "react"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 
@@ -10,25 +10,35 @@ interface ISearchField {
 	handleSearch: (event: ChangeEvent<HTMLInputElement>) => void
 }
 const SearchField: FC<
-	ISearchField & { expandedInput?: boolean; onClick?: () => void }
-> = ({ searchTerm, handleSearch, onClick, expandedInput }) => {
+	ISearchField & {
+		expandedInput?: boolean
+		setExpandedInput?: SetStateAction<boolean>
+		setIsSearchListOpened?: SetStateAction<boolean>
+		width: number
+	}
+> = ({
+	searchTerm,
+	handleSearch,
+	width,
+	setIsSearchListOpened,
+	setExpandedInput,
+	expandedInput
+}) => {
 	return (
-		<>
-			<div className={styles.search}>
-				<div onClick={onClick}>
-					<MaterialIcon name={"MdSearch"} className={styles.icon} />
-				</div>
-				<input
-					className={classNames(styles.input, {
-						[styles.activeInput]: expandedInput
-					})}
-					type="text"
-					placeholder={"Поиск аниме"}
-					value={searchTerm}
-					onChange={handleSearch}
-				/>
+		<div className={styles.search} onClick={setIsSearchListOpened}>
+			<div onClick={setExpandedInput}>
+				<MaterialIcon name={"MdSearch"} className={styles.icon} />
 			</div>
-		</>
+			<input
+				className={classNames(styles.input, {
+					[styles.activeInput]: expandedInput
+				})}
+				type="text"
+				placeholder={"Поиск аниме"}
+				value={searchTerm}
+				onChange={handleSearch}
+			/>
+		</div>
 	)
 }
 

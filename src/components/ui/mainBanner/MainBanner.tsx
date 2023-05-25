@@ -62,7 +62,7 @@ const Slider: FC<{
 						380: {
 							slidesPerView: 2
 						},
-						900: {
+						750: {
 							slidesPerView: 3
 						},
 						1050: {

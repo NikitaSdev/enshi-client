@@ -1,0 +1,77 @@
+@import "src/assets/styles/adaptive";
+.filter {
+	margin-top: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	.container {
+		background: #efefef;
+		border-radius: 20px;
+		gap: 30px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 1220px;
+		padding: 80px 35px;
+	}
+	.select {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		gap: 45px;
+
+		> div {
+			width: 366px;
+			@include _1050 {
+				width: 100%;
+			}
+			@include _650 {
+				width: 100%;
+			}
+		}
+		> div:last-child {
+			width: 226px;
+			@include _1050 {
+				width: 70%;
+				@include _650 {
+					width: 100%;
+				}
+			}
+		}
+		@include _1050 {
+			gap: 20px;
+		}
+		@include _650 {
+			flex-direction: column;
+			gap: 20px;
+		}
+	}
+	.icon {
+		height: 20px;
+		width: auto;
+		padding-right: 10px;
+	}
+	.button {
+		align-self: flex-start;
+		height: 50px;
+		width: 214px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid black;
+		border-radius: 15px;
+		transition: 0.5s;
+		p {
+			gap: 10px;
+			display: flex;
+			align-items: center;
+		}
+	}
+	.button:hover {
+		background: #8956fde5;
+		border-color: #8956fde5;
+		color: white;
+	}
+}

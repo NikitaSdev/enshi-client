@@ -16,6 +16,7 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	const title = (title: string) => {
 		return title.length > 34 ? title.slice(0, 350) + "..." : title.slice(0, 34)
 	}
+	console.log(movie)
 	return (
 		<div className={styles.content}>
 			<h1>{movie.title}</h1>
@@ -44,9 +45,15 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 
 			<div className={styles.description}>
 				<p>
-					{isDescriptionOpened
-						? movie.material_data.anime_description
-						: title(movie.material_data.anime_description)}
+					{movie.material_data.anime_description
+						? isDescriptionOpened
+							? movie.material_data.anime_description
+							: title(movie.material_data.anime_description)
+						: movie.material_data.description
+						? isDescriptionOpened
+							? movie.material_data.description
+							: title(movie.material_data.description)
+						: ""}
 				</p>
 			</div>
 

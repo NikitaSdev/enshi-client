@@ -20,24 +20,31 @@ const Search: FC<{
 	const [width, setWidth] = useState(0)
 	useEffect(() => {
 		setWidth(document.body.clientWidth)
-	}, [])
-	console.log(width)
+	}, [expandedInput])
 	return (
 		<div className={cn(styles.wrapper, className)} ref={ref}>
-			<SearchField
-				onClick={() => {
-					setExpandedInput((prev) => !prev)
-					setIsSearchListOpened((prev) => !prev)
-				}}
-				expandedInput={expandedInput}
-				searchTerm={searchTerm}
-				handleSearch={handleSearch}
-			/>
-			{width >= 480
-				? isSuccess && isSearchListOpened && <SearchList movies={data || []} />
-				: isSuccess &&
-				  isSearchListOpened &&
-				  expandedInput && <SearchList movies={data || []} />}
+			{width > 480 ? (
+				<SearchField
+					width={width}
+					setExpandedInput={() => setExpandedInput(true)}
+					setIsSearchListOpened={() => setIsSearchListOpened(true)}
+					expandedInput={expandedInput}
+					searchTerm={searchTerm}
+					handleSearch={handleSearch}
+				/>
+			) : (
+				<SearchField
+					width={width}
+					setExpandedInput={() => setExpandedInput((prev) => !prev)}
+					setIsSearchListOpened={() => setIsSearchListOpened(true)}
+					expandedInput={expandedInput}
+					searchTerm={searchTerm}
+					handleSearch={handleSearch}
+				/>
+			)}
+			{expandedInput && isSuccess && isSearchListOpened && (
+				<SearchList movies={data || []} />
+			)}
 		</div>
 	)
 }

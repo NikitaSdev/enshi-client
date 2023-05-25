@@ -29,7 +29,7 @@ const MoviePage: NextPage<IMoviePage> = ({ movie }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	try {
-		const { data: movies } = await MovieService.getMovieList()
+		const { data: movies } = await MovieService.getMovie()
 		const paths = movies.results.map((movie: IMovie) => ({
 			params: { slug: movie.id }
 		}))
