@@ -25,10 +25,16 @@ export const MovieService = {
 		statuses: Array<{ value: string; label: string }>,
 		years: Array<{ value: number; label: number }>
 	) {
-		return axios.get<IMovieList>(getMoviesList(genres, statuses, years))
+		try {
+			return axiosClassic.get<IMovieList>(
+				getMoviesList(genres, statuses, years)
+			)
+		} catch (e) {
+			console.log(e)
+		}
 	},
 	async getMovie() {
-		return axios.get<IMovieList>(getMovie())
+		return axiosClassic.get<IMovieList>(getMovie())
 	},
 
 	async getMain(mainId: string) {
@@ -44,11 +50,11 @@ export const MovieService = {
 		return movies
 	},
 	async getTop(id: string) {
-		const movies = await axios.get<IMovieList>(getTopList(id))
+		const movies = await axiosClassic.get<IMovieList>(getTopList(id))
 		return movies
 	},
 	async getTrending(movieList: Array<string>) {
-		const { data: movies } = await axios.get<IMovie>(
+		const { data: movies } = await axiosClassic.get<IMovie>(
 			getAnnounced(movieList.join(","))
 		)
 		return movies
@@ -60,23 +66,17 @@ export const MovieService = {
 		return movies
 	},
 	async getBySlug(slug: string) {
-		return axios.get<IMovie>(getMoviesUrlBySlug(slug))
+		return axiosClassic.get<IMovie>(getMoviesUrlBySlug(slug))
 	},
 	async getByName(name: string) {
 		return axiosClassic.get<IMovieList>(getMoviesUrlByName(name))
 	},
 	async getSimilar(genres: Array<string>, year: string) {
-		return axios.get<IMovieList>(getSimilar(genres, year))
-	},
+		return axiosClassic.get<IMovieList>(getSimilar(genres, year))
+	}
 	// async updateCountOpened(slug: string) {
 	// 	return axiosClassic.put<string>(getMoviesUrl(`/update-count-opened`), {
 	// 		slug
 	// 	})
 	// },
-	async Get20() {
-		useEffect(() => {
-			alert("")
-		}, [])
-		return []
-	}
 }

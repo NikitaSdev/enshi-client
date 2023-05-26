@@ -1,28 +1,60 @@
 import React from "react"
-import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
 
-import AuthField from "@/screens/auth/AuthField"
-import { IProfileInput } from "@/screens/profile/profile.interface"
-import { useProfile } from "@/screens/profile/useProfile"
-
-import SkeletonLoader from "@/ui/SkeletonLoader"
-import Button from "@/ui/form-elements/Button"
-import Heading from "@/ui/heading/Heading"
+import MaterialIcon from "@/ui/MaterialIcon"
 
 import Meta from "@/utils/meta/Meta"
 
 import styles from "./Profile.module.scss"
 
 const Profile = () => {
-	const { handleSubmit, register, formState, setValue } =
-		useForm<IProfileInput>({
-			mode: "onChange"
-		})
-	const { isLoading, onSubmit } = useProfile(setValue)
+	const user = useSelector((state) => state.user)
 	return (
 		<>
 			<Meta title={"Профиль"}></Meta>
-			<main></main>
+			<main>
+				<section
+					className={styles.banner}
+					style={{
+						background: `url(${user.user.wrapperURL})`,
+						backgroundPosition: "center",
+						backgroundSize: "cover"
+					}}
+				>
+					<div className={styles.bannerContainer}>
+						<div className={styles.user}>
+							<img
+								className={styles.avatar}
+								src={user.user.avatarUrl}
+								alt={user.user.login}
+							/>
+							<div>
+								<h3>{user.user.pseudonim}</h3>
+								<p>Новичок</p>
+							</div>
+						</div>
+						<div className={styles.info}>
+							<div>
+								<h3>7</h3>
+								<p>В избранном</p>
+							</div>
+							<div>
+								<h3>32</h3>
+								<p>Просмотрено</p>
+							</div>
+						</div>
+						<div className={styles.settings}>
+							<MaterialIcon name={"IoSettingsOutline"} />
+						</div>
+					</div>
+				</section>
+				<section>
+					<h1>Избранное</h1>
+				</section>
+				<section>
+					<h1>Недавно просмотренные</h1>
+				</section>
+			</main>
 		</>
 	)
 }

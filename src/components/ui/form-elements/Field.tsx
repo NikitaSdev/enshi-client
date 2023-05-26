@@ -11,7 +11,7 @@ const Field = forwardRef<UseFormRegisterReturn<string>, IField>(
 		return (
 			<div className={cn(styles.common, styles.field)} style={style}>
 				<label>
-					{/*<input type={type} ref={ref} {...rest} placeholder={placeholder} />*/}
+					<input type={type} ref={ref} {...rest} placeholder={placeholder} />
 				</label>
 				{error && <div className={styles.error}>{error.message}</div>}
 			</div>

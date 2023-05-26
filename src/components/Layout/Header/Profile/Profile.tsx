@@ -1,10 +1,13 @@
-import React, { useState } from "react"
+import Link from "next/link"
+import React, { FC, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
 
 import AuthField from "@/screens/auth/AuthField"
 import { IAuthInput } from "@/screens/auth/auth.interface"
 import { useAuthRedirect } from "@/screens/auth/useAuthRedirect"
 
+import MaterialIcon from "@/ui/MaterialIcon"
 import Button from "@/ui/form-elements/Button"
 import Heading from "@/ui/heading/Heading"
 
@@ -13,9 +16,13 @@ import { useAuth } from "@/hooks/useAuth"
 
 import Meta from "@/utils/meta/Meta"
 
+import { userSlice } from "@/store/user/user.slice"
+
 import styles from "./Profile.module.scss"
 
-const AuthForm = () => {
+const AuthForm: FC<{ setIsAuthFormOpened: () => boolean }> = ({
+	setIsAuthFormOpened
+}) => {
 	const [type, setType] = useState<"login" | "register">("login")
 	const {
 		register: registerInput,
@@ -27,8 +34,10 @@ const AuthForm = () => {
 	const { login, register } = useActions()
 	const onSubmit: SubmitHandler<IAuthInput> = (data) => {
 		if (type == "login") {
+			console.log("login", data)
 			login(data)
 		} else if (type === "register") {
+			console.log(data)
 			register(data)
 		}
 	}
@@ -37,10 +46,13 @@ const AuthForm = () => {
 			<Meta title={"Вход в аккаунт"} />
 			<section className={styles.wrapper}>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<Heading
-						title={type === "login" ? "Авторизация" : "Регистрация"}
-						className={"mb-12"}
-					/>
+					<div className={styles.heading}>
+						<h1>{type === "login" ? "Авторизация" : "Регистрация"}</h1>
+						<button onClick={() => setIsAuthFormOpened(false)}>
+							<MaterialIcon name={"MdClose"} />
+						</button>
+					</div>
+
 					<AuthField
 						register={registerInput}
 						formState={formState}
@@ -49,7 +61,7 @@ const AuthForm = () => {
 					/>
 
 					{type === "login" ? (
-						<div>
+						<div className={styles.switch}>
 							<p onClick={() => setType("register")}>Регистрация</p>
 							<p>Забыли пароль?</p>
 						</div>
@@ -73,12 +85,25 @@ const AuthButton = () => {
 			>
 				<p>Войти</p>
 			</button>
-			{isAuthFormOpened && <AuthForm />}
+			{isAuthFormOpened && (
+				<AuthForm setIsAuthFormOpened={setIsAuthFormOpened} />
+			)}
 		</>
 	)
 }
 const ProfileButton = () => {
-	return <div>Профиль</div>
+	const user = useSelector((state) => state.user)
+	console.log(user)
+	return (
+		<Link href={"/profile"}>
+			<a href={"/profile"}>
+				<button className={styles.profileButton}>
+					<img src={user.user.avatarUrl} /> <p>{user.user.pseudonim}</p>
+					<MaterialIcon name={"MdChevronRight"} />
+				</button>
+			</a>
+		</Link>
+	)
 }
 const Profile = () => {
 	const { user } = useAuth()

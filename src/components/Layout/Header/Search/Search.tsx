@@ -20,6 +20,8 @@ const Search: FC<{
 	const [width, setWidth] = useState(0)
 	useEffect(() => {
 		setWidth(document.body.clientWidth)
+		width > 480 && setExpandedInput(true)
+		width > 480 && setIsSearchListOpened(true)
 	}, [expandedInput])
 	return (
 		<div className={cn(styles.wrapper, className)} ref={ref}>

@@ -9,6 +9,7 @@ import "@/assets/styles/react-select.scss"
 import "../assets/styles/globals.scss"
 import MainProvider from "../providers/MainProvider"
 
+//TODO: исправить поиск и баг с фильтрами
 type TypeAppProps = AppProps & TypeComponentAuthFields
 export default function App({ Component, pageProps }: TypeAppProps) {
 	return (

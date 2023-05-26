@@ -57,18 +57,13 @@ const AuthField: FC<IAuthFields> = ({
 						placeholder="E-mail или логин"
 					/>
 					<Field
-						{...register(
-							"password",
-							isPasswordRequired
-								? {
-										required: "Пароль необходим",
-										minLength: {
-											value: 6,
-											message: "Password must contains at least 6 characters"
-										}
-								  }
-								: {}
-						)}
+						{...register("password", {
+							required: "Пароль необходим",
+							minLength: {
+								value: 6,
+								message: "Password must contains at least 6 characters"
+							}
+						})}
 						placeholder="Пароль"
 						type={"password"}
 						error={errors.password}
@@ -83,31 +78,24 @@ const AuthField: FC<IAuthFields> = ({
 						placeholder="Логин"
 					/>
 					<Field
-						{...register(
-							"password",
-							isPasswordRequired
-								? {
-										required: "Пароль необходим",
-										minLength: {
-											value: 6,
-											message: "Пароль должен быть не менее 6 символов"
-										}
-								  }
-								: {}
-						)}
-						ref={register({ validate: validatePassword })}
+						{...register("pseudonim", {
+							required: "Псевдоним необходим"
+						})}
+						placeholder="Псевдоним"
+					/>
+					<Field
+						{...register("password", {
+							required: "Пароль необходим",
+							minLength: {
+								value: 6,
+								message: "Пароль должен быть не менее 6 символов"
+							}
+						})}
 						placeholder="Пароль"
 						type={"password"}
 						error={errors.password}
 					/>
-					<Field
-						placeholder="Повторите пароль"
-						ref={register({
-							required: true,
-							validate: (value: string) =>
-								value === password.current || "Пароли не совпадают"
-						})}
-					/>
+					<Field placeholder="Повторите пароль" />
 
 					<Field
 						{...register("email", {

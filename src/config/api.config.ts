@@ -1,4 +1,4 @@
-export const APP_URL = `https://kodikapi.com`
+export const APP_URL = `https://kodikapi.com/`
 export const API_SERVER_URL = `https://kodikapi.com/`
 export const ANILIBRIA_URL = "https://ww.anilibria.org.ru"
 export const getGenresUrl = (string: string) => `/genres${string}`

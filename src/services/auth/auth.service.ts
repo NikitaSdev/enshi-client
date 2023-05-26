@@ -11,7 +11,7 @@ import { removeTokensStorage, saveToStorage } from "./auth.helper"
 export const AuthService = {
 	async register(email: string, password: string) {
 		const response = await axios.post<IAuthResponse>(
-			`${APP_URL}${getAuthUrl("/register")}`,
+			`http://localhost:5000/api${getAuthUrl("/register")}`,
 			{
 				email,
 				password
@@ -25,7 +25,7 @@ export const AuthService = {
 	},
 	async login(emailOrLogin: string, password: string) {
 		const response = await axios.post<IAuthResponse>(
-			`${APP_URL}${getAuthUrl("/login")}`,
+			`http://localhost:5000/api${getAuthUrl("/login")}`,
 			{
 				emailOrLogin,
 				password
@@ -45,7 +45,7 @@ export const AuthService = {
 	async getNewTokens() {
 		const refreshToken = Cookies.get("refreshToken")
 		const response = await axios.post<IAuthResponse>(
-			`${APP_URL}${getAuthUrl("/login/access-token")}`,
+			`http://localhost:5000/api${getAuthUrl("/login/access-token")}`,
 			{
 				refreshToken
 			},

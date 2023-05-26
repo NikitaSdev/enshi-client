@@ -1,6 +1,73 @@
-.form{
-  @apply w-1/2 mt-12;
-  > button {
-    @apply mt-5;
-  }
+.banner {
+	height: 287px;
+	width: 100vw;
+}
+.bannerContainer {
+	width: 100%;
+	padding: 140px 217px 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	z-index: 2;
+	background: rgba(0, 0, 0, 0.3);
+}
+.info {
+	margin-bottom: -25px;
+	align-self: flex-end;
+	display: flex;
+	gap: 25px;
+	> div {
+		background: white;
+		width: 162px;
+		height: 77px;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-end;
+		padding-bottom: 5px;
+		gap: 5px;
+		h3 {
+			color: black;
+			font-weight: 600;
+			font-size: 1.25rem;
+		}
+		p {
+			color: #828282;
+			font-weight: 600;
+		}
+	}
+}
+.settings {
+	border: 1px solid white;
+	border-radius: 10px;
+	height: 40px;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	svg {
+		width: 70%;
+		height: 70%;
+	}
+}
+.avatar {
+	width: 122px;
+	height: 122px;
+	border-radius: 50%;
+}
+.user {
+	gap: 15px;
+	display: flex;
+	align-items: center;
+	h3 {
+		font-weight: 700;
+		font-size: 1.43rem;
+	}
+	p {
+		font-size: 1.05rem;
+		font-weight: 500;
+	}
 }
