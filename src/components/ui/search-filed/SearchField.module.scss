@@ -22,6 +22,10 @@
 			@apply fill-white  transition-colors;
 		}
 	}
+	div {
+		display: flex;
+		align-items: center;
+	}
 
 	&:focus-within {
 		@apply border-gray-600;
