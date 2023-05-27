@@ -5,8 +5,6 @@ import MenuItem from "@/components/Layout/Header/MenuContainer/MenuItem"
 import { IMenu } from "@/components/Layout/Header/MenuContainer/menu.interface"
 import Profile from "@/components/Layout/Header/Profile/Profile"
 
-import AuthButton from "@/ui/video-player/AuthPlaceholder/AuthButton"
-
 import { useAuth } from "@/hooks/useAuth"
 
 import styles from "./Menu.module.scss"

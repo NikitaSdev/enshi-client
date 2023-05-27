@@ -9,12 +9,12 @@ import { ANILIBRIA_URL } from "../../../../../config/api.config"
 
 import styles from "./SearchList.module.scss"
 
-const SearchList: FC<{ movies: IMovie[] }> = ({ movies }) => {
+const SearchList: FC<{ movies: any }> = ({ movies }) => {
 	return (
 		<div className={styles.list}>
 			{movies.results ? (
 				movies.results.map(
-					(movie) =>
+					(movie: any) =>
 						movie.material_data && (
 							<Link key={movie.id} href={`/movies/${movie.id}`}>
 								<a>

@@ -27,7 +27,6 @@ const Search: FC<{
 		<div className={cn(styles.wrapper, className)} ref={ref}>
 			{width > 480 ? (
 				<SearchField
-					width={width}
 					setExpandedInput={() => setExpandedInput(true)}
 					setIsSearchListOpened={() => setIsSearchListOpened(true)}
 					expandedInput={expandedInput}
@@ -36,7 +35,6 @@ const Search: FC<{
 				/>
 			) : (
 				<SearchField
-					width={width}
 					setExpandedInput={() => setExpandedInput((prev) => !prev)}
 					setIsSearchListOpened={() => setIsSearchListOpened(true)}
 					expandedInput={expandedInput}

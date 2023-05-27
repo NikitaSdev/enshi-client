@@ -136,7 +136,6 @@
 	width: 32px;
 	height: 32px;
 	background: white;
-	z-index: 5;
 	top: 15px;
 	right: 15px;
 	border-radius: 5px;
@@ -144,6 +143,7 @@
 	justify-content: center;
 	align-items: center;
 	color: #a9a9a9;
+	z-index: 2;
 }
 .activeFavourite {
 	color: #a173ff;

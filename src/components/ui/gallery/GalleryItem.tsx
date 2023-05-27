@@ -24,7 +24,7 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog }) => {
 	const [favoriteMovies, setFavoriteMovies] =
 		useState<Array<string | undefined>>()
 	useEffect(() => {
-		const _id = user.user._id
+		const _id = user.user && user.user._id
 		const getFavorite = async () => {
 			const { data: favouriteMovies } = await axios.post(
 				"http://localhost:5000/api/users/profile/favourites",
@@ -33,14 +33,15 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog }) => {
 				}
 			)
 			setFavoriteMovies(favouriteMovies)
-			console.log(favouriteMovies)
 		}
-		getFavorite()
+		user.user && getFavorite()
 	}, [refetch])
 	const toggleFavourites = async (id: string) => {
-		setRefetch((prev) => !prev)
-		const refreshToken = Cookies.get("refreshToken")
-		await UsersService.toggleFavourite(id, refreshToken)
+		if (user.user) {
+			setRefetch((prev) => !prev)
+			const refreshToken = Cookies.get("refreshToken")
+			await UsersService.toggleFavourite(id, refreshToken)
+		}
 	}
 	console.log(item)
 	return (

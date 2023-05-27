@@ -134,7 +134,7 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 				)}
 			/>
 			<div className={styles.buttons}>
-				<Button onClick={handleClick}>Отправить</Button>
+				<Button>Отправить</Button>
 			</div>
 		</form>
 	)

@@ -8,19 +8,15 @@ import { IAuthInput } from "@/screens/auth/auth.interface"
 import { useAuthRedirect } from "@/screens/auth/useAuthRedirect"
 
 import MaterialIcon from "@/ui/MaterialIcon"
-import Button from "@/ui/form-elements/Button"
-import Heading from "@/ui/heading/Heading"
 
 import { useActions } from "@/hooks/useActions"
 import { useAuth } from "@/hooks/useAuth"
 
 import Meta from "@/utils/meta/Meta"
 
-import { userSlice } from "@/store/user/user.slice"
-
 import styles from "./Profile.module.scss"
 
-const AuthForm: FC<{ setIsAuthFormOpened: () => boolean }> = ({
+export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
 	setIsAuthFormOpened
 }) => {
 	const [type, setType] = useState<"login" | "register">("login")
@@ -86,12 +82,13 @@ const AuthButton = () => {
 				<p>Войти</p>
 			</button>
 			{isAuthFormOpened && (
-				<AuthForm setIsAuthFormOpened={setIsAuthFormOpened} />
+				<AuthForm setIsAuthFormOpened={() => setIsAuthFormOpened(false)} />
 			)}
 		</>
 	)
 }
 const ProfileButton = () => {
+	// @ts-ignore
 	const user = useSelector((state) => state.user)
 	const title = (title: string) => {
 		return title.length > 9 ? title.slice(0, 9) + "..." : title

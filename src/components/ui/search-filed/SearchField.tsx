@@ -12,19 +12,18 @@ interface ISearchField {
 const SearchField: FC<
 	ISearchField & {
 		expandedInput?: boolean
-		setExpandedInput?: SetStateAction<boolean>
-		setIsSearchListOpened?: SetStateAction<boolean>
+		setExpandedInput?: (arg: boolean) => void
+		setIsSearchListOpened?: (arg: boolean) => void
 	}
 > = ({
 	searchTerm,
 	handleSearch,
-	width,
 	setIsSearchListOpened,
 	setExpandedInput,
 	expandedInput
 }) => {
 	return (
-		<div className={styles.search} onClick={setIsSearchListOpened}>
+		<div className={styles.search} onClick={() => setIsSearchListOpened(true)}>
 			<div onClick={setExpandedInput}>
 				<MaterialIcon name={"MdSearch"} className={styles.icon} />
 			</div>
