@@ -15,15 +15,15 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog, variant }) => {
 		return title.length > 34 ? title.slice(0, 30) + "..." : title.slice(0, 34)
 	}
 	return (
-		<Link href={`movies/${item.link}`}>
-			<div
-				className={classNames(styles.item, {
-					[styles.catalogItem]: catalog
-				})}
-			>
-				<div className={styles.favourite}>
-					<MaterialIcon name={"MdBookmark"} />
-				</div>
+		<div
+			className={classNames(styles.item, {
+				[styles.catalogItem]: catalog
+			})}
+		>
+			<div className={styles.favourite}>
+				<MaterialIcon name={"MdBookmark"} />
+			</div>
+			<Link href={`movies/${item.link}`}>
 				<a>
 					<img alt={item.name} src={item.posterPath} draggable={false} />
 				</a>
@@ -48,8 +48,8 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog, variant }) => {
 						</div>
 					</div>
 				)}
-			</div>
-		</Link>
+			</Link>
+		</div>
 	)
 }
 

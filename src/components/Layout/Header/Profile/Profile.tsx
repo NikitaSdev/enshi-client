@@ -93,12 +93,15 @@ const AuthButton = () => {
 }
 const ProfileButton = () => {
 	const user = useSelector((state) => state.user)
-	console.log(user)
+	const title = (title: string) => {
+		return title.length > 9 ? title.slice(0, 9) + "..." : title
+	}
 	return (
 		<Link href={"/profile"}>
 			<a href={"/profile"}>
 				<button className={styles.profileButton}>
-					<img src={user.user.avatarUrl} /> <p>{user.user.pseudonim}</p>
+					<img src={user.user.avatarUrl} />{" "}
+					<p>{user.user.pseudonim && title(user.user.pseudonim)}</p>
 					<MaterialIcon name={"MdChevronRight"} />
 				</button>
 			</a>

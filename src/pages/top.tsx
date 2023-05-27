@@ -32,7 +32,7 @@ const Top = () => {
 	useEffect(() => {
 		getData()
 	}, [])
-	console.log(movies)
+
 	return (
 		movies && <TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
 	)

@@ -48,6 +48,7 @@ const HeadProvider: FC = ({ children }) => {
 					content={"#8b54fd"}
 				/>
 				<script src="/serviceWorkerRegister.js" defer></script>
+				<script src="../../components/screens/singleMovie/kodikscript.js"></script>
 			</Head>
 			{children}
 		</>

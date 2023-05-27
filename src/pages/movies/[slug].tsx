@@ -1,5 +1,6 @@
 import axios from "axios"
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+import dynamic from "next/dynamic"
 import { useQuery } from "react-query"
 
 import SingleMovie from "@/screens/singleMovie/SingleMovie"

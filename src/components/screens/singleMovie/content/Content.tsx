@@ -1,13 +1,8 @@
 import { FC, useState } from "react"
 
-import FavoriteButton from "@/screens/singleMovie/FavoriteButton/FavoriteButton"
 import ContentList from "@/screens/singleMovie/content/ContentList/ContentList"
 
-import MaterialIcon from "@/ui/MaterialIcon"
-
 import { IMovie } from "@/shared/types/movie.types"
-
-import { getActorUrl, getGenreUrl } from "../../../../config/url.config"
 
 import styles from "./Content.module.scss"
 
@@ -16,7 +11,7 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	const title = (title: string) => {
 		return title.length > 34 ? title.slice(0, 350) + "..." : title.slice(0, 34)
 	}
-	console.log(movie)
+
 	return (
 		<div className={styles.content}>
 			<h1>{movie.title}</h1>
@@ -57,12 +52,15 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 				</p>
 			</div>
 
-			<button
-				className={styles.extra}
-				onClick={() => setIsDescriptionOpened((prev) => !prev)}
-			>
-				{isDescriptionOpened ? "Свернуть" : "Развернуть"}
-			</button>
+			{(movie.material_data.anime_description ||
+				movie.material_data.description) && (
+				<button
+					className={styles.extra}
+					onClick={() => setIsDescriptionOpened((prev) => !prev)}
+				>
+					{isDescriptionOpened ? "Свернуть" : "Развернуть"}
+				</button>
+			)}
 
 			<ContentList
 				name={"Жанры"}
@@ -72,7 +70,6 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 						title: g
 					}))}
 			/>
-			<FavoriteButton movieId={movie.id} />
 		</div>
 	)
 }

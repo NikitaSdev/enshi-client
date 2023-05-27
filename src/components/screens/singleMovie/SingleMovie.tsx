@@ -1,10 +1,10 @@
-import Hls from "hls.js"
-import { FC, useEffect, useRef, useState } from "react"
-import Select, { Props, StylesConfig, components } from "react-select"
+import axios from "axios"
+import Cookies from "js-cookie"
+import { FC, useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { StylesConfig } from "react-select"
 
 import Content from "@/screens/singleMovie/content/Content"
-
-import Button from "@/components/ui/form-elements/Button"
 
 import Banner from "@/ui/banner/Banner"
 import Gallery from "@/ui/gallery/Gallery"
@@ -15,44 +15,10 @@ import { MovieService } from "@/services/movie.service"
 
 import Meta from "@/utils/meta/Meta"
 
-import { ANILIBRIA_URL } from "../../../config/api.config"
 import { IMoviePage } from "../../../pages/movies/[slug]"
 
 import styles from "./SingleMovie.module.scss"
 
-interface VideoPlayerProps {
-	src: string
-}
-
-const VideoPlayer: FC<VideoPlayerProps> = ({ src }) => {
-	const videoRef = useRef<HTMLVideoElement>(null)
-
-	useEffect(() => {
-		if (Hls.isSupported()) {
-			const hls = new Hls()
-			if (videoRef.current) {
-				hls.loadSource(src)
-				hls.attachMedia(videoRef.current)
-				hls.on(Hls.Events.MANIFEST_PARSED, () => {
-					const video = videoRef.current!
-					video.play()
-				})
-			}
-		} else if (videoRef.current?.canPlayType("application/vnd.apple.mpegurl")) {
-			const video = videoRef.current!
-			video.src = src
-			video.addEventListener("loadedmetadata", () => {
-				video.play()
-			})
-		}
-	}, [src])
-
-	return (
-		<div>
-			<video ref={videoRef} controls className={styles.video}></video>
-		</div>
-	)
-}
 interface OptionType {
 	value: string
 	label: string
@@ -115,7 +81,17 @@ const customStyles: StylesConfig<OptionType, false> = {
 }
 
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
+	const user = useSelector((state) => state.user)
 	const [similar, setSimilar] = useState<IMovieList>()
+	useEffect(() => {
+		if (user) {
+			const refreshToken = Cookies.get("refreshToken")
+			axios.post("http://localhost:5000/api/users/count", {
+				movieId: movie.id,
+				refreshToken
+			})
+		}
+	})
 	useEffect(() => {
 		const fetch = async () => {
 			const { data: similarMovies } = await MovieService.getSimilar(
@@ -138,6 +114,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 				<section>
 					<div className={styles.container}>
 						<Banner
+							id={movie.id}
 							image={movie.material_data.poster_url}
 							Detail={() => <Content movie={movie} />}
 						/>
