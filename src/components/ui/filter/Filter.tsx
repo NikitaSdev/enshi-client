@@ -25,7 +25,7 @@ const Filter: FC<IFilter> = ({
 	setYears
 }) => {
 	const customStyles = {
-		option: (provided, state) => ({
+		option: (provided: any, state: any) => ({
 			...provided,
 			padding: "10px 20px",
 			backgroundColor: state.isFocused ? "#F2F2F2" : "white",
@@ -34,7 +34,7 @@ const Filter: FC<IFilter> = ({
 			}
 		}),
 
-		control: (provided) => ({
+		control: (provided: any) => ({
 			...provided,
 			minHeight: 75,
 			borderRadius: 10,
@@ -59,9 +59,11 @@ const Filter: FC<IFilter> = ({
 	const [genreValue, setGenreValue] = useState([])
 	const [yearValue, setYearValue] = useState([])
 	const [statusValue, setStatusValue] = useState([])
-	const CustomGenreOption = ({ data, isSelected }) => {
+	// @ts-ignore
+	const CustomGenreOption = ({ data }) => {
 		const handleOptionClick = () => {
 			setGenres(genreValue ? [...genreValue, data] : [data])
+			// @ts-ignore
 			setGenreValue(genreValue ? [...genreValue, data] : [data])
 		}
 
@@ -72,7 +74,7 @@ const Filter: FC<IFilter> = ({
 			</div>
 		)
 	}
-	const CustomYearOption = ({ data, isSelected, isFocused }) => {
+	const CustomYearOption = ({ data }) => {
 		const handleOptionClick = () => {
 			setYears(yearValue ? [...yearValue, data] : [data])
 			setYearValue(yearValue ? [...yearValue, data] : [data])

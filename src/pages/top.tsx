@@ -17,14 +17,14 @@ const Top = () => {
 			const { data: topList } = await axios.get(
 				"http://localhost:5000/api/topPage"
 			)
-			const moviesList = []
+			const moviesList: any = []
 
 			for (let i = 0; i < topList.list.length; i++) {
 				const { data: movies } = await MovieService.getTop(topList.list[i])
 				moviesList.push(...movies.results)
 			}
 
-			setMovies((prevMovies) => ({ ...prevMovies, results: moviesList }))
+			setMovies((prevMovies: any) => ({ ...prevMovies, results: moviesList }))
 		} catch (error) {
 			console.log(error)
 		}

@@ -32,7 +32,7 @@ export const UsersService = {
 			{ id }
 		)
 	},
-	async toggleFavourite(movieId: string, refreshToken: string) {
+	async toggleFavourite(movieId: string, refreshToken: string | undefined) {
 		return axiosClassic.put<string>(
 			`http://localhost:5000/api${getUsersUrl("/profile/favourites")}`,
 			{

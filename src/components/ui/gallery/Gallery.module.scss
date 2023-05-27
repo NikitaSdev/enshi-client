@@ -46,6 +46,7 @@
 	}
 	.swiper {
 		padding-top: 35px;
+		min-width: 450px;
 		max-width: 1150px;
 		align-self: center;
 		@include _1200 {
@@ -144,6 +145,9 @@
 	align-items: center;
 	color: #a9a9a9;
 }
+.activeFavourite {
+	color: #a173ff;
+}
 .description {
 	padding-top: 1px;
 	display: flex;
@@ -213,7 +217,7 @@
 	width: 200px;
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: flex-start;
 	position: relative;
 	@include _480 {
 		height: 380px;

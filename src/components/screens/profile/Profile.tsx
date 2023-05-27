@@ -1,5 +1,6 @@
 import { rootReducer } from "@reduxjs/toolkit/src/tests/injectableCombineReducers.example"
 import axios from "axios"
+import classNames from "classnames"
 import Image from "next/image"
 import React, { FC, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -26,45 +27,54 @@ import { userSlice } from "@/store/user/user.slice"
 import styles from "./Profile.module.scss"
 import settingsIcon from "./settings.svg"
 
-const Settings: FC<{ setIsSettingsOpened: () => void }> = ({
+const Settings: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 	setIsSettingsOpened
 }) => {
 	return (
 		<>
 			<Meta title={"Настройки"} />
 			<section className={styles.wrapper}>
-				<div className={styles.heading}>
-					<h1>Настройки </h1>
-					<button onClick={() => setIsSettingsOpened(false)}>
-						<MaterialIcon name={"MdClose"} />
-					</button>
-				</div>
-
-				<SettingsField />
+				<SettingsField setIsSettingsOpened={() => setIsSettingsOpened(false)} />
 			</section>
 		</>
 	)
 }
 const Profile = () => {
+	// @ts-ignore
 	const user = useSelector((state) => state.user)
 	const { logout } = useActions()
 	const [isSettingsOpened, setIsSettingsOpened] = useState(false)
 	const [recent, setRecent] = useState({ results: [] })
+	const [favourite, setFavourite] = useState({ results: [] })
 	const getData = async () => {
 		try {
 			const count = user.user.count
+			const favourites = user.user.favourites
 
 			const recent = {
 				list: count
 			}
-			const moviesList: any = []
+			const favourite = {
+				list: favourites
+			}
+			const recentList: any = []
+			const favouriteList: any = []
 
 			for (let i = 0; i < recent.list.length; i++) {
 				const { data: movies } = await MovieService.getTop(recent.list[i])
-				moviesList.push(...movies.results)
+				recentList.push(...movies.results)
 			}
-			moviesList.reverse()
-			setRecent((prevMovies: any) => ({ ...prevMovies, results: moviesList }))
+			for (let i = 0; i < favourite.list.length; i++) {
+				const { data: movies } = await MovieService.getTop(favourite.list[i])
+				favouriteList.push(...movies.results)
+			}
+			recentList.reverse()
+			favouriteList.reverse()
+			setRecent((prevMovies: any) => ({ ...prevMovies, results: recentList }))
+			setFavourite((prevMovies: any) => ({
+				...prevMovies,
+				results: favouriteList
+			}))
 		} catch (error) {
 			console.log(error)
 		}
@@ -113,7 +123,7 @@ const Profile = () => {
 						</div>
 						<div className={styles.info}>
 							<div>
-								<h3>7</h3>
+								<h3>{user.user.favourites.length}</h3>
 								<p>В избранном</p>
 							</div>
 							<div>
@@ -121,19 +131,33 @@ const Profile = () => {
 								<p>Просмотрено</p>
 							</div>
 						</div>
-						<div
-							className={styles.settings}
-							onClick={() => setIsSettingsOpened((prev) => !prev)}
-						>
-							<Image src={settingsIcon} alt="Настройки" />
-						</div>
-						<div className={styles.settings} onClick={() => logout()}>
-							<MaterialIcon name={"MdExitToApp"} />
+						<div className={styles.logosContainer}>
+							<div
+								className={styles.settings}
+								onClick={() => setIsSettingsOpened((prev) => !prev)}
+							>
+								<Image src={settingsIcon} alt="Настройки" />
+							</div>
+							<div className={styles.settings} onClick={() => logout()}>
+								<MaterialIcon name={"MdExitToApp"} />
+							</div>
 						</div>
 					</div>
 				</section>
+				<div className={classNames(styles.info, styles.activeInfo)}>
+					<div>
+						<h3>{user.user.favourites.length}</h3>
+						<p>В избранном</p>
+					</div>
+					<div>
+						<h3>{user.user.count.length}</h3>
+						<p>Просмотрено</p>
+					</div>
+				</div>
 				<section className={styles.favorite}>
-					<h1>Избранное</h1>
+					{favourite && (
+						<Gallery items={favourite} heading={"Избранное"} icon={chevron} />
+					)}
 				</section>
 				<section className={styles.recent}>
 					{recent && (

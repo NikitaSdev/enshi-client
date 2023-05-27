@@ -15,12 +15,40 @@
 	@include _1200 {
 		padding: 140px 40px 25px;
 	}
+	@include _380 {
+		padding: 50px 40px 25px;
+		gap: 50px;
+		flex-direction: column-reverse;
+	}
+}
+.logosContainer {
+	display: flex;
+	gap: 5px;
+	@include _380 {
+		align-self: flex-end;
+	}
+}
+.activeInfo {
+	display: none !important;
+	@include _830 {
+		display: flex !important;
+	}
+
+	justify-content: center;
+	div {
+		border-top-left-radius: 0 !important;
+		border-top-right-radius: 0 !important;
+		background: #efefef !important;
+	}
 }
 .info {
 	margin-bottom: -25px;
 	align-self: flex-end;
 	display: flex;
 	gap: 25px;
+	@include _830 {
+		display: none;
+	}
 	> div {
 		background: white;
 		width: 162px;
@@ -33,6 +61,7 @@
 		justify-content: flex-end;
 		padding-bottom: 5px;
 		gap: 5px;
+
 		h3 {
 			color: black;
 			font-weight: 600;
@@ -86,9 +115,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	background: rgba(0, 0, 0, 0.3);
 	z-index: 6;
 	form {
+		top: 10%;
+		position: fixed;
 		background: #1f1f25;
 		border-radius: 10px;
 		border: 3px solid #fafafa40;
@@ -99,6 +131,10 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
+		color: white;
+		input {
+			width: 100% !important;
+		}
 	}
 }
 .heading {
@@ -112,6 +148,9 @@
 	h1 {
 		font-size: 1.375rem;
 		font-weight: 600;
+	}
+	> div {
+		width: 100%;
 	}
 	button {
 		width: 35px;

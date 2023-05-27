@@ -20,9 +20,9 @@ const UploadFile: FC<IUploadField> = ({
 	const { isLoading, uploadImage } = useUpload(onChange, folder)
 	return (
 		<div className={cn(styles.field, styles.uploadField)} style={style}>
+			<p className={styles.label}>{placeholder}</p>
 			<div className={styles.uploadFlex}>
 				<div className={styles.inputContainer}>
-					<p>{placeholder}</p>
 					<div>
 						<p>Выбрать файл</p>
 					</div>

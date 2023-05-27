@@ -1,7 +1,10 @@
+import axios from "axios"
 import classNames from "classnames"
+import Cookies from "js-cookie"
 import Image from "next/image"
 import Link from "next/link"
 import { FC, useEffect, useRef, useState } from "react"
+import { useSelector } from "react-redux"
 import SwiperCore, { Navigation } from "swiper"
 import "swiper/css"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -10,6 +13,8 @@ import { v4 as uuidv4 } from "uuid"
 import MaterialIcon from "@/ui/MaterialIcon"
 
 import { IMovie, IMovieList } from "@/shared/types/movie.types"
+
+import { UsersService } from "@/services/users.service"
 
 import { ANILIBRIA_URL } from "../../../config/api.config"
 
@@ -40,6 +45,29 @@ const Gallery: FC<{
 	}
 	const title = (title: string) => {
 		return title.length > 34 ? title.slice(0, 30) + "..." : title.slice(0, 34)
+	}
+	const user = useSelector((state) => state.user)
+	const [refetch, setRefetch] = useState(true)
+	const [favoriteMovies, setFavoriteMovies] =
+		useState<Array<string | undefined>>()
+	useEffect(() => {
+		const _id = user.user._id
+		const getFavorite = async () => {
+			const { data: favouriteMovies } = await axios.post(
+				"http://localhost:5000/api/users/profile/favourites",
+				{
+					_id
+				}
+			)
+			setFavoriteMovies(favouriteMovies)
+			console.log(favouriteMovies)
+		}
+		getFavorite()
+	}, [refetch])
+	const toggleFavourites = async (id: string) => {
+		setRefetch((prev) => !prev)
+		const refreshToken = Cookies.get("refreshToken")
+		await UsersService.toggleFavourite(id, refreshToken)
 	}
 	return (
 		<section
@@ -115,14 +143,18 @@ const Gallery: FC<{
 					>
 						{items.results.map((item: IMovie) => (
 							<SwiperSlide key={uuidv4()} className={styles.swiperItem}>
-								<Link href={singleMovie ? item.id : `movies/${item.id}`}>
-									<div className={styles.item}>
-										<div className={styles.favourite}>
-											<MaterialIcon name={"MdBookmark"} />
-										</div>
-										{announced && (
-											<div className={styles.announce}>Анонсировано</div>
-										)}
+								<div className={styles.item}>
+									<div
+										className={classNames(styles.favourite, {
+											[styles.activeFavourite]: favoriteMovies?.includes(
+												item.id
+											)
+										})}
+										onClick={() => toggleFavourites(item.id)}
+									>
+										<MaterialIcon name={"MdBookmark"} />
+									</div>
+									<a href={singleMovie ? item.id : `movies/${item.id}`}>
 										<img
 											alt={item.title}
 											src={item.material_data.poster_url}
@@ -152,8 +184,8 @@ const Gallery: FC<{
 												</div>
 											</div>
 										)}
-									</div>
-								</Link>
+									</a>
+								</div>
 							</SwiperSlide>
 						))}
 					</Swiper>

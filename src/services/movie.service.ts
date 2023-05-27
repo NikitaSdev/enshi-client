@@ -26,9 +26,7 @@ export const MovieService = {
 		years: Array<{ value: number; label: number }>
 	) {
 		try {
-			return axiosClassic.get<IMovieList>(
-				getMoviesList(genres, statuses, years)
-			)
+			return axiosClassic.get<any>(getMoviesList(genres, statuses, years))
 		} catch (e) {
 			console.log(e)
 		}

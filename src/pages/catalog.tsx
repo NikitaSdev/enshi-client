@@ -74,6 +74,7 @@ const TrendingPage = () => {
 			statuses: Array<{ value: string; label: string }>,
 			years: Array<{ value: number; label: number }>
 		) => {
+			// @ts-ignore
 			const { data: movies } = await MovieService.getMovieList(
 				genres,
 				statuses,
@@ -82,14 +83,17 @@ const TrendingPage = () => {
 			setMovies(movies)
 		}
 		getOptions()
+		// @ts-ignore
 		getMovies(genres, statuses, years)
 	}, [genres, statuses, years])
 
 	const handlePrev = async () => {
+		// @ts-ignore
 		const { data: prev } = await axios.get(movies.prev_page)
 		setMovies(prev)
 	}
 	const handleNext = async () => {
+		// @ts-ignore
 		const { data: next } = await axios.get(movies.next_page)
 		setMovies(next)
 	}

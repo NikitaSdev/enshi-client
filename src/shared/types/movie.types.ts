@@ -29,6 +29,8 @@ export interface IMovieList {
 }
 
 export interface IMovie {
+	results: any
+	release: any
 	title: any
 	last_episode: any
 	year: string

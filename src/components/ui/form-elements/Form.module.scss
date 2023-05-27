@@ -16,8 +16,10 @@
 }
 
 .field {
-	@apply text-left mb-8;
-
+	@apply w-full text-left mb-8;
+	.label {
+		margin-bottom: -30px;
+	}
 	input {
 		@apply outline-border-none focus:ring-0 bg-transparent text-gray-500 w-full m-0 px-0;
 	}
@@ -25,9 +27,12 @@
 
 .uploadField {
 	@apply relative;
+	p {
+		align-self: flex-end;
+	}
 	.uploadFlex {
 		@apply flex;
-
+		gap: 25px;
 		> .uploadImageContainer {
 			@apply shrink-0 relative w-24 h-24;
 
@@ -42,9 +47,16 @@
 		.inputContainer {
 			position: relative;
 			background: #333238;
-			width: 100%;
+			width: 80%;
 			color: #828282;
+			z-index: 2;
+			height: 50px;
+			border-radius: 5px;
+			align-self: flex-end;
 			p {
+				top: 10px;
+				left: 10px;
+				position: absolute;
 				z-index: -2;
 			}
 

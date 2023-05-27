@@ -14,7 +14,6 @@ const SearchField: FC<
 		expandedInput?: boolean
 		setExpandedInput?: SetStateAction<boolean>
 		setIsSearchListOpened?: SetStateAction<boolean>
-		width: number
 	}
 > = ({
 	searchTerm,

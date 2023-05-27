@@ -43,7 +43,8 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
 										year: movie.year,
 										content: {
 											title: movie.title
-										}
+										},
+										id: movie.id
 									}}
 									variant={"horizontal"}
 								/>

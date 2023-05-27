@@ -81,6 +81,7 @@ const customStyles: StylesConfig<OptionType, false> = {
 }
 
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
+	// @ts-ignore
 	const user = useSelector((state) => state.user)
 	const [similar, setSimilar] = useState<IMovieList>()
 	useEffect(() => {

@@ -16,6 +16,7 @@ interface IBanner {
 	Detail?: FC | null
 }
 const Banner: FC<IBanner & { id: string }> = ({ image, id, Detail }) => {
+	// @ts-ignore
 	const user = useSelector((state) => state.user)
 	const [refetch, setRefetch] = useState(true)
 	const [favoriteMovies, setFavoriteMovies] =
