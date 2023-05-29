@@ -22,19 +22,21 @@ const Banner: FC<IBanner & { id: string }> = ({ image, id, Detail }) => {
 	const [favoriteMovies, setFavoriteMovies] =
 		useState<Array<string | undefined>>()
 	useEffect(() => {
-		const _id = user.user._id
-		const getFavorite = async () => {
-			const { data: favouriteMovies } = await axios.post(
-				"http://localhost:5000/api/users/profile/favourites",
-				{
-					_id
-				}
-			)
-			setFavoriteMovies(favouriteMovies)
-			console.log(favouriteMovies)
-			console.log(id)
+		if (user.user) {
+			const _id = user.user._id
+			const getFavorite = async () => {
+				const { data: favouriteMovies } = await axios.post(
+					"http://localhost:5000/api/users/profile/favourites",
+					{
+						_id
+					}
+				)
+				setFavoriteMovies(favouriteMovies)
+				console.log(favouriteMovies)
+				console.log(id)
+			}
+			getFavorite()
 		}
-		getFavorite()
 	}, [refetch])
 	const toggleFavourites = async () => {
 		setRefetch((prev) => !prev)

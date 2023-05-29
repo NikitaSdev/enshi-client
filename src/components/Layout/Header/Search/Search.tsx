@@ -32,6 +32,7 @@ const Search: FC<{
 					expandedInput={expandedInput}
 					searchTerm={searchTerm}
 					handleSearch={handleSearch}
+					width={"desktop"}
 				/>
 			) : (
 				<SearchField

@@ -83,6 +83,7 @@ const TrendingPage = () => {
 			setMovies(movies)
 		}
 		getOptions()
+
 		// @ts-ignore
 		getMovies(genres, statuses, years)
 	}, [genres, statuses, years])
@@ -104,7 +105,7 @@ const TrendingPage = () => {
 	}
 	console.log(movies)
 	return (
-		<main className={"flex flex-col items-center "}>
+		<main>
 			<Filter
 				genreList={genreList}
 				statusOptions={statusOptions}
@@ -114,13 +115,13 @@ const TrendingPage = () => {
 				yearList={yearList}
 				setYears={setYears}
 			/>
-			{movies && (
-				<Catalog
-					movies={movies || []}
-					title={"Каталог"}
-					description={"Трендовые фильмы и сериалы"}
-				/>
-			)}
+
+			<Catalog
+				movies={movies || []}
+				title={"Каталог"}
+				description={"Трендовые фильмы и сериалы"}
+			/>
+
 			<Pagination
 				movies={movies}
 				handleNext={handleNext}

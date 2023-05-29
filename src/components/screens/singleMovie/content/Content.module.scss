@@ -15,7 +15,7 @@
 		font-size: 1.75rem;
 		line-height: 1.75rem;
 		height: 56px;
-		width: 450px;
+		max-width: 450px;
 	}
 
 	.rating {
@@ -49,6 +49,7 @@
 	}
 }
 .extra {
+	margin-top: 10px;
 	width: 100%;
 	display: flex;
 	justify-content: center;

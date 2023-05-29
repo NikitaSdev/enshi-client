@@ -4,8 +4,29 @@
 	padding-bottom: 72px;
 	background: #fafafa;
 }
-
+.headContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 1170px;
+	width: 100%;
+	padding-top: 45px;
+	.count {
+		background: #efefef;
+		color: #828282;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 160px;
+		height: 40px;
+		gap: 5px;
+		border-radius: 5px;
+		font-size: 1.1rem;
+		font-weight: 500;
+	}
+}
 .wrapper {
+	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -16,12 +37,9 @@
 	}
 	h1 {
 		align-self: center;
-		width: 1270px;
-		padding-top: 45px;
 		font-size: 1.4rem;
 		font-weight: 700;
 		line-height: 1.75rem;
-		padding-left: 60px;
 		@include _480 {
 			padding-left: 0;
 			width: 100%;
@@ -46,9 +64,11 @@
 	}
 	.swiper {
 		padding-top: 35px;
-		min-width: 450px;
-		max-width: 1150px;
+		width: 1150px;
 		align-self: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		@include _1200 {
 			max-width: 900px;
 		}
@@ -59,7 +79,7 @@
 			max-width: 650px;
 		}
 		@include _780 {
-			max-width: 550px;
+			max-width: 610px;
 		}
 		@include _650 {
 			max-width: 450px;
@@ -76,10 +96,12 @@
 		}
 		@include _360 {
 			max-width: 360px;
-			padding-left: 60px;
 		}
 		.swiperItem {
 			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 	.button {
@@ -144,6 +166,10 @@
 	align-items: center;
 	color: #a9a9a9;
 	z-index: 2;
+	svg {
+		width: 100%;
+		height: 100%;
+	}
 }
 .activeFavourite {
 	color: #a173ff;
@@ -196,8 +222,12 @@
 	}
 }
 .slide {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border-radius: 21px;
 	width: 200px;
+	align-self: center;
 	height: 285px;
 	@include _480 {
 		height: 340px;
@@ -220,15 +250,16 @@
 	justify-content: flex-start;
 	position: relative;
 	@include _480 {
-		height: 380px;
+		height: 400px;
 		width: 200px;
 	}
 	@include _420 {
+		padding: 10px;
 		height: 400px;
 		width: 180px;
 	}
 	@include _380 {
-		height: 340px;
+		height: 360px;
 		width: 160px;
 	}
 	@include _360 {
@@ -240,10 +271,13 @@
 		width: 200px;
 		border-radius: 21px;
 		@include _480 {
-			height: 350px;
+			height: 250px;
 			width: 250px;
 		}
-
+		@include _380 {
+			height: 280px;
+			width: 170px;
+		}
 		@include _360 {
 			height: 320px;
 			width: 250px;

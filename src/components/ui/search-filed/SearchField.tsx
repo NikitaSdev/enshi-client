@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { ChangeEvent, FC, SetStateAction, useState } from "react"
+import { ChangeEvent, FC, SetStateAction, useEffect, useState } from "react"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 
@@ -12,6 +12,7 @@ interface ISearchField {
 const SearchField: FC<
 	ISearchField & {
 		expandedInput?: boolean
+		width?: "desktop"
 		setExpandedInput?: (arg: boolean) => void
 		setIsSearchListOpened?: (arg: boolean) => void
 	}
@@ -20,12 +21,32 @@ const SearchField: FC<
 	handleSearch,
 	setIsSearchListOpened,
 	setExpandedInput,
-	expandedInput
+	expandedInput,
+	width
 }) => {
 	return (
-		<div className={styles.search} onClick={() => setIsSearchListOpened(true)}>
-			<div onClick={() => setExpandedInput(true)}>
-				<MaterialIcon name={"MdSearch"} className={styles.icon} />
+		<div
+			className={styles.search}
+			onClick={() => {
+				// @ts-ignore
+				setIsSearchListOpened(true)
+				// @ts-ignore
+				width && setExpandedInput(true)
+			}}
+		>
+			<div>
+				{width ? (
+					<MaterialIcon name={"MdSearch"} className={styles.icon} />
+				) : (
+					<MaterialIcon
+						name={"MdSearch"}
+						className={styles.icon}
+						onClick={() =>
+							// @ts-ignore
+							setExpandedInput((prev) => !prev)
+						}
+					/>
+				)}
 
 				<input
 					className={classNames(styles.input, {

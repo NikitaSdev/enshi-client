@@ -1,19 +1,12 @@
-import axios from "axios"
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
-import dynamic from "next/dynamic"
-import { useQuery } from "react-query"
 
 import SingleMovie from "@/screens/singleMovie/SingleMovie"
 
-import { IGalleryItem } from "@/ui/gallery/gallery.interface"
-
-import { IMovie, IMovieList } from "@/shared/types/movie.types"
+import { IMovie } from "@/shared/types/movie.types"
 
 import { MovieService } from "@/services/movie.service"
 
 import Error404 from "../404"
-import { axiosClassic } from "../../api/interceptors"
-import { getMovieUrl } from "../../config/url.config"
 
 export interface IMoviePage {
 	movie: IMovie

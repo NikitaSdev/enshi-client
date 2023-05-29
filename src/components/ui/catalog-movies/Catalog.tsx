@@ -24,7 +24,7 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
 				</h1>
 			)}
 
-			{movies && (
+			{movies.results && (
 				<div className={styles.movies}>
 					{movies.results.map(
 						(movie: any) =>

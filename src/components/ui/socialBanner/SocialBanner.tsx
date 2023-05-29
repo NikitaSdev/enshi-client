@@ -27,27 +27,32 @@ const SocialBanner = () => {
 									target={"_blank"}
 									rel={"noreferrer"}
 								>
-									<Image draggable={false} src={vk} />
+									<Image draggable={false} src={vk} alt={"Вконтакте"} />
 								</a>
 							</Link>
 							<Link href={""}>
-								<Image draggable={false} src={youtube} />
+								<a href="">
+									<Image draggable={false} src={youtube} alt={"youtube"} />
+								</a>
 							</Link>
 						</div>
 
 						<div>
 							<Link href={""}>
-								<Image
-									draggable={false}
-									src={telegram}
-									className={styles.telegram}
-								/>
+								<a href="">
+									<Image
+										draggable={false}
+										src={telegram}
+										className={styles.telegram}
+										alt={"Telegram"}
+									/>
+								</a>
 							</Link>
 						</div>
 					</div>
 				</div>
 				<div className={styles.girl}>
-					<Image draggable={false} src={girl} />
+					<Image draggable={false} src={girl} alt={""} />
 				</div>
 			</div>
 		</section>

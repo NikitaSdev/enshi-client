@@ -18,17 +18,20 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 			<div className={styles.info}>
 				<p>
 					<span>Эпизоды:</span>
-					{movie.last_episode}
+					{movie.last_episode && movie.last_episode}
 				</p>
 				<p>
-					<span>Жанры:</span> {movie.material_data.anime_genres.join(", ")}
+					<span>Жанры:</span>{" "}
+					{movie.material_data.anime_genres &&
+						movie.material_data.anime_genres.join(", ")}
 				</p>
 				<p>
 					<span>Год выпуска:</span> {movie.year}
 				</p>
 				<p>
 					<span>Статус:</span>{" "}
-					{movie.material_data.anime_status === "ongoing"
+					{movie.material_data.anime_status &&
+					movie.material_data.anime_status === "ongoing"
 						? "Онгоинг"
 						: "Завершенный"}
 				</p>
@@ -62,14 +65,16 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 				</button>
 			)}
 
-			<ContentList
-				name={"Жанры"}
-				links={movie.material_data.anime_genres
-					.slice(0, 1)
-					.map((g: string) => ({
-						title: g
-					}))}
-			/>
+			{movie.material_data.anime_genres && (
+				<ContentList
+					name={"Жанры"}
+					links={movie.material_data.anime_genres
+						.slice(0, 1)
+						.map((g: string) => ({
+							title: g
+						}))}
+				/>
+			)}
 		</div>
 	)
 }

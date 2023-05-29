@@ -24,68 +24,14 @@ interface OptionType {
 	label: string
 }
 
-const customStyles: StylesConfig<OptionType, false> = {
-	control: (provided) => ({
-		...provided,
-		height: 40,
-		width: 169,
-		borderRadius: 10,
-		backgroundColor: "#8b54fd",
-		border: "none",
-		boxShadow: "none"
-	}),
-	valueContainer: (provided) => ({
-		...provided,
-		padding: 0,
-		color: "#fff",
-		display: "flex",
-		alignItems: "center"
-	}),
-	singleValue: (provided) => ({
-		...provided,
-		color: "#fff",
-		paddingLeft: 8,
-		whiteSpace: "nowrap",
-		overflow: "hidden",
-		textOverflow: "ellipsis"
-	}),
-	option: (provided, state) => ({
-		...provided,
-		backgroundColor: state.isSelected ? "#fff" : "transparent",
-		color: state.isSelected ? "#8b54fd" : "#666",
-		padding: "10px 15px",
-		cursor: "pointer"
-	}),
-	menu: (provided) => ({
-		...provided,
-		marginTop: 0,
-		borderRadius: 10,
-		boxShadow: "none"
-	}),
-	placeholder: (provided) => ({
-		...provided,
-		color: "#fff",
-		paddingLeft: 8
-	}),
-	dropdownIndicator: (provided) => ({
-		...provided,
-		color: "white",
-		"&:hover": {
-			color: "white"
-		}
-	}),
-	indicatorSeparator: (provided) => ({
-		...provided,
-		display: "none"
-	})
-}
-
 const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 	// @ts-ignore
 	const user = useSelector((state) => state.user)
 	const [similar, setSimilar] = useState<IMovieList>()
+	const [linked, setLinked] = useState<IMovieList>()
+
 	useEffect(() => {
-		if (user) {
+		if (user.user) {
 			const refreshToken = Cookies.get("refreshToken")
 			axios.post("http://localhost:5000/api/users/count", {
 				movieId: movie.id,
@@ -100,6 +46,11 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 				movie.year
 			)
 			setSimilar(similarMovies)
+			const { data: linkedMovies } = await MovieService.getByName(
+				movie.material_data.title
+			)
+
+			setLinked(linkedMovies)
 		}
 		fetch()
 	}, [])
@@ -125,9 +76,14 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 						></iframe>
 						{similar && similar.results && (
 							<div className={"mt-12"}>
+								<Gallery items={similar} heading={"Похожее"} singleMovie />
+							</div>
+						)}
+						{linked && linked.results && (
+							<div className={"mt-12"}>
 								<Gallery
-									items={similar}
-									heading={"Похожие фильмы"}
+									items={linked}
+									heading={"Связанное аниме"}
 									singleMovie
 								/>
 							</div>

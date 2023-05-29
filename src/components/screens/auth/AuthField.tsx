@@ -19,54 +19,41 @@ interface IAuthFields {
 	register: any
 	formState: FormState<any>
 	isPasswordRequired?: boolean
-	isLogin: "login" | "register"
+	watch: any
+	isLogin: "login" | "register" | "newPassword"
 }
 const AuthField: FC<IAuthFields> = ({
 	register,
+	watch,
 	formState: { errors },
-	isPasswordRequired = false,
 	isLogin
 }) => {
-	const { watch } = useForm<any>()
-	const password = useRef<any>(null)
-	password.current = watch("password", "")
-
-	const validatePassword = (value: string) => {
-		if (value.length < 6) {
-			return "Пароль должен содержать не менее 8 символов"
-		} else if (!/\d/.test(value)) {
-			return "Пароль должен содержать хотя бы одну цифру"
-		} else if (!/[!@#$%^&*]/.test(value)) {
-			return "Пароль должен содержать хотя бы один специальный символ"
-		}
-		return true
-	}
-
 	return (
 		<>
-			{isLogin === "login" ? (
+			{isLogin === "newPassword" ? (
+				<>
+					<p>Ссылка для восстановления пароля придет вам на почту</p>
+					<Field
+						{...register("emailOrLogin", {
+							required: "Это обязательное поле"
+						})}
+						placeholder="E-mail или логин"
+					/>
+				</>
+			) : isLogin === "login" ? (
 				<>
 					<Field
 						{...register("emailOrLogin", {
-							required: "Это обязательное поле",
-							pattern: {
-								value: validEmail,
-								message: "Please enter a valid email"
-							}
+							required: "Это обязательное поле"
 						})}
 						placeholder="E-mail или логин"
 					/>
 					<Field
 						{...register("password", {
-							required: "Пароль необходим",
-							minLength: {
-								value: 6,
-								message: "Password must contains at least 6 characters"
-							}
+							required: "Пароль необходим"
 						})}
 						placeholder="Пароль"
 						type={"password"}
-						error={errors.password}
 					/>
 				</>
 			) : (
@@ -79,9 +66,9 @@ const AuthField: FC<IAuthFields> = ({
 					/>
 					<Field
 						{...register("pseudonim", {
-							required: "Псевдоним необходим"
+							required: "Юзернейм необходим"
 						})}
-						placeholder="Псевдоним"
+						placeholder="Юзернейм"
 					/>
 					<Field
 						{...register("password", {
@@ -93,10 +80,22 @@ const AuthField: FC<IAuthFields> = ({
 						})}
 						placeholder="Пароль"
 						type={"password"}
-						error={errors.password}
 					/>
-					<Field placeholder="Повторите пароль" />
-
+					{errors.password && (
+						<p className={"mb-3"}>{errors.password.message}</p>
+					)}
+					<Field
+						{...register("confirmPassword", {
+							validate: (value: string) =>
+								value === watch("password") || "Пароли не совпадают",
+							required: "Повторите пароль"
+						})}
+						type={"password"}
+						placeholder="Повторите пароль"
+					/>
+					{errors.confirmPassword && (
+						<p className={"mb-3"}>{errors.confirmPassword.message}</p>
+					)}
 					<Field
 						{...register("email", {
 							required: "Email необходим",

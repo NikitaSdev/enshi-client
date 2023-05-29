@@ -97,6 +97,7 @@ const Profile = () => {
 		if (count > 3) return "Фанат"
 		if (count <= 3) return "Новичок"
 	}
+
 	return (
 		<>
 			<Meta title={"Профиль"}></Meta>
@@ -108,64 +109,57 @@ const Profile = () => {
 						backgroundPosition: "center",
 						backgroundSize: "cover"
 					}}
-				>
-					<div className={styles.bannerContainer}>
-						<div className={styles.user}>
-							<img
-								className={styles.avatar}
-								src={user.user.avatarUrl}
-								alt={user.user.pseudonim}
-							/>
-							<div>
-								<h3>{user.user.pseudonim}</h3>
-								<p>{getRank(user.user.count.length)}</p>
-							</div>
+				></section>
+				<section className={styles.bannerContainer}>
+					<div className={styles.user}>
+						<img
+							className={styles.avatar}
+							src={user.user.avatarUrl}
+							alt={user.user.pseudonim}
+						/>
+						<div>
+							<h3>{user.user.pseudonim}</h3>
+							<p>{getRank(user.user.count.length)}</p>
 						</div>
-						<div className={styles.info}>
-							<div>
-								<h3>{user.user.favourites.length}</h3>
-								<p>В избранном</p>
-							</div>
-							<div>
-								<h3>{user.user.count.length}</h3>
-								<p>Просмотрено</p>
-							</div>
+					</div>
+					<div className={styles.logosContainer}>
+						<div
+							className={styles.settings}
+							onClick={() => setIsSettingsOpened((prev) => !prev)}
+						>
+							<Image src={settingsIcon} alt="Настройки" />
 						</div>
-						<div className={styles.logosContainer}>
-							<div
-								className={styles.settings}
-								onClick={() => setIsSettingsOpened((prev) => !prev)}
-							>
-								<Image src={settingsIcon} alt="Настройки" />
-							</div>
-							<div className={styles.settings} onClick={() => logout()}>
-								<MaterialIcon name={"MdExitToApp"} />
-							</div>
+						<div className={styles.settings} onClick={() => logout()}>
+							<MaterialIcon name={"MdExitToApp"} />
 						</div>
 					</div>
 				</section>
-				<div className={classNames(styles.info, styles.activeInfo)}>
-					<div>
-						<h3>{user.user.favourites.length}</h3>
-						<p>В избранном</p>
-					</div>
-					<div>
-						<h3>{user.user.count.length}</h3>
-						<p>Просмотрено</p>
-					</div>
-				</div>
 				<section className={styles.favorite}>
-					{favourite && (
-						<Gallery items={favourite} heading={"Избранное"} icon={chevron} />
+					{favourite.results.length ? (
+						<Gallery
+							count={user.user.favourites.length}
+							items={favourite}
+							heading={"Избранное"}
+							icon={chevron}
+						/>
+					) : (
+						<div className={styles.noItems}>
+							<h1>Нет избранных</h1>
+						</div>
 					)}
 				</section>
 				<section className={styles.recent}>
-					{recent && (
+					{recent.results.length ? (
 						<Gallery
+							count={user.user.count.length}
 							items={recent}
 							heading={"Недавно просмотренные"}
 							icon={chevron}
 						/>
+					) : (
+						<div className={styles.noItems}>
+							<h1>Нет недавно просмотренных</h1>
+						</div>
 					)}
 				</section>
 				{isSettingsOpened && (

@@ -11,12 +11,18 @@ import { errorCatch } from "../../api/api.helpers"
 
 export const register = createAsyncThunk<IAuthResponse, IEmailPassword>(
 	"auth/register",
-	async ({ email, password }, thunkAPI) => {
+	// @ts-ignore
+	async ({ email, password, login, pseudonim }, thunkAPI) => {
 		try {
-			const response = await AuthService.register(email, password)
+			const response = await AuthService.register(
+				email,
+				password,
+				login,
+				pseudonim
+			)
 			return response.data
 		} catch (e) {
-			toastError(e)
+			toastError(e, "Ошибка")
 			return thunkAPI.rejectWithValue(e)
 		}
 	}
@@ -29,7 +35,7 @@ export const login = createAsyncThunk<IAuthResponse, IEmailPassword>(
 			const response = await AuthService.login(emailOrLogin, password)
 			return response.data
 		} catch (e) {
-			toastError(e)
+			toastError(e, "Ошибка")
 			return thunkAPI.rejectWithValue(e)
 		}
 	}

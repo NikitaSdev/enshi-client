@@ -8,14 +8,17 @@ import Search from "../Search/Search"
 
 import styles from "./MobileMenu.module.scss"
 
-const MobileMenu: FC<{ active: boolean }> = ({ active }) => {
+const MobileMenu: FC<{
+	active: boolean
+	setIsAuthFormOpened: (arg: boolean) => void
+}> = ({ active, setIsAuthFormOpened }) => {
 	return (
 		<div
 			className={cn(styles.menu, {
 				[styles.active]: !active
 			})}
 		>
-			<MenuContainer />
+			<MenuContainer setIsAuthFormOpened={setIsAuthFormOpened} />
 		</div>
 	)
 }

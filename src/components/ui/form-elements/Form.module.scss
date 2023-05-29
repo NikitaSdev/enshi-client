@@ -4,7 +4,7 @@
 }
 
 .common {
-	@apply relative border-b border-gray-600 transition-colors focus-within:border-primary;
+	@apply relative border-b border-gray-600 transition-colors focus-within:border-purple-900;
 
 	> label {
 		@apply block;

@@ -10,27 +10,35 @@ import SearchField from "@/ui/search-filed/SearchField"
 
 import styles from "./Header.module.scss"
 import Menu from "./MenuContainer/Menu"
-import Profile from "./Profile/Profile"
+import Profile, { AuthForm } from "./Profile/Profile"
 
 const Header = () => {
 	const [isMenuOpened, setIsMenuOpened] = useState(true)
-
+	const [isAuthFormOpened, setIsAuthFormOpened] = useState(false)
 	return (
-		<header className={styles.header}>
-			<div>
-				<Logo />
-				<Menu menu={firstMenu} />
-				<div className={styles.container}>
-					<Search />
-					<Profile />
-					<Burger
-						onClick={() => setIsMenuOpened((prev) => !prev)}
-						active={isMenuOpened}
-					/>
+		<>
+			<header className={styles.header}>
+				<div>
+					<Logo />
+					<Menu menu={firstMenu} setIsAuthFormOpened={setIsAuthFormOpened} />
+					<div className={styles.container}>
+						<Search />
+						<Profile setIsAuthFormOpened={setIsAuthFormOpened} />
+						<Burger
+							onClick={() => setIsMenuOpened((prev) => !prev)}
+							active={isMenuOpened}
+						/>
+					</div>
 				</div>
-			</div>
-			<MobileMenu active={isMenuOpened} />
-		</header>
+				<MobileMenu
+					active={isMenuOpened}
+					setIsAuthFormOpened={setIsAuthFormOpened}
+				/>
+			</header>
+			{isAuthFormOpened && (
+				<AuthForm setIsAuthFormOpened={() => setIsAuthFormOpened(false)} />
+			)}
+		</>
 	)
 }
 

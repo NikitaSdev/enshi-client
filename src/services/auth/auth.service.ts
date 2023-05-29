@@ -9,12 +9,19 @@ import { APP_URL, getAuthUrl } from "../../config/api.config"
 import { removeTokensStorage, saveToStorage } from "./auth.helper"
 
 export const AuthService = {
-	async register(email: string, password: string) {
+	async register(
+		email: string,
+		password: string,
+		login: string,
+		pseudonim: string
+	) {
 		const response = await axios.post<IAuthResponse>(
 			`http://localhost:5000/api${getAuthUrl("/register")}`,
 			{
 				email,
-				password
+				password,
+				login,
+				pseudonim
 			}
 		)
 

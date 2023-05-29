@@ -50,24 +50,40 @@
 	height: 100%;
 	top: 0;
 	left: 0;
+	z-index: 12;
 	background: rgba(0, 0, 0, 0.3);
 	position: absolute;
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	z-index: 3;
+
 	form {
+		overflow: scroll;
+		align-self: center;
 		position: fixed;
-		top: 35%;
+		margin: auto;
+		left: auto;
+		top: 100px;
+		min-height: 560px;
+		width: 445px;
 		background: #1f1f25;
 		border-radius: 10px;
 		border: 3px solid #fafafa40;
 		padding: 20px;
-		max-width: 570px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
+		@include _744 {
+			top: 20px;
+			width: 400px;
+		}
+		@include _480 {
+			top: 10px;
+			width: 360px;
+		}
+		@include _360 {
+			width: 300px;
+		}
 		.heading {
 			display: flex;
 			justify-content: center;

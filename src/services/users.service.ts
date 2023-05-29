@@ -47,9 +47,13 @@ export const UsersService = {
 		)
 	},
 	async updateProfile(refreshToken: string | undefined, data: IProfileInput) {
-		return axios.put<IUser>(
-			`http://localhost:5000/api${getUsersUrl(`/profile`)}`,
-			{ refreshToken, data }
-		)
+		try {
+			return axios.put<IUser>(
+				`http://localhost:5000/api${getUsersUrl(`/profile`)}`,
+				{ refreshToken, data }
+			)
+		} catch (e) {
+			return e
+		}
 	}
 }

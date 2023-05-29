@@ -1,7 +1,11 @@
+import classNames from "classnames"
 import Cookies from "js-cookie"
+import { useRouter } from "next/router"
 import React, { FC, useState } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { useQuery } from "react-query"
 import { useSelector } from "react-redux"
+import { toastr } from "react-redux-toastr"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 import Button from "@/ui/form-elements/Button"
@@ -17,39 +21,42 @@ import styles from "../Profile.module.scss"
 const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 	setIsSettingsOpened
 }) => {
-	const validatePassword = (value: string) => {
-		if (value.length < 6) {
-			return "Пароль должен содержать не менее 8 символов"
-		} else if (!/\d/.test(value)) {
-			return "Пароль должен содержать хотя бы одну цифру"
-		} else if (!/[!@#$%^&*]/.test(value)) {
-			return "Пароль должен содержать хотя бы один специальный символ"
-		}
-		return true
-	}
 	// @ts-ignore
 	const user = useSelector((state) => state.user)
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-		control
+		control,
+		watch
 	} = useForm({
 		mode: "onChange"
 	})
-	const [error, setError] = useState(false)
-	const handleClick = () => {
-		if (!error) setIsSettingsOpened(false)
-	}
+
+	const router = useRouter()
+	const password = watch("password")
+	const newPassword = watch("newPassword")
+
 	const refreshToken = Cookies.get("refreshToken")
-	const onSubmit: SubmitHandler<any> = (data) => {
-		console.log(data)
-		UsersService.updateProfile(refreshToken, data)
+	const [error, setError] = useState("")
+	const onSubmit: SubmitHandler<any> = async (data) => {
+		// @ts-ignore
+		const { data: response } = await UsersService.updateProfile(
+			refreshToken,
+			data
+		)
+		if (response !== "Пароли не совпадают") {
+			toastr.success("Настройки", "Обновление прошло успешно")
+			setIsSettingsOpened(false)
+			router.reload()
+		} else {
+			setError("Пароль неверен")
+		}
 	}
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className={styles.heading}>
+			<div className={classNames(styles.heading, "mb-6")}>
 				<h1>Настройки </h1>
 				<button onClick={() => setIsSettingsOpened(false)}>
 					<MaterialIcon name={"MdClose"} />
@@ -65,46 +72,46 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 				{...register("email", {
 					pattern: {
 						value: validEmail,
-						message: "Please enter a valid email"
+						message: "Введите валидный email адресс"
 					}
 				})}
 				label={"Ваш E-mail"}
 				placeholder={user.user.email}
 				type={"email"}
 			/>
-			<div>
-				<Field
-					{...register("password", {
-						pattern: {
-							value: validEmail,
-							message: "Please enter a valid email"
-						}
-					})}
-					label={"Сменить пароль"}
-					placeholder={"Старый пароль"}
-					type={"password"}
-				/>
-				<Field
-					{...register("password", {
-						pattern: {
-							value: validEmail,
-							message: "Please enter a valid email"
-						}
-					})}
-					placeholder={"Новый пароль"}
-					type={"password"}
-				/>
-				<Field
-					{...register("password", {
-						pattern: {
-							value: validEmail,
-							message: "Please enter a valid email"
-						}
-					})}
-					placeholder={"Повторите новый пароль"}
-					type={"password"}
-				/>
-			</div>
+
+			<Field
+				{...register("password")}
+				label={"Сменить пароль"}
+				placeholder={"Старый пароль"}
+				type={"password"}
+			/>
+			{errors.password && <p>{errors.password.message}</p>}
+			{error !== "" && <p>{error}</p>}
+			<Field
+				{...register("newPassword", {
+					minLength: {
+						value: 6,
+						message: "Пароль должен состоять более чем из 6 символов"
+					},
+					required: {
+						value: password !== "",
+						message: "Введите новый пароль"
+					}
+				})}
+				placeholder={"Новый пароль"}
+				type={"password"}
+			/>
+			{errors.newPassword && <p>{errors.newPassword.message}</p>}
+			<Field
+				{...register("confirmPassword", {
+					validate: (value) => value === newPassword || "Пароли не совпадают"
+				})}
+				placeholder={"Повторите новый пароль"}
+				type={"password"}
+			/>
+			{errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+
 			<Controller
 				control={control}
 				name={"avatarURL"}

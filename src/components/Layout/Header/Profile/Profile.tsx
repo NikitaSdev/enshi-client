@@ -1,16 +1,21 @@
+import axios from "axios"
+import classNames from "classnames"
 import Link from "next/link"
-import React, { FC, useState } from "react"
+import { useRouter } from "next/router"
+import React, { FC, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 
 import AuthField from "@/screens/auth/AuthField"
 import { IAuthInput } from "@/screens/auth/auth.interface"
-import { useAuthRedirect } from "@/screens/auth/useAuthRedirect"
 
 import MaterialIcon from "@/ui/MaterialIcon"
+import Field from "@/ui/form-elements/Field"
 
 import { useActions } from "@/hooks/useActions"
 import { useAuth } from "@/hooks/useAuth"
+
+import { validEmail } from "@/shared/regex"
 
 import Meta from "@/utils/meta/Meta"
 
@@ -19,31 +24,42 @@ import styles from "./Profile.module.scss"
 export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
 	setIsAuthFormOpened
 }) => {
-	const [type, setType] = useState<"login" | "register">("login")
+	const [type, setType] = useState<"login" | "register" | "newPassword">(
+		"login"
+	)
 	const {
 		register: registerInput,
 		handleSubmit,
-		formState
+		formState,
+		watch
 	} = useForm<IAuthInput>({
 		mode: "onChange"
 	})
 	const { login, register } = useActions()
 	const onSubmit: SubmitHandler<IAuthInput> = (data) => {
-		if (type == "login") {
-			console.log("login", data)
+		if (type === "newPassword") {
+			axios.post("http://localhost:5000/api/auth/changePassword", data)
+		} else if (type === "login") {
 			login(data)
 		} else if (type === "register") {
-			console.log(data)
 			register(data)
 		}
 	}
+	const user = useAuth()
+	useEffect(() => {
+		user.user && setIsAuthFormOpened(false)
+	}, [user])
 	return (
 		<>
 			<Meta title={"Вход в аккаунт"} />
 			<section className={styles.wrapper}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.heading}>
-						<h1>{type === "login" ? "Авторизация" : "Регистрация"}</h1>
+						<h1 className={"mt-5"}>
+							{(type === "login" && "Авторизация") ||
+								(type === "register" && "Регистрация") ||
+								(type === "newPassword" && "Восстановить пароль")}
+						</h1>
 						<button onClick={() => setIsAuthFormOpened(false)}>
 							<MaterialIcon name={"MdClose"} />
 						</button>
@@ -54,16 +70,21 @@ export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
 						formState={formState}
 						isPasswordRequired
 						isLogin={type}
+						watch={watch}
 					/>
-
 					{type === "login" ? (
 						<div className={styles.switch}>
 							<p onClick={() => setType("register")}>Регистрация</p>
-							<p>Забыли пароль?</p>
+							<p onClick={() => setType("newPassword")}>Забыли пароль?</p>
 						</div>
 					) : (
 						<div>
-							<p onClick={() => setType("login")}>Войти</p>
+							<p
+								onClick={() => setType("login")}
+								className={classNames({ ["mt-5"]: type === "register" })}
+							>
+								Войти
+							</p>
 						</div>
 					)}
 				</form>
@@ -71,19 +92,18 @@ export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
 		</>
 	)
 }
-const AuthButton = () => {
-	const [isAuthFormOpened, setIsAuthFormOpened] = useState(false)
+const AuthButton: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
+	setIsAuthFormOpened
+}) => {
 	return (
 		<>
 			<button
 				className={styles.authButton}
+				// @ts-ignore
 				onClick={() => setIsAuthFormOpened((prev) => !prev)}
 			>
 				<p>Войти</p>
 			</button>
-			{isAuthFormOpened && (
-				<AuthForm setIsAuthFormOpened={() => setIsAuthFormOpened(false)} />
-			)}
 		</>
 	)
 }
@@ -93,10 +113,14 @@ const ProfileButton = () => {
 	const title = (title: string) => {
 		return title.length > 9 ? title.slice(0, 9) + "..." : title
 	}
+	const router = useRouter()
 	return (
 		<Link href={"/profile"}>
 			<a href={"/profile"}>
-				<button className={styles.profileButton}>
+				<button
+					className={styles.profileButton}
+					disabled={router.pathname === "/profile"}
+				>
 					<img src={user.user.avatarUrl} />{" "}
 					<p>{user.user.pseudonim && title(user.user.pseudonim)}</p>
 					<MaterialIcon name={"MdChevronRight"} />
@@ -105,11 +129,17 @@ const ProfileButton = () => {
 		</Link>
 	)
 }
-const Profile = () => {
+const Profile: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
+	setIsAuthFormOpened
+}) => {
 	const { user } = useAuth()
 	return (
 		<div className={styles.button}>
-			{user ? <ProfileButton /> : <AuthButton />}
+			{user ? (
+				<ProfileButton />
+			) : (
+				<AuthButton setIsAuthFormOpened={setIsAuthFormOpened} />
+			)}
 		</div>
 	)
 }

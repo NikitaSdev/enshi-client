@@ -15,20 +15,23 @@ const DynamicAuthItems = dynamic(
 		ssr: false
 	}
 )
-const Menu: FC<{ menu: IMenu; mobile?: boolean }> = ({
-	menu: { items },
-	mobile
-}) => {
-	const { user } = useAuth()
+const Menu: FC<{
+	menu: IMenu
+	mobile?: boolean
+	setIsAuthFormOpened: (arg: boolean) => void
+}> = ({ menu: { items }, mobile, setIsAuthFormOpened }) => {
 	return (
-		<div className={styles.menu}>
-			<ul className={styles.ul}>
-				{items.map((item) => (
-					<MenuItem item={item} key={item.link} />
-				))}
-				{mobile && <Profile />}
-			</ul>
-		</div>
+		<>
+			<div className={styles.menu}>
+				<ul className={styles.ul}>
+					{items.map((item) => (
+						<MenuItem item={item} key={item.link} />
+					))}
+				</ul>
+			</div>
+			<div className={"mt-8"}></div>
+			{mobile && <Profile setIsAuthFormOpened={setIsAuthFormOpened} />}
+		</>
 	)
 }
 

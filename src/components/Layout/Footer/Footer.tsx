@@ -9,7 +9,9 @@ import youtube from "./youtube.svg"
 const Logos = () => {
 	return (
 		<div className={styles.logos}>
-			<Image src={vk} height={22} />
+			<a href="https://vk.com/enshii" target={"_blank"} rel="noreferrer">
+				<Image src={vk} height={22} />
+			</a>
 			<Image src={telegram} height={29} />
 			<Image src={youtube} height={24} />
 		</div>
@@ -21,13 +23,17 @@ const Footer = () => {
 			<div className={styles.footerContainer}>
 				<Logos />
 				<div className={styles.nav}>
-					<a href={"/"}>
+					<a
+						href={"https://vk.com/topic-168163353_49354344"}
+						target={"_blank"}
+						rel="noreferrer"
+					>
 						<p>Правообладателям</p>
 					</a>
-					<a href={"/"}>
+					<a href={"https://vk.com/enshii"} target={"_blank"} rel="noreferrer">
 						<p>Сотрудничество</p>
 					</a>
-					<a href={"/"}>
+					<a href={"mailto:enshi-ru@mail.ru"}>
 						<p>Служба поддержки</p>
 					</a>
 				</div>

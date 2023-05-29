@@ -34,7 +34,12 @@ const UploadFile: FC<IUploadField> = ({
 				{!isNoImage && (
 					<div className={styles.uploadImageContainer}>
 						{isLoading ? (
-							<SkeletonLoader count={1} className={"w-full h-full"} />
+							<SkeletonLoader
+								count={1}
+								width={100}
+								height={100}
+								className={"rounded-2xl"}
+							/>
 						) : (
 							value && (
 								<Image alt={" "} src={value} layout={"fill"} unoptimized />

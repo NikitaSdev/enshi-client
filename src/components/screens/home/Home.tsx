@@ -28,31 +28,24 @@ const Home: FC<IHome> = ({
 			<Meta title={"Главная"} description={"Главная"} />
 			<main>
 				{list && <MainBanner list={list.list} />}
-				{trendingMovies && (
-					<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
-				)}
-				{announcedMovies && (
-					<HomeGallery
-						items={announcedMovies}
-						heading={"Анонсировано "}
-						announced
-					/>
-				)}
-				{ratingsMovies && (
-					<Gallery
-						items={ratingsMovies}
-						heading={"Рейтинговые"}
-						icon={chevron}
-					/>
-				)}
+
+				<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
+
+				<HomeGallery
+					items={announcedMovies}
+					heading={"Анонсировано "}
+					announced
+				/>
+
+				<Gallery items={ratingsMovies} heading={"Рейтинговые"} icon={chevron} />
+
 				<SocialBanner />
-				{recommendedMovies && (
-					<Gallery
-						items={recommendedMovies}
-						heading={"Рекомендуемые"}
-						icon={chevron}
-					/>
-				)}
+
+				<Gallery
+					items={recommendedMovies}
+					heading={"Рекомендуемые"}
+					icon={chevron}
+				/>
 			</main>
 		</>
 	)

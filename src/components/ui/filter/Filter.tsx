@@ -39,11 +39,16 @@ const Filter: FC<IFilter> = ({
 			minHeight: 75,
 			borderRadius: 10,
 			border: "none",
-			maxWidth: 500,
+			maxWidth: 700,
 			borderBottom: "none",
 			boxShadow: "none",
 			cursor: "pointer",
 			paddingLeft: 30
+		}),
+		menu: (provided: any) => ({
+			borderBottomRightRadius: 10,
+			borderBottomLeftRadius: 10,
+			marginTop: -6
 		}),
 
 		optionContent: {
@@ -74,9 +79,10 @@ const Filter: FC<IFilter> = ({
 			</div>
 		)
 	}
-	const CustomYearOption = ({ data }) => {
+	const CustomYearOption = (data: any) => {
 		const handleOptionClick = () => {
 			setYears(yearValue ? [...yearValue, data] : [data])
+			// @ts-ignore
 			setYearValue(yearValue ? [...yearValue, data] : [data])
 		}
 
@@ -87,9 +93,10 @@ const Filter: FC<IFilter> = ({
 			</div>
 		)
 	}
-	const CustomStatusOption = ({ data, isSelected, isFocused }) => {
+	const CustomStatusOption = (data: any, isSelected: any, isFocused: any) => {
 		const handleOptionClick = () => {
 			setStatuses(statusValue ? [...statusValue, data] : [data])
+			// @ts-ignore
 			setStatusValue(statusValue ? [...statusValue, data] : [data])
 		}
 
@@ -154,12 +161,13 @@ const Filter: FC<IFilter> = ({
 						value={genreValue}
 						styles={customStyles}
 						components={{
-							Option: CustomGenreOption,
 							IndicatorSeparator: () => null
 						}}
+						// @ts-ignore
 						options={genreList}
 						onChange={(e) => {
 							setGenres(e)
+							// @ts-ignore
 							setGenreValue(e)
 						}}
 					/>
@@ -169,13 +177,15 @@ const Filter: FC<IFilter> = ({
 						isMulti
 						styles={customStyles}
 						components={{
-							Option: CustomStatusOption,
+							// @ts-ignore
 							IndicatorSeparator: () => null
 						}}
+						// @ts-ignore
 						options={statusOptions}
 						value={statusValue}
 						onChange={(e) => {
 							setStatuses(e)
+							// @ts-ignore
 							setStatusValue(e)
 						}}
 						placeholder={
@@ -210,7 +220,10 @@ const Filter: FC<IFilter> = ({
 									Годы
 								</span>
 								<span style={{ fontSize: 12, color: "#828282" }}>
-									{sliceList(yearList)}
+									{
+										// @ts-ignore
+										sliceList(yearList)
+									}
 								</span>
 							</div>
 						}
@@ -220,12 +233,13 @@ const Filter: FC<IFilter> = ({
 						value={yearValue}
 						styles={customStyles}
 						components={{
-							Option: CustomYearOption,
 							IndicatorSeparator: () => null
 						}}
+						// @ts-ignore
 						options={yearList}
 						onChange={(e) => {
 							setYears(e)
+							// @ts-ignore
 							setYearValue(e)
 						}}
 					/>
@@ -233,8 +247,11 @@ const Filter: FC<IFilter> = ({
 				<button
 					onClick={() => {
 						resetFilters()
+						// @ts-ignore
 						setGenreValue(null)
+						// @ts-ignore
 						setStatusValue(null)
+						// @ts-ignore
 						setYearValue(null)
 					}}
 					className={styles.button}
