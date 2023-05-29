@@ -23,7 +23,7 @@ const HomeGallery: FC<{
 }> = ({ items, heading, singleMovie, icon, announced }) => {
 	const swiperRef = useRef<SwiperCore>()
 	const [swiperNavigationAllowed, setSwiperNavigationAllowed] = useState<any>({
-		prevButtonDisabled: true,
+		prevButtonDisabled: false,
 		nextButtonDisabled: false
 	})
 	console.log(items)
@@ -82,25 +82,6 @@ const HomeGallery: FC<{
 								slidesPerView: 5
 							}
 						}}
-						slidesPerGroup={1}
-						scrollbar={{ draggable: true }}
-						onSlideChange={() =>
-							setSwiperNavigationAllowed({
-								prevButtonDisabled: swiperRef?.current?.isBeginning
-							})
-						}
-						onReachEnd={() => {
-							setSwiperNavigationAllowed({
-								...swiperNavigationAllowed,
-								nextButtonDisabled: false
-							})
-						}}
-						onReachBeginning={() =>
-							setSwiperNavigationAllowed({
-								...swiperNavigationAllowed,
-								prevButtonDisabled: true
-							})
-						}
 						modules={[Navigation]}
 						onBeforeInit={(swiper: SwiperCore | undefined) => {
 							swiperRef.current = swiper

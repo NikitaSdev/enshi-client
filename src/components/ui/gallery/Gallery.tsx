@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid"
 import { AuthForm } from "@/components/Layout/Header/Profile/Profile"
 
 import MaterialIcon from "@/ui/MaterialIcon"
+import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import SkeletonLoader from "@/ui/SkeletonLoader"
 
 import { IMovie, IMovieList } from "@/shared/types/movie.types"
@@ -109,104 +110,101 @@ const Gallery: FC<{
 					>
 						<MaterialIcon name={"MdChevronLeft"} />
 					</button>
-					{items.results && (
-						<Swiper
-							breakpoints={{
-								0: {
-									slidesPerView: 1
-								},
-								360: {
-									slidesPerView: 2
-								},
-								700: {
-									slidesPerView: 3
-								},
-								1050: {
-									slidesPerView: 4
-								},
-								1250: {
-									slidesPerView: 5
-								}
-							}}
-							modules={[Navigation]}
-							onBeforeInit={(swiper: SwiperCore | undefined) => {
-								swiperRef.current = swiper
-							}}
-							className={styles.swiper}
-						>
-							{items.results ? (
-								items.results &&
-								items.results.map(
-									(item: IMovie) =>
-										item.material_data &&
-										item.material_data.anime_genres && (
-											<SwiperSlide key={uuidv4()} className={styles.swiperItem}>
-												<div className={styles.item}>
-													<div
-														className={classNames(styles.favourite, {
-															[styles.activeFavourite]:
-																favoriteMovies?.includes(item.id)
-														})}
-														onClick={() => toggleFavourites(item.id)}
-													>
-														<div>
-															<MaterialIcon name={"MdBookmark"} />
-														</div>
-													</div>
-													<a href={singleMovie ? item.id : `movies/${item.id}`}>
-														<img
-															alt={item.title}
-															src={item.material_data.poster_url}
-															className={styles.slide}
-															draggable={false}
-														/>
-														{announced ? (
-															<div className={styles.release}>
-																{item.release}
-															</div>
-														) : (
-															<div className={styles.description}>
-																<h3>{title(item.title)}</h3>
-																<div>
-																	<div className={styles.year}>
-																		<p>{item.year}</p>
-																	</div>
 
-																	<div className={styles.genre}>
-																		{item.material_data.anime_genres.length &&
-																		item.material_data.anime_genres.length ? (
-																			item.material_data.anime_genres[1] ? (
-																				<>
-																					<p>
-																						{item.material_data.anime_genres[0]}
-																						/
-																					</p>{" "}
-																					<p>
-																						{item.material_data.anime_genres[1]}
-																					</p>
-																				</>
-																			) : (
+					<Swiper
+						breakpoints={{
+							0: {
+								slidesPerView: 1
+							},
+							360: {
+								slidesPerView: 2
+							},
+							700: {
+								slidesPerView: 3
+							},
+							1050: {
+								slidesPerView: 4
+							},
+							1250: {
+								slidesPerView: 5
+							}
+						}}
+						modules={[Navigation]}
+						onBeforeInit={(swiper: SwiperCore | undefined) => {
+							swiperRef.current = swiper
+						}}
+						className={styles.swiper}
+					>
+						{items.results ? (
+							items.results &&
+							items.results.map(
+								(item: IMovie) =>
+									item.material_data &&
+									item.material_data.anime_genres && (
+										<SwiperSlide key={uuidv4()} className={styles.swiperItem}>
+											<div className={styles.item}>
+												<div
+													className={classNames(styles.favourite, {
+														[styles.activeFavourite]: favoriteMovies?.includes(
+															item.id
+														)
+													})}
+													onClick={() => toggleFavourites(item.id)}
+												>
+													<div>
+														<MaterialIcon name={"MdBookmark"} />
+													</div>
+												</div>
+												<a href={singleMovie ? item.id : `movies/${item.id}`}>
+													<img
+														alt={item.title}
+														src={item.material_data.poster_url}
+														className={styles.slide}
+														draggable={false}
+													/>
+													{announced ? (
+														<div className={styles.release}>{item.release}</div>
+													) : (
+														<div className={styles.description}>
+															<h3>{title(item.title)}</h3>
+															<div>
+																<div className={styles.year}>
+																	<p>{item.year}</p>
+																</div>
+
+																<div className={styles.genre}>
+																	{item.material_data.anime_genres.length &&
+																	item.material_data.anime_genres.length ? (
+																		item.material_data.anime_genres[1] ? (
+																			<>
 																				<p>
-																					{item.material_data.anime_genres[0]}
+																					{item.material_data.anime_genres[0]}/
+																				</p>{" "}
+																				<p>
+																					{item.material_data.anime_genres[1]}
 																				</p>
-																			)
+																			</>
 																		) : (
-																			""
-																		)}
-																	</div>
+																			<p>
+																				{item.material_data.anime_genres[0]}
+																			</p>
+																		)
+																	) : (
+																		""
+																	)}
 																</div>
 															</div>
-														)}
-													</a>
-												</div>
-											</SwiperSlide>
-										)
-								)
-							) : (
-								<SkeletonLoader width={190} height={250} />
-							)}
-						</Swiper>
-					)}
+														</div>
+													)}
+												</a>
+											</div>
+										</SwiperSlide>
+									)
+							)
+						) : (
+							<SkeletonGallery />
+						)}
+					</Swiper>
 
 					<button
 						onClick={nextSlide}

@@ -4,4 +4,5 @@ export interface IHome {
 	recommendedMovies: any
 	trendingMovies: any
 	announcedMovies: any
+	isLoading: boolean
 }

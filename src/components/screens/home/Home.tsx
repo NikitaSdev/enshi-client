@@ -1,12 +1,10 @@
-import axios from "axios"
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 
+import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import Gallery from "@/ui/gallery/Gallery"
 import HomeGallery from "@/ui/homeGallery/HomeGallery"
 import MainBanner, { IBanner } from "@/ui/mainBanner/MainBanner"
 import SocialBanner from "@/ui/socialBanner/SocialBanner"
-
-import { MovieService } from "@/services/movie.service"
 
 import Meta from "@/utils/meta/Meta"
 
@@ -19,33 +17,52 @@ const Home: FC<IHome> = ({
 	trendingMovies,
 	announcedMovies,
 	ratingsMovies,
-	recommendedMovies
+	recommendedMovies,
+	isLoading
 }) => {
-	console.log(ratingsMovies)
-
 	return (
 		<>
 			<Meta title={"Главная"} description={"Главная"} />
 			<main>
 				{list && <MainBanner list={list.list} />}
 
-				<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
+				{isLoading ? (
+					<SkeletonGallery />
+				) : (
+					<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
+				)}
 
-				<HomeGallery
-					items={announcedMovies}
-					heading={"Анонсировано "}
-					announced
-				/>
+				{isLoading ? (
+					<SkeletonGallery />
+				) : (
+					<HomeGallery
+						items={announcedMovies}
+						heading={"Анонсировано "}
+						announced
+					/>
+				)}
 
-				<Gallery items={ratingsMovies} heading={"Рейтинговые"} icon={chevron} />
+				{isLoading ? (
+					<SkeletonGallery />
+				) : (
+					<Gallery
+						items={ratingsMovies}
+						heading={"Рейтинговые"}
+						icon={chevron}
+					/>
+				)}
 
 				<SocialBanner />
 
-				<Gallery
-					items={recommendedMovies}
-					heading={"Рекомендуемые"}
-					icon={chevron}
-				/>
+				{isLoading ? (
+					<SkeletonGallery />
+				) : (
+					<Gallery
+						items={recommendedMovies}
+						heading={"Рекомендуемые"}
+						icon={chevron}
+					/>
+				)}
 			</main>
 		</>
 	)

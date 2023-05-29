@@ -6,6 +6,7 @@ import { StylesConfig } from "react-select"
 
 import Content from "@/screens/singleMovie/content/Content"
 
+import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import Banner from "@/ui/banner/Banner"
 import Gallery from "@/ui/gallery/Gallery"
 
@@ -29,7 +30,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 	const user = useSelector((state) => state.user)
 	const [similar, setSimilar] = useState<IMovieList>()
 	const [linked, setLinked] = useState<IMovieList>()
-
+	const [isLoading, setIsLoading] = useState(true)
 	useEffect(() => {
 		if (user.user) {
 			const refreshToken = Cookies.get("refreshToken")
@@ -51,6 +52,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 			)
 
 			setLinked(linkedMovies)
+			setIsLoading(false)
 		}
 		fetch()
 	}, [])
@@ -74,12 +76,16 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							src={`http:${movie.link}`}
 							className={styles.video}
 						></iframe>
-						{similar && similar.results && (
+						{isLoading ? (
+							<SkeletonGallery />
+						) : (
 							<div className={"mt-12"}>
 								<Gallery items={similar} heading={"Похожее"} singleMovie />
 							</div>
 						)}
-						{linked && linked.results && (
+						{isLoading ? (
+							<SkeletonGallery />
+						) : (
 							<div className={"mt-12"}>
 								<Gallery
 									items={linked}

@@ -12,6 +12,7 @@ import chevron from "@/screens/home/chevron.svg"
 import SettingsField from "@/screens/profile/SettingsField/SettingsField"
 
 import MaterialIcon from "@/ui/MaterialIcon"
+import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import Button from "@/ui/form-elements/Button"
 import Gallery from "@/ui/gallery/Gallery"
 
@@ -46,6 +47,7 @@ const Profile = () => {
 	const [isSettingsOpened, setIsSettingsOpened] = useState(false)
 	const [recent, setRecent] = useState({ results: [] })
 	const [favourite, setFavourite] = useState({ results: [] })
+	const [isLoading, setIsLoading] = useState(true)
 	const getData = async () => {
 		try {
 			const count = user.user.count
@@ -75,6 +77,7 @@ const Profile = () => {
 				...prevMovies,
 				results: favouriteList
 			}))
+			setIsLoading(false)
 		} catch (error) {
 			console.log(error)
 		}
@@ -134,34 +137,42 @@ const Profile = () => {
 						</div>
 					</div>
 				</section>
-				<section className={styles.favorite}>
-					{favourite.results.length ? (
-						<Gallery
-							count={user.user.favourites.length}
-							items={favourite}
-							heading={"Избранное"}
-							icon={chevron}
-						/>
-					) : (
-						<div className={styles.noItems}>
-							<h1>Нет избранных</h1>
-						</div>
-					)}
-				</section>
-				<section className={styles.recent}>
-					{recent.results.length ? (
-						<Gallery
-							count={user.user.count.length}
-							items={recent}
-							heading={"Недавно просмотренные"}
-							icon={chevron}
-						/>
-					) : (
-						<div className={styles.noItems}>
-							<h1>Нет недавно просмотренных</h1>
-						</div>
-					)}
-				</section>
+				{isLoading ? (
+					<SkeletonGallery />
+				) : (
+					<section className={styles.favorite}>
+						{favourite.results.length ? (
+							<Gallery
+								count={user.user.favourites.length}
+								items={favourite}
+								heading={"Избранное"}
+								icon={chevron}
+							/>
+						) : (
+							<div className={styles.noItems}>
+								<h1>Нет избранных</h1>
+							</div>
+						)}
+					</section>
+				)}
+				{isLoading ? (
+					<SkeletonGallery />
+				) : (
+					<section className={styles.recent}>
+						{recent.results.length ? (
+							<Gallery
+								count={user.user.count.length}
+								items={recent}
+								heading={"Недавно просмотренные"}
+								icon={chevron}
+							/>
+						) : (
+							<div className={styles.noItems}>
+								<h1>Нет недавно просмотренных</h1>
+							</div>
+						)}
+					</section>
+				)}
 				{isSettingsOpened && (
 					<Settings setIsSettingsOpened={() => setIsSettingsOpened(false)} />
 				)}

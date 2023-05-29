@@ -5,6 +5,8 @@ import { useQuery } from "react-query"
 
 import { IHome } from "@/screens/home/home.interface"
 
+import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
+
 //TODO: swiper
 //TODO: videoadaptive
 //TODO: profile
@@ -18,6 +20,7 @@ const HomePage: NextPage<IHome> = () => {
 	const [trendingMovies, setTrendingMovies] = useState({ results: [] })
 	const [ratingsMovies, setRatingMovies] = useState({ results: [] })
 	const [recommendedMovies, setRecommendedMovies] = useState({ results: [] })
+	const [isLoading, setIsLoading] = useState(true)
 	const getData = async () => {
 		try {
 			const { data: homeData } = await axios.get(
@@ -55,6 +58,7 @@ const HomePage: NextPage<IHome> = () => {
 				...prevMovies,
 				results: recommendedList
 			}))
+			setIsLoading(false)
 		} catch (error) {
 			console.log(error)
 		}
@@ -65,13 +69,16 @@ const HomePage: NextPage<IHome> = () => {
 	console.log(recommendedMovies)
 
 	return (
-		<Home
-			trendingMovies={trendingMovies}
-			announcedMovies={announcedMovies}
-			list={list}
-			recommendedMovies={recommendedMovies}
-			ratingsMovies={ratingsMovies}
-		/>
+		<>
+			<Home
+				trendingMovies={trendingMovies}
+				announcedMovies={announcedMovies}
+				list={list}
+				recommendedMovies={recommendedMovies}
+				ratingsMovies={ratingsMovies}
+				isLoading={isLoading}
+			/>
+		</>
 	)
 }
 
