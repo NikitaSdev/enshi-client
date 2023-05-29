@@ -12,8 +12,8 @@ const Logos = () => {
 			<a href="https://vk.com/enshii" target={"_blank"} rel="noreferrer">
 				<Image src={vk} height={22} />
 			</a>
-			<Image src={telegram} height={29} />
-			<Image src={youtube} height={24} />
+			{/*<Image src={telegram} height={29} />*/}
+			{/*<Image src={youtube} height={24} />*/}
 		</div>
 	)
 }
@@ -30,9 +30,7 @@ const Footer = () => {
 					>
 						<p>Правообладателям</p>
 					</a>
-					<a href={"https://vk.com/enshii"} target={"_blank"} rel="noreferrer">
-						<p>Сотрудничество</p>
-					</a>
+
 					<a href={"mailto:enshi-ru@mail.ru"}>
 						<p>Служба поддержки</p>
 					</a>

@@ -45,11 +45,22 @@ const TrendingPage = () => {
 		)
 
 		genres.results.map((genre: { title: string }) => {
-			genreOptions.push({
-				value: genre.title,
-				label: genre.title[0].toUpperCase() + genre.title.slice(1),
-				icon: <MaterialIcon name={"MdOutlineAddBox"} className={styles.icon} />
-			})
+			if (
+				genre.title !== "фильм-нуар" &&
+				genre.title !== "аниме" &&
+				genre.title !== "биография" &&
+				genre.title !== "вестерн" &&
+				genre.title !== "детский" &&
+				genre.title !== "мультфильм" &&
+				genre.title !== "мюзикл"
+			)
+				genreOptions.push({
+					value: genre.title,
+					label: genre.title[0].toUpperCase() + genre.title.slice(1),
+					icon: (
+						<MaterialIcon name={"MdOutlineAddBox"} className={styles.icon} />
+					)
+				})
 		})
 
 		setGenresList(genreOptions)
@@ -103,7 +114,6 @@ const TrendingPage = () => {
 		setYears(undefined)
 		setStatuses(undefined)
 	}
-	console.log(movies)
 	return (
 		<main>
 			<Filter

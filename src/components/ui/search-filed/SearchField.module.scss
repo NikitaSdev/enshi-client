@@ -7,6 +7,7 @@
 	font-size: 0.8rem;
 	display: flex;
 	justify-content: center;
+	overflow-x: hidden;
 	@include _900 {
 		width: 240px;
 	}
@@ -47,11 +48,12 @@
 		justify-content: center;
 		background: #333238;
 		position: absolute;
-		width: 100vw;
+		width: 270px;
 		height: 50px;
 		z-index: 10;
 		top: 90px;
-		left: -35vw;
+		left: -150px;
 		padding: 12px 48px;
+		overflow-x: hidden;
 	}
 }

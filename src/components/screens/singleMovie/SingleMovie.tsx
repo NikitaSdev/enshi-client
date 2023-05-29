@@ -73,16 +73,9 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							Detail={() => <Content movie={movie} />}
 						/>
 						<iframe
-							src={`http:${movie.link}`}
+							src={`https:${movie.link}`}
 							className={styles.video}
 						></iframe>
-						{isLoading ? (
-							<SkeletonGallery />
-						) : (
-							<div className={"mt-12"}>
-								<Gallery items={similar} heading={"Похожее"} singleMovie />
-							</div>
-						)}
 						{isLoading ? (
 							<SkeletonGallery />
 						) : (
@@ -92,6 +85,13 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 									heading={"Связанное аниме"}
 									singleMovie
 								/>
+							</div>
+						)}
+						{isLoading ? (
+							<SkeletonGallery />
+						) : (
+							<div className={"mt-12"}>
+								<Gallery items={similar} heading={"Еще аниме"} singleMovie />
 							</div>
 						)}
 					</div>

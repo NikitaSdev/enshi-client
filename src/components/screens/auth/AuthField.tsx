@@ -66,9 +66,9 @@ const AuthField: FC<IAuthFields> = ({
 					/>
 					<Field
 						{...register("pseudonim", {
-							required: "Юзернейм необходим"
+							required: "Имя пользователя необходимо"
 						})}
-						placeholder="Юзернейм"
+						placeholder="Имя пользователя"
 					/>
 					<Field
 						{...register("password", {

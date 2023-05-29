@@ -64,49 +64,7 @@ const Filter: FC<IFilter> = ({
 	const [genreValue, setGenreValue] = useState([])
 	const [yearValue, setYearValue] = useState([])
 	const [statusValue, setStatusValue] = useState([])
-	// @ts-ignore
-	const CustomGenreOption = ({ data }) => {
-		const handleOptionClick = () => {
-			setGenres(genreValue ? [...genreValue, data] : [data])
-			// @ts-ignore
-			setGenreValue(genreValue ? [...genreValue, data] : [data])
-		}
 
-		return (
-			<div style={customStyles.optionContent} onClick={handleOptionClick}>
-				<div>{data.icon && data.icon}</div>
-				<span style={{ fontSize: 12, fontWeight: 600 }}>{data.label}</span>
-			</div>
-		)
-	}
-	const CustomYearOption = (data: any) => {
-		const handleOptionClick = () => {
-			setYears(yearValue ? [...yearValue, data] : [data])
-			// @ts-ignore
-			setYearValue(yearValue ? [...yearValue, data] : [data])
-		}
-
-		return (
-			<div style={customStyles.optionContent} onClick={handleOptionClick}>
-				{data.icon && data.icon}
-				<span style={{ fontSize: 12, fontWeight: 600 }}>{data.label}</span>
-			</div>
-		)
-	}
-	const CustomStatusOption = (data: any, isSelected: any, isFocused: any) => {
-		const handleOptionClick = () => {
-			setStatuses(statusValue ? [...statusValue, data] : [data])
-			// @ts-ignore
-			setStatusValue(statusValue ? [...statusValue, data] : [data])
-		}
-
-		return (
-			<div style={customStyles.optionContent} onClick={handleOptionClick}>
-				{data.icon && data.icon}
-				<span style={{ fontSize: 12, fontWeight: 600 }}>{data.label}</span>
-			</div>
-		)
-	}
 	const sliceList = (
 		list: Array<{ value: string; label: string }> | undefined
 	) => {

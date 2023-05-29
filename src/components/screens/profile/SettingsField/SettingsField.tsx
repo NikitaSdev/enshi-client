@@ -65,7 +65,7 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 
 			<Field
 				{...register("pseudonim", {})}
-				label={"Ваш псевдоним"}
+				label={"Имя пользователя"}
 				placeholder={user.user.pseudonim}
 			/>
 			<Field
