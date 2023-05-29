@@ -24,7 +24,8 @@ const Auth: FC = () => {
 		register: registerInput,
 		handleSubmit,
 		formState,
-		reset
+		reset,
+		watch
 	} = useForm<IAuthInput>({
 		mode: "onChange"
 	})
@@ -49,6 +50,7 @@ const Auth: FC = () => {
 						formState={formState}
 						isPasswordRequired
 						isLogin={type}
+						watch={watch}
 					/>
 					<div className={styles.buttons}>
 						<Button
