@@ -103,79 +103,81 @@ const Profile = () => {
 	return (
 		<>
 			<Meta title={"Профиль"}></Meta>
-			<main>
-				<section
-					className={styles.banner}
-					style={{
-						background: `url(${user.user.wrapperURL})`,
-						backgroundPosition: "center",
-						backgroundSize: "cover"
-					}}
-				></section>
-				<section className={styles.bannerContainer}>
-					<div className={styles.user}>
-						<img
-							className={styles.avatar}
-							src={user.user.avatarUrl}
-							alt={user.user.pseudonim}
-						/>
-						<div>
-							<h3>{user.user.pseudonim}</h3>
-							<p>{getRank(user.user.count.length)}</p>
-						</div>
-					</div>
-					<div className={styles.logosContainer}>
-						<div
-							className={styles.settings}
-							onClick={() => setIsSettingsOpened((prev) => !prev)}
-						>
-							<Image src={settingsIcon} alt="Настройки" />
-						</div>
-						<div className={styles.settings} onClick={() => logout()}>
-							<MaterialIcon name={"MdExitToApp"} />
-						</div>
-					</div>
-				</section>
-				{isLoading ? (
-					<SkeletonGallery />
-				) : (
-					<section className={styles.favorite}>
-						{favourite.results.length ? (
-							<Gallery
-								count={user.user.favourites.length}
-								items={favourite}
-								heading={"Избранное"}
-								icon={chevron}
+			{user && user.user && (
+				<main>
+					<section
+						className={styles.banner}
+						style={{
+							background: `url(${user.user.wrapperURL})`,
+							backgroundPosition: "center",
+							backgroundSize: "cover"
+						}}
+					></section>
+					<section className={styles.bannerContainer}>
+						<div className={styles.user}>
+							<img
+								className={styles.avatar}
+								src={user.user.avatarUrl}
+								alt={user.user.pseudonim}
 							/>
-						) : (
-							<div className={styles.noItems}>
-								<h1>Нет избранных</h1>
+							<div>
+								<h3>{user.user.pseudonim}</h3>
+								<p>{getRank(user.user.count.length)}</p>
 							</div>
-						)}
-					</section>
-				)}
-				{isLoading ? (
-					<SkeletonGallery />
-				) : (
-					<section className={styles.recent}>
-						{recent.results.length ? (
-							<Gallery
-								count={user.user.count.length}
-								items={recent}
-								heading={"Недавно просмотренные"}
-								icon={chevron}
-							/>
-						) : (
-							<div className={styles.noItems}>
-								<h1>Нет недавно просмотренных</h1>
+						</div>
+						<div className={styles.logosContainer}>
+							<div
+								className={styles.settings}
+								onClick={() => setIsSettingsOpened((prev) => !prev)}
+							>
+								<Image src={settingsIcon} alt="Настройки" />
 							</div>
-						)}
+							<div className={styles.settings} onClick={() => logout()}>
+								<MaterialIcon name={"MdExitToApp"} />
+							</div>
+						</div>
 					</section>
-				)}
-				{isSettingsOpened && (
-					<Settings setIsSettingsOpened={() => setIsSettingsOpened(false)} />
-				)}
-			</main>
+					{isLoading ? (
+						<SkeletonGallery />
+					) : (
+						<section className={styles.favorite}>
+							{favourite && favourite.results && favourite.results.length ? (
+								<Gallery
+									count={user.user.favourites.length}
+									items={favourite.results}
+									heading={"Избранное"}
+									icon={chevron}
+								/>
+							) : (
+								<div className={styles.noItems}>
+									<h1>Нет избранных</h1>
+								</div>
+							)}
+						</section>
+					)}
+					{isLoading ? (
+						<SkeletonGallery />
+					) : (
+						<section className={styles.recent}>
+							{recent && recent.results && recent.results.length ? (
+								<Gallery
+									count={user.user.count.length}
+									items={recent.results}
+									heading={"Недавно просмотренные"}
+									icon={chevron}
+								/>
+							) : (
+								<div className={styles.noItems}>
+									<h1>Нет недавно просмотренных</h1>
+								</div>
+							)}
+						</section>
+					)}
+					{isSettingsOpened && (
+						<Settings setIsSettingsOpened={() => setIsSettingsOpened(false)} />
+					)}
+				</main>
+			)}
 		</>
 	)
 }

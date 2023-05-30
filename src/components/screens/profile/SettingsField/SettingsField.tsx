@@ -105,7 +105,11 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 			{errors.newPassword && <p>{errors.newPassword.message}</p>}
 			<Field
 				{...register("confirmPassword", {
-					validate: (value) => value === newPassword || "Пароли не совпадают"
+					validate: (value) => value === newPassword || "Пароли не совпадают",
+					required: {
+						value: password !== "",
+						message: "Введите новый пароль"
+					}
 				})}
 				placeholder={"Повторите новый пароль"}
 				type={"password"}
