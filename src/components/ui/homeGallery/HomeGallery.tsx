@@ -46,15 +46,17 @@ const HomeGallery: FC<{
 				[styles.announcedWrapper]: announced
 			})}
 		>
-			<h1 className={styles.heading}>
-				{heading}
+			<div className={styles.headContainer}>
+				<h1 className={styles.heading}>
+					{heading}
 
-				{icon && (
-					<span>
-						<Image src={icon} />
-					</span>
-				)}
-			</h1>
+					{icon && (
+						<span>
+							<Image src={icon} />
+						</span>
+					)}
+				</h1>
+			</div>
 			<div className={styles.swiperContainer}>
 				<button
 					onClick={prevSlide}
@@ -98,9 +100,7 @@ const HomeGallery: FC<{
 												<MaterialIcon name={"MdBookmark"} />
 											</div>
 										)}
-										{announced && (
-											<div className={styles.announce}>Анонсировано</div>
-										)}
+
 										<img
 											alt={item.title}
 											src={
@@ -108,9 +108,11 @@ const HomeGallery: FC<{
 													? item.posters.original.url
 													: item.material_data.poster_url
 											}
-											className={styles.slide}
 											draggable={false}
 										/>
+										{announced && (
+											<div className={styles.announce}>Анонсировано</div>
+										)}
 										{announced ? (
 											<div className={styles.announceName}>
 												<h3>{title(item.names.ru)}</h3>

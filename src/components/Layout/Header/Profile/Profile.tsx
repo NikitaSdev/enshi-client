@@ -19,6 +19,8 @@ import { validEmail } from "@/shared/regex"
 
 import Meta from "@/utils/meta/Meta"
 
+import { NEST_API } from "../../../../config/api.config"
+
 import styles from "./Profile.module.scss"
 
 export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
@@ -38,7 +40,7 @@ export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
 	const { login, register } = useActions()
 	const onSubmit: SubmitHandler<IAuthInput> = (data) => {
 		if (type === "newPassword") {
-			axios.post("http://localhost:5000/api/auth/changePassword", data)
+			axios.post(`${NEST_API}/auth/changePassword`, data)
 		} else if (type === "login") {
 			login(data)
 		} else if (type === "register") {

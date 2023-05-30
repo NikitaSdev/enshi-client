@@ -8,15 +8,17 @@ import TopCatalog from "@/ui/top-catalog/Catalog"
 
 import { MovieService } from "@/services/movie.service"
 
+import { NEST_API } from "../config/api.config"
+
 import MoviePage from "./movies/[slug]"
 
 const Top = () => {
 	const [movies, setMovies] = useState({ results: [] })
 	const getData = async () => {
 		try {
-			const { data: topList } = await axios.get(
-				"http://localhost:5000/api/topPage"
-			)
+			const { data: topList } = await axios.get(`${NEST_API}/topPage`, {
+				headers: { "ngrok-skip-browser-warning": "69420" }
+			})
 			const moviesList: any = []
 
 			for (let i = 0; i < topList.list.length; i++) {

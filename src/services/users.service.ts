@@ -4,7 +4,7 @@ import { IMovie } from "@/shared/types/movie.types"
 import { IUser } from "@/shared/types/user.types"
 
 import axios, { axiosClassic } from "../api/interceptors"
-import { getUsersUrl } from "../config/api.config"
+import { NEST_API, getUsersUrl } from "../config/api.config"
 import { getMovieUrl } from "../config/url.config"
 
 export const UsersService = {
@@ -28,29 +28,38 @@ export const UsersService = {
 	// },
 	async getFavourites(id: string) {
 		return axiosClassic.post<IMovie[]>(
-			`http://localhost:5000/api${getUsersUrl("/profile/favourites")}`,
-			{ id }
+			`${NEST_API}${getUsersUrl("/profile/favourites")}`,
+			{ id },
+			{
+				headers: { "ngrok-skip-browser-warning": "69420" }
+			}
 		)
 	},
 	async toggleFavourite(movieId: string, refreshToken: string | undefined) {
 		return axiosClassic.put<string>(
-			`http://localhost:5000/api${getUsersUrl("/profile/favourites")}`,
+			`${NEST_API}${getUsersUrl("/profile/favourites")}`,
 			{
 				movieId,
 				refreshToken
+			},
+			{
+				headers: { "ngrok-skip-browser-warning": "69420" }
 			}
 		)
 	},
 	async getProfile() {
-		return axios.get<IUser>(
-			`http://localhost:5000/api${getUsersUrl(`/profile`)}`
-		)
+		return axios.get<IUser>(`${NEST_API}${getUsersUrl(`/profile`)},`, {
+			headers: { "ngrok-skip-browser-warning": "69420" }
+		})
 	},
 	async updateProfile(refreshToken: string | undefined, data: IProfileInput) {
 		try {
 			return axios.put<IUser>(
-				`http://localhost:5000/api${getUsersUrl(`/profile`)}`,
-				{ refreshToken, data }
+				`${NEST_API}${getUsersUrl(`/profile`)}`,
+				{ refreshToken, data },
+				{
+					headers: { "ngrok-skip-browser-warning": "69420" }
+				}
 			)
 		} catch (e) {
 			return e

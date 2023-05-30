@@ -5,9 +5,13 @@ import React, { FC, useEffect, useState } from "react"
 import { useQuery } from "react-query"
 import { useSelector } from "react-redux"
 
+import { AuthForm } from "@/components/Layout/Header/Profile/Profile"
+
 import Button from "@/ui/form-elements/Button"
 
 import { UsersService } from "@/services/users.service"
+
+import { NEST_API } from "../../../config/api.config"
 
 import styles from "./Banner.module.scss"
 
@@ -26,7 +30,7 @@ const Banner: FC<IBanner & { id: string }> = ({ image, id, Detail }) => {
 			const _id = user.user._id
 			const getFavorite = async () => {
 				const { data: favouriteMovies } = await axios.post(
-					"http://localhost:5000/api/users/profile/favourites",
+					`${NEST_API}/users/profile/favourites`,
 					{
 						_id
 					}
@@ -35,37 +39,48 @@ const Banner: FC<IBanner & { id: string }> = ({ image, id, Detail }) => {
 				console.log(favouriteMovies)
 				console.log(id)
 			}
-			getFavorite()
+			user.user && getFavorite()
 		}
 	}, [refetch])
+	const [isAuthFormOpened, setIsAuthFormOpened] = useState(false)
 	const toggleFavourites = async () => {
-		setRefetch((prev) => !prev)
-		const refreshToken = Cookies.get("refreshToken")
-		await UsersService.toggleFavourite(id, refreshToken)
+		if (user.user) {
+			setRefetch((prev) => !prev)
+			const refreshToken = Cookies.get("refreshToken")
+			await UsersService.toggleFavourite(id, refreshToken)
+		} else {
+			setIsAuthFormOpened(true)
+		}
 	}
+
 	return (
-		<div className={styles.banner}>
-			<div>
-				<Image
-					className={styles.poster}
-					src={image}
-					alt={""}
-					width={312}
-					height={445}
-					draggable={false}
-					unoptimized
-					priority
-				/>
-				<Button className={styles.addToFavourite} onClick={toggleFavourites}>
-					{favoriteMovies?.includes(id) ? (
-						<p>Удалить из избранного</p>
-					) : (
-						<p>Добавить в избранное</p>
-					)}
-				</Button>
+		<>
+			{isAuthFormOpened && (
+				<AuthForm setIsAuthFormOpened={setIsAuthFormOpened} />
+			)}
+			<div className={styles.banner}>
+				<div>
+					<Image
+						className={styles.poster}
+						src={image}
+						alt={""}
+						width={312}
+						height={445}
+						draggable={false}
+						unoptimized
+						priority
+					/>
+					<Button className={styles.addToFavourite} onClick={toggleFavourites}>
+						{favoriteMovies?.includes(id) ? (
+							<p>Удалить из избранного</p>
+						) : (
+							<p>Добавить в избранное</p>
+						)}
+					</Button>
+				</div>
+				{Detail && <Detail />}
 			</div>
-			{Detail && <Detail />}
-		</div>
+		</>
 	)
 }
 

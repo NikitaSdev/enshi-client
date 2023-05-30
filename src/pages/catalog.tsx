@@ -9,6 +9,8 @@ import Pagination from "@/ui/pagination/Pagination"
 
 import { MovieService } from "@/services/movie.service"
 
+import { removeDuplicates } from "@/utils/removeDuplicates"
+
 import styles from "../components/ui/filter/Filter.module.scss"
 
 const TrendingPage = () => {
@@ -114,6 +116,7 @@ const TrendingPage = () => {
 		setYears(undefined)
 		setStatuses(undefined)
 	}
+
 	return (
 		<main>
 			<Filter
@@ -126,11 +129,16 @@ const TrendingPage = () => {
 				setYears={setYears}
 			/>
 
-			<Catalog
-				movies={movies || []}
-				title={"Каталог"}
-				description={"Трендовые фильмы и сериалы"}
-			/>
+			{movies && (
+				<Catalog
+					movies={
+						// @ts-ignore
+						removeDuplicates(movies.results) || []
+					}
+					title={"Каталог"}
+					description={"Трендовые фильмы и сериалы"}
+				/>
+			)}
 
 			<Pagination
 				movies={movies}

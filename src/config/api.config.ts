@@ -1,6 +1,8 @@
 export const APP_URL = `https://kodikapi.com/`
 export const API_SERVER_URL = `https://kodikapi.com/`
-export const ANILIBRIA_URL = "https://ww.anilibria.org.ru"
+export const NEST_API = "http://localhost:5000/api"
+// export const NEST_API =
+// 	"https://9408-2a00-1fa0-c498-2a12-b9fd-ad59-8583-a742.ngrok-free.app/api"
 export const getGenresUrl = (string: string) => `/genres${string}`
 export const getAuthUrl = (string: string) => `/auth${string}`
 export const getUsersUrl = (string: string) => `/users${string}`
@@ -42,7 +44,7 @@ export const getMovie = () =>
 export const getMoviesUrlBySlug = (string: string) =>
 	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&id=${string}&with_material_data=true&strict=true&limit=8`
 export const getMoviesUrlByName = (string: string) =>
-	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&title=${string}&with_material_data=true&type=anime-serial,anime&limit=100&with_episodes=true`
+	`/search?token=d046caa991d8b228f8d0a1a2f990cce5&title=${string}&with_material_data=true&types=anime-serial&limit=100`
 export const getSimilar = (genres: Array<string>, year: string) =>
 	`/list?token=d046caa991d8b228f8d0a1a2f990cce5&types=anime-serial&anime_genres=${genres.join(
 		","

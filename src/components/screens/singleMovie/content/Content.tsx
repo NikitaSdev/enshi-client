@@ -17,7 +17,7 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 			<h1>{movie.title}</h1>
 			<div className={styles.info}>
 				<p>
-					<span>Эпизоды:</span>
+					<span>Эпизоды: </span>
 					{movie.last_episode && movie.last_episode}
 				</p>
 				<p>

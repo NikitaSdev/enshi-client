@@ -23,7 +23,6 @@ import { MovieService } from "@/services/movie.service"
 import Meta from "@/utils/meta/Meta"
 
 import { logout } from "@/store/user/user.actions"
-import { userSlice } from "@/store/user/user.slice"
 
 import styles from "./Profile.module.scss"
 import settingsIcon from "./settings.svg"

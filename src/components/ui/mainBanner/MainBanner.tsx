@@ -8,6 +8,7 @@ import { v4 } from "uuid"
 
 import MaterialIcon from "@/ui/MaterialIcon"
 import Button from "@/ui/form-elements/Button"
+import SkeletonBanner from "@/ui/mainBanner/SkeletonBanner"
 
 import styles from "./MainBanner.module.scss"
 import poster from "./dumbPoster.jpg"
@@ -71,17 +72,20 @@ const Slider: FC<{
 						}
 					}}
 				>
-					{list.map((item: IBannerItem, index: number) => (
-						<SwiperSlide key={index}>
-							<img
-								className={styles.swiperSlide}
-								src={item.poster}
-								alt={item.name}
-								draggable={false}
-								onClick={() => onClick(index)}
-							/>
-						</SwiperSlide>
-					))}
+					{
+						// @ts-ignore
+						list.list.map((item: IBannerItem, index: number) => (
+							<SwiperSlide key={index}>
+								<img
+									className={styles.swiperSlide}
+									src={item.poster}
+									alt={item.name}
+									draggable={false}
+									onClick={() => onClick(index)}
+								/>
+							</SwiperSlide>
+						))
+					}
 				</Swiper>
 			</div>
 		</>
@@ -91,7 +95,8 @@ const Rating: FC<IBanner & { currentIndex: number }> = ({
 	list,
 	currentIndex
 }) => {
-	const stars = new Array(list[currentIndex].rating + 1)
+	// @ts-ignore
+	const stars = new Array(list.list[currentIndex].rating + 1)
 	stars.fill(0, 0, -1)
 	return (
 		<>
@@ -105,11 +110,11 @@ const MainBanner: FC<any> = ({ list }) => {
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
 	return (
 		<>
-			{list && (
+			{list ? (
 				<section
 					className={styles.banner}
 					style={{
-						background: `url(${list[currentIndex].bigPoster})`,
+						background: `url(${list.list[currentIndex].bigPoster})`,
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover",
 						backgroundPosition: "center"
@@ -118,10 +123,10 @@ const MainBanner: FC<any> = ({ list }) => {
 					<div className={styles.bannerContainer}>
 						<div className={styles.content}>
 							<div>
-								{<h1>{list[currentIndex].name}</h1>}
+								{<h1>{list.list[currentIndex].name}</h1>}
 								<p className={styles.rating}>
 									<span className={styles.season}>
-										{list[currentIndex].season} сезон
+										{list.list[currentIndex].season} сезон
 									</span>
 									<span className={styles.stars}>
 										<Rating currentIndex={currentIndex} list={list} />
@@ -130,11 +135,11 @@ const MainBanner: FC<any> = ({ list }) => {
 
 								<div>
 									<p className={styles.description}>
-										{list[currentIndex].description}
+										{list.list[currentIndex].description}
 									</p>
 								</div>
 								<Button className={styles.watch}>
-									<a href={`movies/${list[currentIndex].link}`}>
+									<a href={`movies/${list.list[currentIndex].link}`}>
 										Cмотреть
 										<span>
 											<MaterialIcon name={"MdPlayArrow"} />
@@ -150,6 +155,8 @@ const MainBanner: FC<any> = ({ list }) => {
 						/>
 					</div>
 				</section>
+			) : (
+				<SkeletonBanner />
 			)}
 		</>
 	)

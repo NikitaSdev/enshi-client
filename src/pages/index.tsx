@@ -13,19 +13,20 @@ import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import { MovieService } from "@/services/movie.service"
 
 import Home from "../components/screens/home/Home"
+import { NEST_API } from "../config/api.config"
 
 const HomePage: NextPage<IHome> = () => {
 	const [list, setList] = useState()
-	const [announcedMovies, setAnnounced] = useState()
-	const [trendingMovies, setTrendingMovies] = useState({ results: [] })
-	const [ratingsMovies, setRatingMovies] = useState({ results: [] })
-	const [recommendedMovies, setRecommendedMovies] = useState({ results: [] })
+	const [announcedMovies, setAnnounced] = useState({})
+	const [trendingMovies, setTrendingMovies] = useState({})
+	const [ratingsMovies, setRatingMovies] = useState({})
+	const [recommendedMovies, setRecommendedMovies] = useState({})
 	const [isLoading, setIsLoading] = useState(true)
 	const getData = async () => {
 		try {
-			const { data: homeData } = await axios.get(
-				"http://localhost:5000/api/HomePage"
-			)
+			const { data: homeData } = await axios.get(`${NEST_API}/HomePage`, {
+				headers: { "ngrok-skip-browser-warning": "69420" }
+			})
 			setAnnounced(homeData.announced)
 			setList(homeData.main)
 			const trendingList: any = []
@@ -48,15 +49,15 @@ const HomePage: NextPage<IHome> = () => {
 			}
 			setTrendingMovies((prevMovies) => ({
 				...prevMovies,
-				results: trendingList
+				trendingList
 			}))
 			setRatingMovies((prevMovies) => ({
 				...prevMovies,
-				results: ratingsList
+				ratingsList
 			}))
 			setRecommendedMovies((prevMovies) => ({
 				...prevMovies,
-				results: recommendedList
+				recommendedList
 			}))
 			setIsLoading(false)
 		} catch (error) {
@@ -66,7 +67,7 @@ const HomePage: NextPage<IHome> = () => {
 	useEffect(() => {
 		getData()
 	}, [])
-	console.log(recommendedMovies)
+	console.log(trendingMovies)
 
 	return (
 		<>

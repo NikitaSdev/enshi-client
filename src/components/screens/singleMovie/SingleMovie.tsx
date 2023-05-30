@@ -15,7 +15,9 @@ import { IMovieList } from "@/shared/types/movie.types"
 import { MovieService } from "@/services/movie.service"
 
 import Meta from "@/utils/meta/Meta"
+import { removeDuplicates } from "@/utils/removeDuplicates"
 
+import { NEST_API } from "../../../config/api.config"
 import { IMoviePage } from "../../../pages/movies/[slug]"
 
 import styles from "./SingleMovie.module.scss"
@@ -34,10 +36,16 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 	useEffect(() => {
 		if (user.user) {
 			const refreshToken = Cookies.get("refreshToken")
-			axios.post("http://localhost:5000/api/users/count", {
-				movieId: movie.id,
-				refreshToken
-			})
+			axios.post(
+				`${NEST_API}/users/count`,
+				{
+					movieId: movie.id,
+					refreshToken
+				},
+				{
+					headers: { "ngrok-skip-browser-warning": "69420" }
+				}
+			)
 		}
 	})
 	useEffect(() => {
@@ -56,7 +64,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		}
 		fetch()
 	}, [])
-
+	console.log(linked)
 	return (
 		movie &&
 		movie.material_data && (
@@ -79,9 +87,9 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 						{isLoading ? (
 							<SkeletonGallery />
 						) : (
-							<div className={"mt-12"}>
+							<div className={"mt-6"}>
 								<Gallery
-									items={linked}
+									items={removeDuplicates(linked?.results)}
 									heading={"Связанное аниме"}
 									singleMovie
 								/>
@@ -90,8 +98,12 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 						{isLoading ? (
 							<SkeletonGallery />
 						) : (
-							<div className={"mt-12"}>
-								<Gallery items={similar} heading={"Еще аниме"} singleMovie />
+							<div className={"mt-6"}>
+								<Gallery
+									items={removeDuplicates(similar?.results)}
+									heading={"Еще аниме"}
+									singleMovie
+								/>
 							</div>
 						)}
 					</div>

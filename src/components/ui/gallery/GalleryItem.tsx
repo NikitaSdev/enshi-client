@@ -15,6 +15,8 @@ import { UsersService } from "@/services/users.service"
 
 import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter"
 
+import { NEST_API } from "../../../config/api.config"
+
 import styles from "./Gallery.module.scss"
 
 const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog }) => {
@@ -30,12 +32,12 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog }) => {
 		const _id = user.user && user.user._id
 		const getFavorite = async () => {
 			const { data: favouriteMovies } = await axios.post(
-				"http://localhost:5000/api/users/profile/favourites",
+				`${NEST_API}/users/profile/favourites`,
 				{
 					_id
 				}
 			)
-			setFavoriteMovies(favouriteMovies)
+			user.user && setFavoriteMovies(favouriteMovies)
 		}
 		user.user && getFavorite()
 	}, [refetch])

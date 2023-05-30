@@ -7,6 +7,8 @@ import { useOutsideClick } from "@/components/Layout/Header/useClickOutside"
 
 import SearchField from "@/ui/search-filed/SearchField"
 
+import { removeDuplicates } from "@/utils/removeDuplicates"
+
 import styles from "./Search.module.scss"
 
 const Search: FC<{
@@ -23,6 +25,7 @@ const Search: FC<{
 		width > 480 && setExpandedInput(true)
 		width > 480 && setIsSearchListOpened(true)
 	}, [expandedInput])
+
 	return (
 		<div className={cn(styles.wrapper, className)} ref={ref}>
 			{width > 480 ? (
@@ -44,7 +47,7 @@ const Search: FC<{
 				/>
 			)}
 			{expandedInput && isSuccess && isSearchListOpened && (
-				<SearchList movies={data || []} />
+				<SearchList movies={removeDuplicates(data?.results) || []} />
 			)}
 		</div>
 	)

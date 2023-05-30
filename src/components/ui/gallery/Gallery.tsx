@@ -20,7 +20,7 @@ import { IMovie, IMovieList } from "@/shared/types/movie.types"
 
 import { UsersService } from "@/services/users.service"
 
-import { ANILIBRIA_URL } from "../../../config/api.config"
+import { NEST_API } from "../../../config/api.config"
 
 import styles from "./Gallery.module.scss"
 
@@ -60,9 +60,12 @@ const Gallery: FC<{
 		const _id = user.user && user.user._id
 		const getFavorite = async () => {
 			const { data: favouriteMovies } = await axios.post(
-				"http://localhost:5000/api/users/profile/favourites",
+				`${NEST_API}/users/profile/favourites`,
 				{
 					_id
+				},
+				{
+					headers: { "ngrok-skip-browser-warning": "69420" }
 				}
 			)
 			setFavoriteMovies(favouriteMovies)
@@ -129,15 +132,15 @@ const Gallery: FC<{
 								slidesPerView: 5
 							}
 						}}
+						spaceBetween={20}
 						modules={[Navigation]}
 						onBeforeInit={(swiper: SwiperCore | undefined) => {
 							swiperRef.current = swiper
 						}}
 						className={styles.swiper}
 					>
-						{items.results ? (
-							items.results &&
-							items.results.map(
+						{items ? (
+							items.map(
 								(item: IMovie) =>
 									item.material_data &&
 									item.material_data.anime_genres && (

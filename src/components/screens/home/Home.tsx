@@ -24,12 +24,16 @@ const Home: FC<IHome> = ({
 		<>
 			<Meta title={"Главная"} description={"Главная"} />
 			<main>
-				{list && <MainBanner list={list.list} />}
+				<MainBanner list={list} />
 
 				{isLoading ? (
 					<SkeletonGallery />
 				) : (
-					<Gallery items={trendingMovies} heading={"Популярные"} icon={fire} />
+					<Gallery
+						items={trendingMovies.trendingList}
+						heading={"Популярные"}
+						icon={fire}
+					/>
 				)}
 
 				{isLoading ? (
@@ -46,7 +50,7 @@ const Home: FC<IHome> = ({
 					<SkeletonGallery />
 				) : (
 					<Gallery
-						items={ratingsMovies}
+						items={ratingsMovies.ratingsList}
 						heading={"Рейтинговые"}
 						icon={chevron}
 					/>
@@ -58,7 +62,7 @@ const Home: FC<IHome> = ({
 					<SkeletonGallery />
 				) : (
 					<Gallery
-						items={recommendedMovies}
+						items={recommendedMovies.recommendedList}
 						heading={"Рекомендуемые"}
 						icon={chevron}
 					/>
