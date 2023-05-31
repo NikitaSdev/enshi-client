@@ -9,9 +9,9 @@ const SkeletonGallery = () => {
 			{array.map(() => (
 				<div key={Math.random()}>
 					<div className={styles.bigSkeleton}>
-						<Skeleton width={200} height={270} baseColor={"#E3E3E3"} />
+						<Skeleton width={190} height={270} baseColor={"#E3E3E3"} />
 						<Skeleton
-							width={200}
+							width={190}
 							height={20}
 							baseColor={"#E3E3E3"}
 							highlightColor={"#F1F1F1"}
@@ -20,13 +20,13 @@ const SkeletonGallery = () => {
 					</div>
 					<div>
 						<Skeleton
-							width={200}
+							width={190}
 							height={17}
 							baseColor={"#F1F1F1"}
 							highlightColor={"#E3E3E3"}
 						/>
 						<Skeleton
-							width={200}
+							width={190}
 							height={17}
 							baseColor={"#F1F1F1"}
 							highlightColor={"#E3E3E3"}

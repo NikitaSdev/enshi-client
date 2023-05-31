@@ -37,6 +37,9 @@
 	}
 	@include _744 {
 		height: 650px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	@include _480 {
 		height: 700px;
@@ -178,12 +181,13 @@
 		}
 	}
 	.skeletonSlider {
+		position: absolute;
 		display: flex;
 		align-self: flex-end;
 		justify-content: flex-end;
 		gap: 20px;
 		margin-bottom: -40px;
-		margin-right: -150px;
+		right: 0;
 		@include _744 {
 			margin-right: -350px;
 		}

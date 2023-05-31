@@ -3,12 +3,12 @@
 .skeleton {
 	display: flex;
 	flex-wrap: wrap;
-	max-width: 1170px;
+	max-width: 1200px;
 	justify-content: center;
 	align-items: center;
 	margin: auto;
 	padding: 76px 44px;
-	gap: 20px;
+	gap: 40px;
 	@include _580 {
 		padding: 76px 0;
 	}

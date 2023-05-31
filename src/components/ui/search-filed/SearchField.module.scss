@@ -43,7 +43,7 @@
 }
 .activeInput {
 	@include _480 {
-		border-radius: 4px;
+		border-radius: 0;
 		display: block;
 		background: #333238;
 		position: absolute;
