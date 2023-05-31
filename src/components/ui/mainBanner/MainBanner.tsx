@@ -32,10 +32,14 @@ const Slider: FC<{
 }> = ({ currentIndex, list, onClick }) => {
 	const swiperRef = useRef<SwiperCore>()
 
-	console.log(currentIndex)
 	const prevSlide = () => {
 		if (swiperRef.current) {
 			swiperRef.current.slidePrev()
+		}
+	}
+	const nextSlide = () => {
+		if (swiperRef.current) {
+			swiperRef.current.slideNext()
 		}
 	}
 
@@ -66,7 +70,7 @@ const Slider: FC<{
 						830: {
 							slidesPerView: 3
 						},
-						1050: {
+						1200: {
 							spaceBetween: 20,
 							slidesPerView: 4
 						}
@@ -87,6 +91,12 @@ const Slider: FC<{
 						))
 					}
 				</Swiper>
+				<div onClick={nextSlide}>
+					<MaterialIcon
+						name={"MdOutlineChevronRight"}
+						className={styles.swipeRight}
+					/>
+				</div>
 			</div>
 		</>
 	)

@@ -25,9 +25,10 @@
 .content {
 	height: 532px;
 	width: 1170px;
+	display: flex;
+	align-items: center;
 	> div:first-child {
 		width: 400px;
-
 		@include _480 {
 			width: 95%;
 		}
@@ -36,13 +37,10 @@
 		height: 600px;
 	}
 	@include _744 {
+		align-items: start;
 		height: 650px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
 	}
 	@include _480 {
-		height: 700px;
 	}
 
 	h1 {
@@ -107,11 +105,11 @@
 .swiper {
 	position: absolute;
 	right: 0;
-	bottom: -115px;
-	margin-top: 70px;
+	bottom: -120px;
 	max-width: 900px;
-	@include _1050 {
+	@include _1200 {
 		right: -25px;
+		bottom: -160px;
 		max-width: 650px;
 	}
 	@include _830 {
@@ -119,15 +117,18 @@
 		max-width: 450px;
 	}
 	@include _744 {
+		bottom: -125px;
 		right: -25px;
 		max-width: 450px;
 	}
 	@include _500 {
+		bottom: -80px;
 		max-width: 400px;
 	}
 	@include _380 {
 		right: -150px;
 		max-width: 360px;
+		bottom: -140px;
 	}
 	div {
 		div {
@@ -144,7 +145,7 @@
 .swipeLeft {
 	cursor: pointer;
 	position: absolute;
-	top: 110px;
+	top: 80px;
 	left: -80px;
 	padding: 0;
 	margin: 0;
