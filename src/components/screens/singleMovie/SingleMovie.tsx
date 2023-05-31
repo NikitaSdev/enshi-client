@@ -83,7 +83,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 						/>
 						<iframe
 							allowFullScreen
-							allow={"fullscreen"}
+							allow={"fullscreen; autoplay"}
 							src={`https:${movie.link}`}
 							className={styles.video}
 						></iframe>
