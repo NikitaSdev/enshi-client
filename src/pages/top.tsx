@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import Skeleton from "react-loading-skeleton"
+import { toastr } from "react-redux-toastr"
 
 import SkeletonCatalog from "@/ui/SkeletonCatalog/SkeletonCatalog"
 import Button from "@/ui/form-elements/Button"
@@ -45,14 +46,14 @@ const Top = () => {
 			{movies && (
 				<TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
 			)}
-			{isLoading && <SkeletonCatalog />}
+
 			<div
 				style={{
 					width: "100%",
 					display: "flex",
 					justifyContent: "center",
 					color: "white",
-					marginTop: "96px"
+					marginTop: "24px"
 				}}
 			>
 				<Button
@@ -61,6 +62,7 @@ const Top = () => {
 						setIsLoading(true)
 						setSkip((prev) => prev + 10)
 						setLimit((prev) => prev + 10)
+						toastr.success("Загрузка", "В процессе")
 						skip < 90 && getData()
 					}}
 				>

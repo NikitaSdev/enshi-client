@@ -114,7 +114,7 @@ const HomeGallery: FC<{
 											<div className={styles.announce}>Анонсировано</div>
 										)}
 										{announced ? (
-											<div className={styles.announceName}>
+											<div className={styles.description}>
 												<h3>{title(item.names.ru)}</h3>
 												<div className={styles.release}>{item.release}</div>
 											</div>
