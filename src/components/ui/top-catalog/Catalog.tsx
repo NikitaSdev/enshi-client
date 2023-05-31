@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
+import Skeleton from "react-loading-skeleton"
 import { v4 } from "uuid"
 
 import MaterialIcon from "@/ui/MaterialIcon"
@@ -11,7 +12,6 @@ import Meta from "@/utils/meta/Meta"
 import styles from "./Catalog.module.scss"
 
 const TopCatalog: FC<ICatalog> = ({ movies, title, description }) => {
-	console.log(movies)
 	return (
 		<section className={styles.main}>
 			<Meta title={title} description={description}></Meta>
@@ -23,32 +23,37 @@ const TopCatalog: FC<ICatalog> = ({ movies, title, description }) => {
 					</span>
 				</h1>
 			)}
-			<div className={styles.movies}>
-				{movies.map((movie: any) => {
-					console.log(movie)
-					return (
-						<GalleryItem
-							catalog
-							key={v4()}
-							item={{
-								name: movie.title,
-								link: movie.id,
-								posterPath: movie.material_data.poster_url,
-								posters: "",
-								genres: movie.material_data.anime_genres
-									? movie.material_data.anime_genres
-									: [""],
-								year: movie.year,
-								content: {
-									title: movie.title
-								},
-								id: movie.id
-							}}
-							variant={"horizontal"}
-						/>
-					)
-				})}
-			</div>
+			{movies ? (
+				<div className={styles.movies}>
+					{movies.map((movie: any) => {
+						return (
+							<GalleryItem
+								catalog
+								key={v4()}
+								item={{
+									name: movie.title,
+									link: movie.id,
+									posterPath: movie.material_data.poster_url,
+									posters: "",
+									genres: movie.material_data.anime_genres
+										? movie.material_data.anime_genres
+										: [""],
+									year: movie.year,
+									content: {
+										title: movie.title
+									},
+									id: movie.id
+								}}
+								variant={"horizontal"}
+							/>
+						)
+					})}
+				</div>
+			) : (
+				<>
+					<SkeletonLoader count={25} width={290} height={250} />
+				</>
+			)}
 		</section>
 	)
 }

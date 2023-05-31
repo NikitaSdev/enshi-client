@@ -90,7 +90,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							<div className={"mt-6"}>
 								<Gallery
 									items={removeDuplicates(linked?.results)}
-									heading={"Связанное аниме"}
+									heading={"Похожие"}
 									singleMovie
 								/>
 							</div>

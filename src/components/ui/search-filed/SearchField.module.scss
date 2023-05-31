@@ -44,19 +44,15 @@
 .activeInput {
 	@include _480 {
 		border-radius: 4px;
-		display: flex;
-		justify-content: center;
+		display: block;
 		background: #333238;
 		position: absolute;
-		width: 360px;
+		width: 100vw;
 		height: 50px;
 		z-index: 10;
 		top: 90px;
-		right: -82px;
+		right: -81px;
 		padding: 12px 48px;
 		overflow-x: hidden;
-	}
-	@include _360 {
-		width: 340px;
 	}
 }

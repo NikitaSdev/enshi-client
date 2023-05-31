@@ -104,7 +104,7 @@ const Profile = () => {
 		<>
 			<Meta title={"Профиль"}></Meta>
 			{user && user.user && (
-				<main>
+				<main style={{ marginTop: 96 }}>
 					<section
 						className={styles.banner}
 						style={{

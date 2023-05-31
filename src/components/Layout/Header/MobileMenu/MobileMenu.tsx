@@ -1,10 +1,9 @@
 import cn from "classnames"
-import { FC, RefObject, useEffect, useState } from "react"
+import { FC } from "react"
 
-import MenuItem from "@/components/Layout/Header/MenuContainer/MenuItem"
+import { useOutsideClick } from "@/components/Layout/Header/useClickOutside"
 
 import MenuContainer from "../MenuContainer/MenuContainer"
-import Search from "../Search/Search"
 
 import styles from "./MobileMenu.module.scss"
 

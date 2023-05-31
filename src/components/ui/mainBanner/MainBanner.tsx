@@ -63,7 +63,7 @@ const Slider: FC<{
 						380: {
 							slidesPerView: 2
 						},
-						750: {
+						830: {
 							slidesPerView: 3
 						},
 						1050: {
@@ -114,10 +114,7 @@ const MainBanner: FC<any> = ({ list }) => {
 				<section
 					className={styles.banner}
 					style={{
-						background: `url(${list.list[currentIndex].bigPoster})`,
-						backgroundRepeat: "no-repeat",
-						backgroundSize: "cover",
-						backgroundPosition: "center"
+						background: `url(${list.list[currentIndex].bigPoster})`
 					}}
 				>
 					<div className={styles.bannerContainer}>

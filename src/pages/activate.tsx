@@ -2,7 +2,7 @@ import React from "react"
 
 const Activate = () => {
 	return (
-		<main>
+		<main style={{ marginTop: 186 }}>
 			<h1
 				className={"text-center"}
 				style={{ fontSize: "2rem", fontWeight: 600 }}

@@ -16,10 +16,12 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 		<div className={styles.content}>
 			<h1>{movie.title}</h1>
 			<div className={styles.info}>
-				<p>
-					<span>Эпизоды: </span>
-					{movie.last_episode && movie.last_episode}
-				</p>
+				{movie.material_data.anime_kins === "tv" && (
+					<p>
+						<span>Эпизоды: </span>
+						{movie.last_episode && movie.last_episode}
+					</p>
+				)}
 				<p>
 					<span>Жанры:</span>{" "}
 					{movie.material_data.anime_genres &&

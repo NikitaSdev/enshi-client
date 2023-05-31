@@ -1,8 +1,6 @@
 import axios from "axios"
-import cn from "classnames"
 import classNames from "classnames"
 import Cookies from "js-cookie"
-import Link from "next/link"
 import { FC, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
@@ -17,7 +15,7 @@ import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter"
 
 import { NEST_API } from "../../../config/api.config"
 
-import styles from "./Gallery.module.scss"
+import styles from "./GalleryItem.module.scss"
 
 const GalleryItem: FC<IGalleryItemProps> = ({ item, catalog }) => {
 	const title = (title: string) => {

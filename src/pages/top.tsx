@@ -1,16 +1,11 @@
 import axios from "axios"
-import { GetStaticProps } from "next"
-import React, { FC, useEffect, useState } from "react"
-import { useQuery } from "react-query"
+import React, { useEffect, useState } from "react"
 
-import Catalog from "@/ui/catalog-movies/Catalog"
 import TopCatalog from "@/ui/top-catalog/Catalog"
 
 import { MovieService } from "@/services/movie.service"
 
 import { NEST_API } from "../config/api.config"
-
-import MoviePage from "./movies/[slug]"
 
 const Top = () => {
 	const [movies, setMovies] = useState({ results: [] })
@@ -34,10 +29,7 @@ const Top = () => {
 	useEffect(() => {
 		getData()
 	}, [])
-
-	return (
-		movies && <TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
-	)
+	return <TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
 }
 
 export default Top
