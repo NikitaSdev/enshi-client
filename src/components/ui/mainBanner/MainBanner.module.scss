@@ -160,3 +160,43 @@
 		top: 80px;
 	}
 }
+.skeleton {
+	margin-bottom: 60px;
+	height: 650px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	.background {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+	}
+	.container {
+		height: 100%;
+		width: 1170px;
+		position: absolute;
+		top: 50px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		@include _1200 {
+			width: 100%;
+		}
+	}
+	.skeletonSlider {
+		display: flex;
+		align-self: flex-end;
+		justify-content: flex-end;
+		gap: 20px;
+		margin-bottom: -40px;
+		margin-right: -150px;
+		@include _744 {
+			margin-right: -350px;
+		}
+		@include _480 {
+			margin-right: -800px;
+		}
+	}
+}
