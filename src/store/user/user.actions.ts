@@ -20,6 +20,7 @@ export const register = createAsyncThunk<IAuthResponse, IEmailPassword>(
 				login,
 				pseudonim
 			)
+			toastr.success("Успешно", "Теперь подтвердите почту")
 			return response.data
 		} catch (e) {
 			toastError(e, "Ошибка")

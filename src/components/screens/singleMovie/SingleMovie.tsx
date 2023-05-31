@@ -33,21 +33,7 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 	const [similar, setSimilar] = useState<IMovieList>()
 	const [linked, setLinked] = useState<IMovieList>()
 	const [isLoading, setIsLoading] = useState(true)
-	useEffect(() => {
-		if (user.user) {
-			const refreshToken = Cookies.get("refreshToken")
-			axios.post(
-				`${NEST_API}/users/count`,
-				{
-					movieId: movie.id,
-					refreshToken
-				},
-				{
-					headers: { "ngrok-skip-browser-warning": "69420" }
-				}
-			)
-		}
-	})
+
 	useEffect(() => {
 		const fetch = async () => {
 			const { data: similarMovies } = await MovieService.getSimilar(
@@ -64,7 +50,28 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		}
 		fetch()
 	}, [])
-	console.log(linked)
+	const handleIframeMessage = (event: any) => {
+		if (event.data.key == "kodik_player_current_episode") {
+			if (user.user && event.data.value.episode === movie.last_episode) {
+				const refreshToken = Cookies.get("refreshToken")
+				axios.post(
+					`${NEST_API}/users/count`,
+					{
+						movieId: movie.id,
+						refreshToken
+					},
+					{
+						headers: { "ngrok-skip-browser-warning": "69420" }
+					}
+				)
+			}
+		}
+	}
+
+	useEffect(() => {
+		window.addEventListener("message", handleIframeMessage)
+		return () => window.removeEventListener("message", handleIframeMessage)
+	}, [])
 	return (
 		movie &&
 		movie.material_data && (

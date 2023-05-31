@@ -11,12 +11,11 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	const title = (title: string) => {
 		return title.length > 34 ? title.slice(0, 350) + "..." : title.slice(0, 34)
 	}
-
 	return (
 		<div className={styles.content}>
 			<h1>{movie.title}</h1>
 			<div className={styles.info}>
-				{movie.material_data.anime_kins === "tv" && (
+				{movie.type === "anime-serial" && (
 					<p>
 						<span>Эпизоды: </span>
 						{movie.last_episode && movie.last_episode}
@@ -38,8 +37,7 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 						: "Завершенный"}
 				</p>
 				<p>
-					<span>Тип:</span>{" "}
-					{movie.material_data.anime_kins === "tv" ? "Сериал" : "Фильм"}
+					<span>Тип:</span> {movie.type === "anime-serial" ? "Сериал" : "Фильм"}
 				</p>
 			</div>
 

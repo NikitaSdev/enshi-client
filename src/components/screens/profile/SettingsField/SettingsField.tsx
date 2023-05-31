@@ -1,4 +1,5 @@
 import classNames from "classnames"
+import { filesize } from "filesize"
 import Cookies from "js-cookie"
 import { useRouter } from "next/router"
 import React, { FC, useState } from "react"
@@ -52,6 +53,19 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 		} else {
 			setError("Пароль неверен")
 		}
+	}
+	const validateFile = (file: any) => {
+		const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10 MB
+
+		if (file) {
+			const fileSize = file.size
+
+			if (fileSize > MAX_FILE_SIZE) {
+				return `File size must be less than ${filesize(MAX_FILE_SIZE)}.`
+			}
+		}
+
+		return true
 	}
 
 	return (
@@ -130,6 +144,7 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 					/>
 				)}
 			/>
+			{errors.avatarURL && <p>{errors.avatarURL.message}</p>}
 			<Controller
 				control={control}
 				name={"wrapperURL"}

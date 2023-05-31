@@ -14,6 +14,7 @@ type TypeUpload = (
 }
 export const useUpload: TypeUpload = (onChange, folder) => {
 	const [isLoading, setIsLoading] = useState(false)
+
 	const { mutateAsync } = useMutation(
 		"upload file",
 		(data: FormData) => FileService.upload(data, folder),
