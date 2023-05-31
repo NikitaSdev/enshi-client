@@ -2,7 +2,7 @@
 .heading {
 	margin-left: auto;
 	margin-right: auto;
-	width: 1170px;
+	width: 1300px;
 	display: flex;
 	font-size: 1.45rem;
 	font-weight: 700;
@@ -48,6 +48,6 @@
 .main {
 	padding: 76px 44px;
 	@include _580 {
-		padding: 76px 40px;
+		padding: 76px 0;
 	}
 }

@@ -8,7 +8,7 @@
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 	background-position: center !important;
-	margin-bottom: 60px;
+	margin-bottom: 107px;
 	.bannerContainer {
 		position: relative;
 		padding: 30px 10px;
@@ -122,13 +122,13 @@
 		max-width: 450px;
 	}
 	@include _500 {
-		bottom: -80px;
+		bottom: -110px;
 		max-width: 400px;
 	}
 	@include _380 {
 		right: -150px;
 		max-width: 360px;
-		bottom: -140px;
+		bottom: -160px;
 	}
 	div {
 		div {
