@@ -54,16 +54,10 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 		if (event.data.key == "kodik_player_current_episode") {
 			if (user.user && event.data.value.episode === movie.last_episode) {
 				const refreshToken = Cookies.get("refreshToken")
-				axios.post(
-					`${NEST_API}/users/count`,
-					{
-						movieId: movie.id,
-						refreshToken
-					},
-					{
-						headers: { "ngrok-skip-browser-warning": "69420" }
-					}
-				)
+				axios.post(`${NEST_API}/users/count`, {
+					movieId: movie.id,
+					refreshToken
+				})
 			}
 		}
 	}
@@ -88,9 +82,12 @@ const SingleMovie: FC<IMoviePage> = ({ movie }) => {
 							Detail={() => <Content movie={movie} />}
 						/>
 						<iframe
+							allowFullScreen
+							allow={"fullscreen"}
 							src={`https:${movie.link}`}
 							className={styles.video}
 						></iframe>
+
 						{isLoading ? (
 							<SkeletonGallery />
 						) : (
