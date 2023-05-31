@@ -132,7 +132,7 @@ const MainBanner: FC<any> = ({ list }) => {
 
 								<div>
 									<p className={styles.description}>
-										{list.list[currentIndex].description}
+										{list.list[currentIndex].description.slice(0, 180) + "..."}
 									</p>
 								</div>
 								<Button className={styles.watch}>

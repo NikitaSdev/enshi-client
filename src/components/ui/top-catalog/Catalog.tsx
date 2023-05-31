@@ -23,37 +23,32 @@ const TopCatalog: FC<ICatalog> = ({ movies, title, description }) => {
 					</span>
 				</h1>
 			)}
-			{movies ? (
-				<div className={styles.movies}>
-					{movies.map((movie: any) => {
-						return (
-							<GalleryItem
-								catalog
-								key={v4()}
-								item={{
-									name: movie.title,
-									link: movie.id,
-									posterPath: movie.material_data.poster_url,
-									posters: "",
-									genres: movie.material_data.anime_genres
-										? movie.material_data.anime_genres
-										: [""],
-									year: movie.year,
-									content: {
-										title: movie.title
-									},
-									id: movie.id
-								}}
-								variant={"horizontal"}
-							/>
-						)
-					})}
-				</div>
-			) : (
-				<>
-					<SkeletonLoader count={25} width={290} height={250} />
-				</>
-			)}
+
+			<div className={styles.movies}>
+				{movies.map((movie: any) => {
+					return (
+						<GalleryItem
+							catalog
+							key={v4()}
+							item={{
+								name: movie.title,
+								link: movie.id,
+								posterPath: movie.material_data.poster_url,
+								posters: "",
+								genres: movie.material_data.anime_genres
+									? movie.material_data.anime_genres
+									: [""],
+								year: movie.year,
+								content: {
+									title: movie.title
+								},
+								id: movie.id
+							}}
+							variant={"horizontal"}
+						/>
+					)
+				})}
+			</div>
 		</section>
 	)
 }

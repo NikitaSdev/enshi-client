@@ -23,7 +23,7 @@ const Home: FC<IHome> = ({
 	return (
 		<>
 			<Meta title={"Главная"} description={"Главная"} />
-			<main style={{ marginTop: 96 }}>
+			<main>
 				<MainBanner list={list} />
 
 				{isLoading ? (

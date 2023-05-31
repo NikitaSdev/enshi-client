@@ -1,6 +1,8 @@
 import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
+import SkeletonCatalog from "@/ui/SkeletonCatalog/SkeletonCatalog"
+import Button from "@/ui/form-elements/Button"
 import TopCatalog from "@/ui/top-catalog/Catalog"
 
 import { MovieService } from "@/services/movie.service"
@@ -9,27 +11,38 @@ import { NEST_API } from "../config/api.config"
 
 const Top = () => {
 	const [movies, setMovies] = useState({ results: [] })
+	const [isLoading, setIsLoading] = useState(true)
+
+	const moviesList: any = []
 	const getData = async () => {
 		try {
-			const { data: topList } = await axios.get(`${NEST_API}/topPage`, {
-				headers: { "ngrok-skip-browser-warning": "69420" }
-			})
-			const moviesList: any = []
+			setIsLoading(true)
+			const { data: topList } = await axios.get(`${NEST_API}/topPage`)
 
-			for (let i = 0; i < topList.list.length; i++) {
-				const { data: movies } = await MovieService.getTop(topList.list[i])
+			for (let i = 0; i < topList.length; i++) {
+				const { data: movies } = await MovieService.getTop(topList[i])
 				moviesList.push(...movies.results)
 			}
 
-			setMovies((prevMovies: any) => ({ ...prevMovies, results: moviesList }))
+			setMovies({ results: moviesList })
+			setIsLoading(false)
 		} catch (error) {
 			console.log(error)
 		}
 	}
+
 	useEffect(() => {
 		getData()
 	}, [])
-	return <TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
+
+	return (
+		<>
+			{movies && (
+				<TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
+			)}
+			<div style={{ marginTop: -150 }}>{isLoading && <SkeletonCatalog />}</div>
+		</>
+	)
 }
 
 export default Top

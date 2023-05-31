@@ -4,6 +4,7 @@ import Skeleton from "react-loading-skeleton"
 import Select from "react-select"
 
 import MaterialIcon from "@/ui/MaterialIcon"
+import SkeletonCatalog from "@/ui/SkeletonCatalog/SkeletonCatalog"
 import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import Catalog from "@/ui/catalog-movies/Catalog"
 import Filter from "@/ui/filter/Filter"
@@ -96,21 +97,29 @@ const TrendingPage = () => {
 				statuses,
 				years
 			)
+			await getOptions()
 			setMovies(movies)
+			setIsLoading(false)
 		}
-		getOptions()
 
 		// @ts-ignore
 		getMovies(genres, statuses, years)
-		// setIsLoading(false)
 	}, [genres, statuses, years])
 
 	const handlePrev = async () => {
+		window.scrollTo({
+			top: 350,
+			behavior: "smooth"
+		})
 		// @ts-ignore
 		const { data: prev } = await axios.get(movies.prev_page)
 		setMovies(prev)
 	}
 	const handleNext = async () => {
+		window.scrollTo({
+			top: 350,
+			behavior: "smooth"
+		})
 		// @ts-ignore
 		const { data: next } = await axios.get(movies.next_page)
 		setMovies(next)
@@ -143,7 +152,7 @@ const TrendingPage = () => {
 					description={"Трендовые фильмы и сериалы"}
 				/>
 			)}
-
+			{!movies && <SkeletonCatalog />}
 			<Pagination
 				movies={movies}
 				handleNext={handleNext}

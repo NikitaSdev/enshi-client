@@ -24,13 +24,10 @@
 }
 .content {
 	height: 532px;
-
 	width: 1170px;
 	> div:first-child {
-		width: 70%;
-		@include _744 {
-			width: 85%;
-		}
+		width: 400px;
+
 		@include _480 {
 			width: 95%;
 		}
@@ -39,27 +36,22 @@
 		height: 600px;
 	}
 	@include _744 {
-		height: 700px;
-	}
-	@include _580 {
-		height: 750px;
+		height: 650px;
 	}
 	@include _480 {
-		height: 800px;
-	}
-	@include _420 {
-		height: 840px;
-	}
-	@include _360 {
-		height: 900px;
+		height: 700px;
 	}
 
 	h1 {
 		text-transform: uppercase;
 		font-weight: 700;
-		font-size: 2.185rem;
+		font-size: 2rem;
+		width: 100%;
 		@include _744 {
 			font-size: 2rem;
+		}
+		@include _480 {
+			font-size: 1.8rem;
 		}
 	}
 	.rating {

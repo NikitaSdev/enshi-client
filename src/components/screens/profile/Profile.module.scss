@@ -7,19 +7,19 @@
 	max-width: 1170px;
 	align-items: center;
 	justify-content: space-between;
-	margin: auto;
-	margin-top: 45px;
+	margin: 45px auto auto;
 	border-radius: 10px;
 	display: flex;
 	color: black;
 	z-index: 2;
 	background: #efefef;
 	padding: 35px 15px;
-	@include _1200 {
-	}
+
 	@include _380 {
-		gap: 50px;
+		gap: 25px;
 		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 }
 .noItems {
@@ -34,7 +34,7 @@
 	display: flex;
 	gap: 5px;
 	@include _380 {
-		align-self: flex-end;
+		align-self: center;
 	}
 }
 
@@ -88,10 +88,10 @@
 	align-items: center;
 	flex-direction: column;
 	background: rgba(0, 0, 0, 0.3);
-	z-index: 10;
+	z-index: 13;
 
 	form {
-		margin-top: 50px;
+		margin-top: 96px;
 		background: #1f1f25;
 		border-radius: 10px;
 		border: 3px solid #fafafa40;
