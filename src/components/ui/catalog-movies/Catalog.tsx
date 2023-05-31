@@ -1,10 +1,13 @@
 import { FC } from "react"
+import Skeleton from "react-loading-skeleton"
 
 import MaterialIcon from "@/ui/MaterialIcon"
+import SkeletonCatalog from "@/ui/SkeletonCatalog/SkeletonCatalog"
 import { ICatalog } from "@/ui/catalog-movies/catalog.interface"
 import GalleryItem from "@/ui/gallery/GalleryItem"
 
 import Meta from "@/utils/meta/Meta"
+import { removeDuplicates } from "@/utils/removeDuplicates"
 
 import styles from "./Catalog.module.scss"
 

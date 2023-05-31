@@ -1,8 +1,10 @@
 import axios from "axios"
 import { ReactNode, useEffect, useState } from "react"
+import Skeleton from "react-loading-skeleton"
 import Select from "react-select"
 
 import MaterialIcon from "@/ui/MaterialIcon"
+import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 import Catalog from "@/ui/catalog-movies/Catalog"
 import Filter from "@/ui/filter/Filter"
 import Pagination from "@/ui/pagination/Pagination"
@@ -14,6 +16,7 @@ import { removeDuplicates } from "@/utils/removeDuplicates"
 import styles from "../components/ui/filter/Filter.module.scss"
 
 const TrendingPage = () => {
+	const [isLoading, setIsLoading] = useState(true)
 	const [movies, setMovies] = useState()
 	const [genreList, setGenresList] =
 		useState<Array<{ value: string; label: string; icon: ReactNode }>>()
@@ -99,6 +102,7 @@ const TrendingPage = () => {
 
 		// @ts-ignore
 		getMovies(genres, statuses, years)
+		// setIsLoading(false)
 	}, [genres, statuses, years])
 
 	const handlePrev = async () => {
@@ -118,7 +122,7 @@ const TrendingPage = () => {
 	}
 
 	return (
-		<main>
+		<>
 			<Filter
 				genreList={genreList}
 				statusOptions={statusOptions}
@@ -145,7 +149,7 @@ const TrendingPage = () => {
 				handleNext={handleNext}
 				handlePrev={handlePrev}
 			/>
-		</main>
+		</>
 	)
 }
 
