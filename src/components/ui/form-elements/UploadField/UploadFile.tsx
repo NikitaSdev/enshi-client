@@ -27,7 +27,11 @@ const UploadFile: FC<IUploadField> = ({
 						<p>Выбрать файл</p>
 					</div>
 					<label>
-						<input type={"file"} onChange={uploadImage} />
+						<input
+							type={"file"}
+							onChange={uploadImage}
+							accept="image/png, image/svg,image/gif, image/jpeg,image/webp,"
+						/>
 						{error && <div className={styles.error}>{error.message}</div>}
 					</label>
 				</div>

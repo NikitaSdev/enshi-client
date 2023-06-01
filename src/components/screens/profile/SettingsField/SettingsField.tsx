@@ -109,19 +109,26 @@ const SettingsField: FC<{ setIsSettingsOpened: (arg: boolean) => void }> = ({
 						message: "Пароль должен состоять более чем из 6 символов"
 					},
 					required: {
-						value: password !== "",
+						value: password,
 						message: "Введите новый пароль"
 					}
 				})}
 				placeholder={"Новый пароль"}
 				type={"password"}
+				defaultValue={""}
 			/>
 			{errors.newPassword && <p>{errors.newPassword.message}</p>}
 			<Field
 				{...register("confirmPassword", {
-					validate: (value) => value === newPassword || "Пароли не совпадают",
+					validate: (value) => {
+						if (value === "") {
+							return
+						}
+						if (value !== newPassword) return "Пароли не совпадают"
+					},
+
 					required: {
-						value: password !== "",
+						value: password,
 						message: "Введите новый пароль"
 					}
 				})}

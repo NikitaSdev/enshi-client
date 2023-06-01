@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import React, { FC, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
+import { toastr } from "react-redux-toastr"
 
 import AuthField from "@/screens/auth/AuthField"
 import { IAuthInput } from "@/screens/auth/auth.interface"
@@ -41,6 +42,7 @@ export const AuthForm: FC<{ setIsAuthFormOpened: (arg: boolean) => void }> = ({
 	const onSubmit: SubmitHandler<IAuthInput> = (data) => {
 		if (type === "newPassword") {
 			axios.post(`${NEST_API}/auth/changePassword`, data)
+			toastr.success("Успешно", "Новый пароль отправлен на почту")
 		} else if (type === "login") {
 			login(data)
 		} else if (type === "register") {
