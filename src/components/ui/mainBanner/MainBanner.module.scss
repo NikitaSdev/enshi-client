@@ -38,9 +38,14 @@
 	}
 	@include _744 {
 		align-items: start;
-		height: 650px;
+		padding-top: 78px;
+		height: 700px;
 	}
 	@include _480 {
+		height: 750px;
+	}
+	@include _380 {
+		height: 780px;
 	}
 
 	h1 {

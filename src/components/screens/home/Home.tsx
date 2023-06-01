@@ -27,7 +27,9 @@ const Home: FC<IHome> = ({
 				<MainBanner list={list} />
 
 				{isLoading ? (
-					<SkeletonGallery />
+					<div className={"mt-5"}>
+						<SkeletonGallery />
+					</div>
 				) : (
 					<Gallery
 						items={trendingMovies.trendingList}
