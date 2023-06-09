@@ -151,6 +151,10 @@
 	font-size: 0.8rem;
 	font-weight: 600;
 	width: 100%;
+
+	p {
+		text-align: center;
+	}
 }
 
 .favourite {
@@ -176,7 +180,7 @@
 }
 .description {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	flex-direction: column;
 	h3 {
 		margin-top: 15px;
@@ -187,7 +191,7 @@
 	div {
 		margin-top: 15px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		.year {
 			display: flex;

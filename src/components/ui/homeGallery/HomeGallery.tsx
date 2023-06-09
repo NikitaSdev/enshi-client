@@ -117,7 +117,9 @@ const HomeGallery: FC<{
 											{announced ? (
 												<div className={styles.description}>
 													<h3>{title(item.names.ru)}</h3>
-													<div className={styles.release}>{item.release}</div>
+													<div className={styles.release}>
+														<p>{item.release}</p>
+													</div>
 												</div>
 											) : (
 												<div className={styles.description}>
