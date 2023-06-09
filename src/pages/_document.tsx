@@ -26,7 +26,7 @@ export default function Document() {
 				<noscript>
 					<div>
 						<img
-							src="https://mc.yandex.ru/watch/12345678"
+							src="https://mc.yandex.ru/watch/93902630"
 							style={{ position: "absolute", left: "-9999px" }}
 							alt=""
 						/>
