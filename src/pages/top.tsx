@@ -44,7 +44,11 @@ const Top = () => {
 	return (
 		<>
 			{movies && (
-				<TopCatalog movies={movies.results} title={"ТОП - 100 аниме"} />
+				<TopCatalog
+					movies={movies.results}
+					title={"ТОП - 100 аниме"}
+					description={"Подборка топ 100 аниме!"}
+				/>
 			)}
 
 			<div
