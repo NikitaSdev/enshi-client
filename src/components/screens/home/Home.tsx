@@ -22,7 +22,6 @@ const Home: FC<IHome> = ({
 }) => {
 	return (
 		<>
-			<Meta title={"Главная"} description={"Главная"} />
 			<main>
 				<MainBanner list={list} />
 

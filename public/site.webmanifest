@@ -2,6 +2,8 @@
     "name": "Enshi.",
     "short_name": "Enshi.",
     "description":"Онлайн сервис для просмотра аниме и фильмов.",
+    "lang":"ru",
+    "orientation":"any",
     "icons": [
       {
         "src": "/android-chrome-96x96.png",

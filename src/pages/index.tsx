@@ -12,6 +12,8 @@ import SkeletonGallery from "@/ui/SkeletonGallery/SkeletonGallery"
 //TODO: profile
 import { MovieService } from "@/services/movie.service"
 
+import Meta from "@/utils/meta/Meta"
+
 import Home from "../components/screens/home/Home"
 import { NEST_API } from "../config/api.config"
 
@@ -71,6 +73,10 @@ const HomePage: NextPage<IHome> = () => {
 
 	return (
 		<>
+			<Meta
+				title={"Главная"}
+				description={"Онлайн сервис для просмотра аниме и фильмов."}
+			/>
 			<Home
 				trendingMovies={trendingMovies}
 				announcedMovies={announcedMovies}

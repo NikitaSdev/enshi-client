@@ -102,7 +102,6 @@ const Profile = () => {
 
 	return (
 		<>
-			<Meta title={"Профиль"}></Meta>
 			{user && user.user && (
 				<main>
 					<section

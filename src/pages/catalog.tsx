@@ -12,6 +12,7 @@ import Pagination from "@/ui/pagination/Pagination"
 
 import { MovieService } from "@/services/movie.service"
 
+import Meta from "@/utils/meta/Meta"
 import { removeDuplicates } from "@/utils/removeDuplicates"
 
 import styles from "../components/ui/filter/Filter.module.scss"
@@ -132,6 +133,7 @@ const TrendingPage = () => {
 
 	return (
 		<>
+			<Meta title={"Каталог"} description={"Трендовые фильмы и сериалы"}></Meta>
 			<Filter
 				genreList={genreList}
 				statusOptions={statusOptions}
@@ -144,12 +146,11 @@ const TrendingPage = () => {
 
 			{movies && (
 				<Catalog
+					title={"Каталог"}
 					movies={
 						// @ts-ignore
 						removeDuplicates(movies.results) || []
 					}
-					title={"Каталог"}
-					description={"Трендовые фильмы и сериалы"}
 				/>
 			)}
 			{!movies && <SkeletonCatalog />}
